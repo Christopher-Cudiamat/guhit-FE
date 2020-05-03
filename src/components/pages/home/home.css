@@ -1,0 +1,10 @@
+.slick-slider {
+	background:  #F0B110;
+	outline:none !important;
+}
+
+.slick-slide, .slick-slide *{ outline: none !important; }
+
+.slick-slide {
+	outline: none;
+}
