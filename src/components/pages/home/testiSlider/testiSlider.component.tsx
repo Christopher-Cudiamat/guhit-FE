@@ -12,6 +12,7 @@ import comics2 from "../../../../images/comics-2.jpg";
 import comics3 from "../../../../images/comics-3.jpg";
 import comics4 from "../../../../images/comics-4.jpg";
 import comics5 from "../../../../images/comics-5.jpg";
+import cover from "../../../../images/cover.jpg";
 
 import {FaQuoteLeft} from 'react-icons/fa';
 import {IoIosArrowForward} from 'react-icons/io';
@@ -38,7 +39,7 @@ const TestiSlider = (props:any) => {
 
   const testiArr = [
     {
-      cover: comics2,
+      cover: cover,
       message: "Steve & Kate’s camp runs summer camps for children across the U.S. The unique thing about Steve & Kate’s camp is that their entire website is essentially a series of customer testimonials.",
       creatorName: "KARL PERALTA",
       creatorDisplayName: "@KarlMarvin14",

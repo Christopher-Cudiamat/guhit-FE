@@ -19,6 +19,7 @@ import comics2 from "../../../images/comics-2.jpg";
 import comics3 from "../../../images/comics-3.jpg";
 import comics4 from "../../../images/comics-4.jpg";
 import comics5 from "../../../images/comics-5.jpg";
+import cover from "../../../images/cover.jpg";
 import banner1 from "../../../images/main-banner-image-1.png";
 
 import { FaGlobe } from 'react-icons/fa';
@@ -57,7 +58,7 @@ const Home = (props:any) => {
   };
 
   const featComArr = [
-    {thumb: comics1, genre: "Comedy", likes:3},
+    {thumb: cover, genre: "Comedy", likes:3},
     {thumb:  comics2, genre: "Action", likes:4},
     {thumb:  comics3, genre: "Adventure", likes:1},
     {thumb:  comics4, genre: "Horror", likes:9},
