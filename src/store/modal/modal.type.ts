@@ -10,6 +10,7 @@ export interface IModalParameter {
   libraryModal?: boolean,
   accountModal?: boolean,
   openModal: boolean,
+  switchToDesktopModal?: boolean,
 }
 
 export interface IModalState {

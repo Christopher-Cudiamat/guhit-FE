@@ -11,20 +11,22 @@ export const Table = styled.table<ITableTypes>`
   ${({imageUpload}) => imageUpload &&
     css` 
 
-        & tr:first-child th{
-          font-size: 1.4rem;
-        } 
-        & tr{
-          &:nth-child(odd){
-            background: #ddd;
-          }
-          &:nth-child(even){
-            background: #eee;
-          }
-          &:first-child{
-            background: #fff;
-          }
+      & tr:first-child th{
+        font-size: 1.4rem;
+      } 
+      
+
+      & tr{
+        &:nth-child(odd){
+          background: #ddd;
         }
+        &:nth-child(even){
+          background: #eee;
+        }
+        &:first-child{
+          background: #fff;
+        }
+      }
 
         & th{
           padding: 1rem;   
@@ -72,15 +74,31 @@ export const Table = styled.table<ITableTypes>`
           text-align: left;    
         }
         &:nth-child(4){
-          width: 5%;    
+          width: 11.5%; 
+          transition: all .1s;   
+          &:hover {
+            cursor: pointer;
+            background: ${props => props.theme.color.primaryLight};
+          }
         }
         &:nth-child(5){
-          width: 5%;    
+          width: 5%; 
+          transition: all .1s;   
+          &:hover {
+            cursor: pointer;
+            background: ${props => props.theme.color.primaryLight};
+          }   
         }
         &:last-child{
           width: 5%; 
           font-size: 1.4rem;
-          padding-right: 0rem;   
+          padding-right: .5rem;
+          padding-left: .5rem;
+          transition: all .1s;   
+          &:hover {
+            cursor: pointer;
+            background: ${props => props.theme.color.errorLight};
+          }   
              
         }
       }

@@ -10,27 +10,25 @@ import store from './configs/store.config';
 import Loader from './components/loader/loader.container';
 
 
+
 const App = () => {
   
   let loader = store.getState().loader.isLoading;
-  console.log("LOADER====>", loader);
 
   return (
 
     <ThemeProvider theme={theme}>
-      <>
-        {
-          loader
-          ? <Overlay light/> 
-          : null 
-        }
+      <div style={{position:"relative"}}>
+
+        {loader ? <Overlay light/> : null }
+
         <Router>
           <Loader/> 
-          <Header/>   
+          <Header/> 
           <Pages />
           <Footer/>
         </Router>
-      </>
+      </div>
     </ThemeProvider>
 
   );

@@ -15,7 +15,8 @@ interface IUploaderTypes {
   prevCover?: string,
   coverFull?: boolean,
   cover?:boolean,
-  
+  circular?:boolean,
+  disabled?:boolean,
 }
 
 
@@ -30,7 +31,7 @@ export const UploaderThumb= styled.div<IUploaderTypes>`
     border: 2px #ccc dashed;
     background-image: ${props => props.backgroundImage ? `url(${props.prevThumb})` :`url(${props.prevThumb})`}; 
     /* background-size: ${props => props.thumbFull ? "90%" :"13rem 13rem"}; */
-    border-radius: 50%;
+    border-radius: ${props => props.circular ? "50%" :"0%"}; 
     background-repeat: no-repeat;
     background-position: center 50%;
 `
@@ -110,6 +111,13 @@ export const UploaderChapter= styled.div<IUploaderTypes>`
   align-items: center;
   justify-content: center;
   border: 2px #ccc dashed;
+
+  
+  ${({disabled}) => disabled &&
+    css`  
+    opacity: .5;
+    `
+  };
 `
 
 export const UploaderField = styled.input<IUploaderTypes>`
@@ -194,7 +202,7 @@ export const UploaderImg= styled.img<IUploaderTypes>`
   ${({chapters}) => chapters &&
     css`  
       position: absolute;
-      right: 20%;
+      right: 12%;
       top: 20%;
       opacity:0.7;
       width: 4rem;

@@ -17,6 +17,7 @@ const theme = {
     grayLight: "#CCC",
     grayDark: "#EDEDED",
     error:  "#DE4646",
+    errorLight:  "#ff3717",
     link: "#4683DE",
     violet: "#C9486F",
 

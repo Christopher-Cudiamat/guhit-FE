@@ -8,7 +8,7 @@ const initialState: INavigationState = {
     comicsLink: false,
     novelsLink: false,
     menuLink: false,
-    loginLink: false,
+    loginLink: false, 
 
     libraryLink: false,
     publishLink: false,

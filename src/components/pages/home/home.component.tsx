@@ -3,7 +3,7 @@ import { useHistory } from 'react-router';
 import Slider from "react-slick";
 import { ScrollToTopOnMount } from '../../../utility/scrollToTopOnMount';
 import TestiSlider from './testiSlider/testiSlider.component';
-import { getProfile } from '../../../services/profile';
+
 
 import './home.css';
 import { TitleMain, TitleSection } from '../../../styleComponents/ui/title.syle';
@@ -37,7 +37,12 @@ import apple from '../../../images/apple.png';
 
 const Home = (props:any) => {
 
-  let {profile,setNavValue,setModalValue,changeNavValue,changeModalValue} = props;
+  let {
+    setNavValue,
+    setModalValue,
+    changeNavValue,
+    changeModalValue
+  } = props;
   
   const history = useHistory();
 
@@ -53,8 +58,6 @@ const Home = (props:any) => {
     slidesToScroll: 1,
     arrows:false,
     speed: 5000,
-    // autoplay: true,
-    // fade: true,
   };
 
   const featComArr = [
@@ -82,7 +85,6 @@ const Home = (props:any) => {
     if(name==="novelsLink"){
       history.push("./novels");
     }
-    
   };
 
   return (
@@ -170,7 +172,7 @@ const Home = (props:any) => {
           <TitleSection fontWeight={"bold"}>Are you a creator?</TitleSection>
           <p>Join Our Community of people who are passionate of drawing and story telling.</p>
           <Div  imgContainer><img src={creator} alt="creator doodle"/></Div>
-          <Button secondary>Learn more</Button>
+          <Button secondary={true}>Learn more</Button>
         </Div>
 
         <Div downloadApp>

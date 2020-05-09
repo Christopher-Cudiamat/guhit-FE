@@ -9,7 +9,6 @@ interface INavTypes {
 const Nav = styled.div<INavTypes>`
   position:relative;
   height: 5rem;
-  /* background: ${props => props.theme.color.black}; */
   padding-left: 1rem;
   padding-right: 1rem;
   display: flex;
@@ -19,7 +18,6 @@ const Nav = styled.div<INavTypes>`
   ${({primary}) => primary &&
     css`
       justify-content: space-between;
-      /* background: ${props => props.theme.color.black}; */
     `
   };
 
@@ -27,7 +25,6 @@ const Nav = styled.div<INavTypes>`
     css`
       justify-content: space-between;
       margin-top: -1px;
-      /* background: ${props => props.theme.color.black}; */
     `
   };
 

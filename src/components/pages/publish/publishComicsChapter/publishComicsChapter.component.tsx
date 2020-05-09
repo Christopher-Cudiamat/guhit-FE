@@ -19,8 +19,6 @@ import { ScrollToTopOnMount } from '../../../../utility/scrollToTopOnMount';
 import { postPublishChapter } from '../../../../services/publish';
 
 
-
-
 const PublishComicsChapter = (props:any) => {
 
   interface IImageUploadType {
@@ -36,43 +34,41 @@ const PublishComicsChapter = (props:any) => {
   const inputEl = useRef<HTMLInputElement>(null)
   
   const [isDisabled,  setIsDisabled] = useState<boolean>(false);
-  const [thumbnailPic, setThumbnailPic] = useState<IImageUploadType[]>([]);
-  const [title, setTitle] = useState<string>("");
-  const [summary, setSummary] = useState<string>("");
-  const [bannerPic, setBannerPic] = useState<IImageUploadType[]>([]);
+  const [chapterCover, setChapterCover] = useState<IImageUploadType[]>([]);
+  const [chapterTitle, setChapterTitle] = useState<string>("");
+  const [chapterDescription, setChapterDescription] = useState<string>("");
+  // const [bannerPic, setBannerPic] = useState<IImageUploadType[]>([]);
   const [tags, setTags] = useState<string[]>([]);
   const [tagInputDef, setTagInputDef] = useState<string>("");
   const [openComments, setOpenComments] = useState<boolean>(false); 
   const [matureContents, setMatureContents] = useState<boolean>(false); 
   const [chaptersData, setChaptersData] = useState({}); 
-  const [chapters, setChapters] = useState<IImageUploadType[]>([]);
-
+  const [chapterPages, setChapterPages] = useState<IImageUploadType[]>([]);
   const [prevThumbnail, setprevThumbnail] = useState<string>("");
   const [toggleThumbSize, setToggleThumbSize] = useState<boolean>(false);
 
   
-  const [prevBanner, setprevBanner] = useState<string>("");
-  const [toggleBannerSize, setToggleBannerSize] = useState<boolean>(false);
+  // const [prevBanner, setprevBanner] = useState<string>("");
+  // const [toggleBannerSize, setToggleBannerSize] = useState<boolean>(false);
 
-  console.log("CHAPTERDATA",chaptersData);
-  console.log("THUMB PICS",thumbnailPic);
-  console.log("PREV IMAGE",prevThumbnail);
    
   useEffect(() => {
     setChaptersData({
-      thumbnailPic,
-      title,
-      summary,
+      chapterCover,
+      chapterTitle,
+      chapterDescription,
       tags,
       openComments,
       matureContents,
-      bannerPic,
-      chapters,
+      // bannerPic,
+      chapterPages,
       date: new Date(),
     })
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [thumbnailPic,title,summary,tags,
-    bannerPic,openComments,matureContents]);
+  }, [chapterCover,chapterTitle,chapterPages,chapterDescription,tags,
+    ,openComments,matureContents]);
+
+    console.log("chapterPages",chapterPages);
 
   useEffect(() => {
     setTagInputDef("");
@@ -80,40 +76,35 @@ const PublishComicsChapter = (props:any) => {
   }, [tags]);
 
   useEffect(() => {
-    setChapters(chapters);
+    setChapterPages(chapterPages);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [chapters]);
+  }, [chapterPages]);
+
+
 
   //chapter uploads table work in progress
-  const handleChangePosition = (name:string,from: number) => {
+  const handleChangePosition = (name:string,arr:any, old_index:any, new_index:any) => {
     if(name === "up"){
-      var f = chapters.splice(from, 1)[0];
-      console.log("SORT F UP",chapters);
-      let newChapter = chapters.splice(from - 1, 0, f)
-      setChapters(newChapter);
-      console.log("SORT UP",chapters);
+      arr.splice(new_index, 0, arr.splice(old_index, 1)[0]);
+      setChapterPages(arr);
     } else {
-      var f = chapters.splice(from, 1)[0];
-      console.log("SORT F DOWN",chapters);
-      let newChapter = chapters.splice(from + 1, 0, f)
-      setChapters(newChapter);
-      console.log("SORT DOWN",chapters);
+      arr.splice(new_index, 0, arr.splice(old_index, 1)[0]);
+      setChapterPages(arr);
     }
   };
 
   const handleDeleteChapter = (indexClicked:number) => {
-    const newChapter = chapters.filter((el,index) => index !== indexClicked);
-    setChapters(newChapter);
+    const newChapter = chapterPages.filter((el,index) => index !== indexClicked);
+    setChapterPages(newChapter);
   };
   
-  const handleThumbnail = (event:any) => {
-    // setThumbnailPic([...thumbnailPic,event.target.files[0]]);
-    setThumbnailPic(event);
+  const handleChapterCover = (event:any) => {
+    setChapterCover(event);
   };
 
-  const handleBanner = (event:any) => {
-    setBannerPic(event);
-  };
+  // const handleBanner = (event:any) => {
+  //   setBannerPic(event);
+  // };
 
   const handleSendForm = (event:any) => {
     event.preventDefault();
@@ -143,7 +134,7 @@ const PublishComicsChapter = (props:any) => {
   };
 
   const handleChapterUpload = (event:any) => {
-    setChapters([...chapters,event.target.files[0]]);
+    setChapterPages([...chapterPages,event.target.files[0]]);
   };
 
   const handleValidateUpload = (e:any) => {
@@ -164,12 +155,13 @@ const PublishComicsChapter = (props:any) => {
             if(name === "thumbnail"){
               setprevThumbnail(e.target.result);
               setToggleThumbSize(true);
-              handleThumbnail(file);
-            } else if (name === "banner"){
-              setprevBanner(e.target.result);
-              setToggleBannerSize(true);
-              handleBanner(file);
+              handleChapterCover(file);
             }
+            // } else if (name === "banner"){
+            //   setprevBanner(e.target.result);
+            //   setToggleBannerSize(true);
+            //   handleBanner(file);
+            // }
           };
           reader.readAsDataURL(file);
         }else {
@@ -192,7 +184,7 @@ const PublishComicsChapter = (props:any) => {
       <PublishHeader
         activeCreators={false}
         activeSeries={false}
-        activeChapter={true}
+        activeChapters={true}
         title={"Create new chapter"}
         message={"Have fun creating chapters, but play by the rules"}
       />
@@ -209,7 +201,7 @@ const PublishComicsChapter = (props:any) => {
               type="file"
               onChange={e => handleUpload(e.target.files, "thumbnail")}/>
           </UploaderThumb>
-          <UploaderLabel thumbnail>Upload Thumbnail<span>(300 x 300px)</span></UploaderLabel>
+          <UploaderLabel thumbnail>Upload Chapter Cover<span>(200 x 200px)</span></UploaderLabel>
         </UploaderThumbContainer>
 
         <Form>
@@ -218,11 +210,11 @@ const PublishComicsChapter = (props:any) => {
             <Label fixed>Chapter Title</Label>
             <InputField 
               marginTop
-              onChange={(e:any) => setTitle(e.target.value)}/>
+              onChange={(e:any) => setChapterTitle(e.target.value)}/>
           </Input>
 
           <div>
-            {chapters.length > 0 ?
+            {chapterPages.length > 0 ?
               <>
                 <Table imageUpload>
                   <tr>
@@ -234,13 +226,13 @@ const PublishComicsChapter = (props:any) => {
                     <th>Delete</th>
                   </tr>       
                   {
-                    chapters.map((el, index) => {
+                    chapterPages.map((el, index) => {
                       return  <tr key={index}>
                                 <td>{index+1}</td>
                                 <td>{el.name}</td>
                                 <td>{el.size}</td>
-                                <td><IoMdArrowRoundUp onClick={(e:any) => handleChangePosition("up",index)}/></td>
-                                <td><IoMdArrowRoundDown onClick={(e:any) => handleChangePosition("down",index)}/></td>
+                                <td onClick={(e:any) => handleChangePosition("up",chapterPages,index,index-1)}><IoMdArrowRoundUp/></td>
+                                <td onClick={(e:any) => handleChangePosition("down",chapterPages,index,index+1)}><IoMdArrowRoundDown/></td>
                                 <td onClick={(e:any) => handleDeleteChapter(index)}><MdDeleteForever/></td>
                               </tr>
                     })
@@ -248,10 +240,11 @@ const PublishComicsChapter = (props:any) => {
                 </Table> 
               </>: null
             }
-            <UploaderChapter>
+            <UploaderChapter
+              disabled={chapterPages.length > 2}>
               <UploaderField
                 chapters
-                disabled={chapters.length > 2}
+                disabled={chapterPages.length > 2}
                 multiple
                 type="file"
                 onChange={handleChapterUpload}/>
@@ -261,11 +254,11 @@ const PublishComicsChapter = (props:any) => {
           </div>
 
           <Input>
-              <Label fixed>Chapter Summary</Label> 
+              <Label fixed>Chapter Description</Label> 
               <TextArea 
                 marginTop
                 maxLength={500}
-                onBlur={(e:any) => setSummary(e.target.value)}
+                onBlur={(e:any) => setChapterDescription(e.target.value)}
                 placeholder="Less than 500 characters"/>
           </Input>
 
@@ -303,7 +296,7 @@ const PublishComicsChapter = (props:any) => {
 
           
 
-          <UploaderBannerContainer>
+          {/* <UploaderBannerContainer>
             <UploaderBanner 
               thumbnail
               bannerFull={toggleBannerSize} 
@@ -315,7 +308,7 @@ const PublishComicsChapter = (props:any) => {
                 onChange={e => handleUpload(e.target.files, "banner")}/>
             </UploaderBanner>
             <UploaderLabel banner>Upload chapter banner <span>(Optional) 1280 x 460px</span></UploaderLabel>
-          </UploaderBannerContainer>
+          </UploaderBannerContainer> */}
 
         
           <Div checkContainer>

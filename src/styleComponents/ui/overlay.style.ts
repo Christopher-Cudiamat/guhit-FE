@@ -4,12 +4,13 @@ interface IOverlayTypes {
   toggle?: boolean,
   bannerr?: boolean,
   globalSearch?:boolean,
-  light?: boolean
+  light?: boolean,
+  zIndex?:string
 }
 
 export const Overlay = styled.div<IOverlayTypes>`
   position: fixed;
-  z-index: 1;
+  z-index: ${props => props.zIndex ? props.zIndex : "1"};
   top: 0%;
   left:0%;
   background: ${props => props.light ? props.theme.color.white : props.theme.color.black};

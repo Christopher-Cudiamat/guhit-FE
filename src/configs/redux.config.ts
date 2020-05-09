@@ -7,6 +7,7 @@ import { navigationReducer } from "../store/navigation/navigation.reducer";
 import { modalReducer } from "../store/modal/modal.reducer";
 import { alertReducer } from "../store/alert/alert.reducer";
 import { profileReducer } from "../store/profile/profile.reducer";
+import { portalInfoReducer } from "../store/portalInfo/portalInfo.reducer";
 
 export const history = createBrowserHistory();
 
@@ -18,6 +19,7 @@ export const appReducer = combineReducers({
   "modal": modalReducer,
   "alert": alertReducer,
   "profile": profileReducer,
+  "portalInfo": portalInfoReducer,
 });
 
 

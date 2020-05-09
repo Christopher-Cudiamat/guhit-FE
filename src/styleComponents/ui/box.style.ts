@@ -7,6 +7,9 @@ interface IBoxTypes {
   secondaryBig?: boolean,
   errorTalkBubble?:boolean,
   secondaryTalkBubble?: boolean,
+  fontSize?: string,
+  lineHeight?: string,
+  bottom?: string,
 }
 
 export const Box = styled.div<IBoxTypes>`
@@ -68,17 +71,20 @@ export const Box = styled.div<IBoxTypes>`
 ${({secondaryTalkBubble}) => secondaryTalkBubble &&
     css`  
       padding:2rem;
-      background:  ${props => props.theme.color.secondary};;
+      background:  ${props => props.theme.color.secondary};
       position: relative;
       border-radius: 10px;
       width:70%;
       margin:auto;
+     
+      font-size: ${props => props.fontSize ? props.fontSize: "1.6rem"};
+      line-height: ${props => props.lineHeight ? props.lineHeight: "2rem"};
 
       &:before {
       right: 41%;
       content: "";
       position: absolute;
-      bottom: -51%;
+      bottom: ${props => props.bottom ? props.bottom: "-38%"};
       width: 0;
       height: 0;
       border-top: -1px solid transparent;

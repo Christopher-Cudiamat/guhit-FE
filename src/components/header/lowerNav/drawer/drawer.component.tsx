@@ -2,6 +2,7 @@ import React from 'react';
 import { DivLink, DivContainer, Container } from './drawer.style';
 import { MdKeyboardArrowRight } from 'react-icons/md';
 import { LinkRouter } from '../../../../styleComponents/ui/link.style';
+import SwitchToDesktop from '../../../globalModals/switchToDesktop/switchToDesktop';
 
 
 
@@ -25,10 +26,11 @@ const Drawer = (props:any) => {
     <Container>
 
         <DivContainer toggle={modalData.data.drawerModal}>
-          <LinkRouter to="creator">
+          <LinkRouter to="./">
             <DivLink onClick={e => handleClickLink("menuLink")}>
               <p>Publish</p>
               <MdKeyboardArrowRight size={22} color={"white"}/>
+              <SwitchToDesktop />
             </DivLink>
           </LinkRouter>
 

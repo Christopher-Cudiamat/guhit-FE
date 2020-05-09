@@ -16,7 +16,7 @@ export const TextArea= styled.textarea<ITextareaTypes>`
   padding: 1.5rem 1rem;
   font-family: 'Helvetica Neue',
     sans-serif;  
-  opacity: 0.5;
+  opacity: 0.7;
   font-size: 18px;  
 
   &:focus {

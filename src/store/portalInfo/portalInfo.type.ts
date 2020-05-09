@@ -1,0 +1,1 @@
+export const UPDATE_PORTAL_INFO = "UPDATE_PORTAL_INFO";

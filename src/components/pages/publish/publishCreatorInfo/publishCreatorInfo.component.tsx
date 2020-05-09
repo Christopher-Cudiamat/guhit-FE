@@ -192,6 +192,7 @@ const PublishCreatorInfo = (props:any) => {
         
         <UploaderThumbContainer >
           <UploaderThumb 
+            circular
             thumbnail
             thumbFull={profileSize} 
             prevThumb={profile.isCreator ? editProfilePic : prevProfile||uploadChap}>

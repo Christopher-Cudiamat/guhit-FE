@@ -57,6 +57,7 @@ export const DivLink = styled.div`
   justify-content: space-between;
   padding: 1.5rem 0 1.5rem 0;
   opacity: 0.8;
+  position: relative;
 `
 
 export const Link = styled.a`
