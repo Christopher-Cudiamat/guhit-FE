@@ -9,6 +9,7 @@ const CreatorAccount = (props:any) => {
   return (
 
     <DivAccount>
+      
       <DivProfile>
         <CreatorProfile/>
       </DivProfile>

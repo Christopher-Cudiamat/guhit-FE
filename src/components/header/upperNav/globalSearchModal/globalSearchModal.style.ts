@@ -44,12 +44,12 @@ export const Div = styled.div<IUpperNavTypes>`
         background: ${props => props.theme.color.white};
         padding:  0rem 1rem;
 
-        & input {
-          width:100%;
-          border: none;
-          border-color: transparent;
-          border-radius: 0px;
-      }
+          & input {
+            width:100%;
+            border: none;
+            border-color: transparent;
+            border-radius: 0px;
+          }
         }
       `
   };

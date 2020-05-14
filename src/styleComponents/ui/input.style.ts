@@ -7,7 +7,8 @@ interface IInputTypes {
   noBorder?:boolean,
   searchGlobal?:boolean,
   fixed?:boolean,
-  marginTop?: boolean;
+  marginTop?: boolean,
+  globalSearchInput?:boolean,
   // ref?: any,
 }
 
@@ -59,7 +60,7 @@ export const InputField = styled.input<IInputTypes>`
     }
   `
   };
-
+ 
 
   &:focus + label, &:valid + label {
     position: absolute;
@@ -71,6 +72,9 @@ export const InputField = styled.input<IInputTypes>`
 
   &:focus {
     border: ${props => props.noBorder ?  "none": props.searchGlobal ? "none" : "2px solid #3393FF"};
+    opacity: ${props => props.globalSearchInput ?  "0.5": "1"};
+    /* width: ${props => props.globalSearchInput ?  "120%": "100%"}; */
+    transition: all .3s;
   } 
 `
 

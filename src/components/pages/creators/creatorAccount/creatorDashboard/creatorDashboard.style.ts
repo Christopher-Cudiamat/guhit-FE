@@ -2,12 +2,14 @@ import styled, {css} from "styled-components";
 
 interface ICreatorDashboardTypes {
   dashboardContainer?:boolean,
+  publishOption?: boolean,
 }
 
 
 export const Div = styled.div<ICreatorDashboardTypes>`
   padding: 3rem 2rem;
   position:relative;
+  
   @media ${props => props.theme.media.laptop} {
     box-shadow: 0px 3px 5px rgba(0,0,0,0.2);
     border-radius:1rem;
@@ -39,52 +41,41 @@ export const Div = styled.div<ICreatorDashboardTypes>`
         }
       }
 
-      /* & div:last-child() {
+    }
 
-      } */
+    & h4:last-child {
+      color: ${props => props.theme.color.blackLight};
+      &:hover {
+        cursor:pointer;
+      }
     }
   
+  `};   
 
-    /* & div:last-child {
-        border-radius: .4rem;
-        border: 1px solid ${props => props.theme.color.grayLight};
-        padding: 2rem 0rem;
-        margin-bottom: 7rem;
-
-        & h2:first-child{ 
-          color: ${props => props.theme.color.gray};
-        }
-
-        & button:last-child{ 
-          margin-top: 5rem;
-        }
-    } */
-
-    /* & div:last-child {
-      padding: 2rem 0rem;
-      display: flex;
-      background: ${props => props.theme.color.grayLight};
-      color: ${props => props.theme.color.gray};
-      justify-content:space-evenly;
-      position: absolute;
-      bottom: 0%;
-      right:0%;
-      font-size: 1.6rem;
-      width: -webkit-fill-available;
-     
-      @media ${props => props.theme.media.laptop} {
-        padding: 2rem 2rem;
-        width: 80%;
-        font-size: 1.6rem;
-        border-top-left-radius:2rem;
-        border-top-right-radius:2rem;
-        left: 50%;
-        
-        transform: translate(-50%, 0%);
+  
+  ${({publishOption}) => publishOption && 
+  css`
+    padding: 0rem;
+    color: ${props => props.theme.color.white};
+    position: absolute;
+    right: -5%;
+    top: 11%;
+    display:flex;
+    justify-content: space-around;
+    align-items: center;
+    
+    & h4 {
+      padding: 2rem 3rem;
+      background: ${props => props.theme.color.secondary};
+      color: ${props => props.theme.color.blackLight};
+      &:hover {
+        color: ${props => props.theme.color.white};
+        background: ${props => props.theme.color.secondaryLight};
+        cursor:pointer;
+        transition: .2s all;
       }
-
-    } */
-     
+    }
+  
   `};   
 
 

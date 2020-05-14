@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { LinkRouter } from '../../../styleComponents/ui/link.style';
 import { Banner, BannerTitle, BannerText } from '../../../styleComponents/ui/banner.style';
+import { useHistory } from 'react-router-dom';
 
 import bannera from '../../../images/loginImageblack.png';
 import Button from '../../../styleComponents/ui/button.style';
@@ -19,6 +20,7 @@ import  test1 from '../../../images/publish/test1.png';
 import  test2 from '../../../images/publish/test2.png';
 import  test3 from '../../../images/publish/test3.png';
 import  test4 from '../../../images/publish/test4.png';
+import { ScrollToTopOnMount } from '../../../utility/scrollToTopOnMount';
  
 
 const Publish = (props:any) => {
@@ -41,6 +43,9 @@ const Publish = (props:any) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  
+  const history = useHistory();
+
   const  navArray = [
     {title:"Monetization", link: "monetization"},
     {title:"Community", link: "community"},
@@ -53,8 +58,16 @@ const Publish = (props:any) => {
     setMonetize({[name1]: true,[name2]: false,[name3]: false});
   }
 
+  const handlePublishSeries = () => {
+    history.push("./creator-account");
+  }
+
+
   return (
     <Container id="containerElement">
+
+      <ScrollToTopOnMount/>
+
       <Div bannerContainer>
         <Banner bgImg={bannera}>
           <BannerTitle>How we help creators</BannerTitle>
@@ -62,9 +75,19 @@ const Publish = (props:any) => {
             At Guhit, creators are limited only by what they dare to dream.
             Guhit can help creators bring their stories to print, television, feature film, merchandising, and more.
           </BannerText>
-          <Link to="publishOption" spy={true} smooth={true} offset={-55} duration={800}>
-            <Button secondary> Get Started</Button>
-          </Link>
+          {
+            profile.isCreator 
+            ?
+            <Button
+              onClick={handlePublishSeries} 
+              secondary>
+              Get Started
+            </Button>
+            :
+            <Link to="publishOption" spy={true} smooth={true} offset={-55} duration={800}>
+              <Button secondary> Get Started</Button>
+            </Link>
+          }
         </Banner>
       </Div>
 

@@ -60,8 +60,10 @@ const Login = (props:any) => {
               setCreatorProfile(res);
             }
           });
-        if(continueToPublish){
+        if(continueToPublish && !profile.isCreator){
           history.push('/publish-creator-info');
+        } else if(continueToPublish && profile.isCreator){
+          history.push('/creator-account');
         } else {
           history.push('./');
         }    

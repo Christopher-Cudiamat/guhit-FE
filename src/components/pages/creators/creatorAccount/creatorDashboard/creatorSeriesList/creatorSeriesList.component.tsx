@@ -3,12 +3,17 @@ import { getAllSeries } from '../../../../../../services/publish';
 import { Div } from './creatorSeriesList.style';
 import Button from '../../../../../../styleComponents/ui/button.style';
 
+import { useHistory } from 'react-router-dom';
+
 
 const CreatorSeriesList = (props:any) => {
 
-  const {listFilter,token} = props;
+  const {listFilter,token,onOpenChapters} = props;
  
   const [seriesArray, setSeriesArray] = useState<Array<any>>([]);
+  const [openChapterList, setOpenChapterList] = useState<boolean>(false);
+
+  const history = useHistory();
 
   useEffect(() => {
     getAllSeries(token)
@@ -17,6 +22,10 @@ const CreatorSeriesList = (props:any) => {
       })
    
   }, [listFilter]);
+
+  const handleAddChapter = () => {
+    history.push("./publish-comic-chapters");
+  }
 
   return (
     
@@ -37,8 +46,18 @@ const CreatorSeriesList = (props:any) => {
                       <p>{el.seriesDateCreated}</p>
                       <p>chapters: 0</p>
                       <Div buttons>
-                        <Button blackOutline>Add chapter</Button >
-                        <Button blackOutline>View chapters</Button >
+                        <Button
+                         blackOutline
+                          onClick={handleAddChapter}
+                         >
+                           Add new chapter
+                        </Button >
+                        <Button 
+                          blackOutline
+                          onClick={onOpenChapters}
+                          >
+                            Edit chapters
+                        </Button >
                         <Button blackOutline>Edit Series</Button >
                       </Div>
                     </div>

@@ -16,7 +16,7 @@ const GlobalSearchModal = (props:any) => {
             <FaSearch color={"#aaa"} size={18}/>
           </Icon>
           <Input>
-            <InputField noBorder placeholder={"Search here..."}/>
+            <InputField globalSearchInput noBorder placeholder={"Search here..."}/>
           </Input>
         </Div>
       </Container>

@@ -67,7 +67,7 @@ const Pages = (props:any) => {
           </Route>
           <Route exact path="/novels">
             <Novels />
-          </Route>
+          </Route> 
           <Route exact path="/publish-comic-chapters">
             <PublishComicsChapter />
           </Route>

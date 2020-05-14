@@ -176,7 +176,7 @@ const PublishComicsChapter = (props:any) => {
 
   };
 
-  return (
+  return (  
     <Container>
 
       <ScrollToTopOnMount/>
