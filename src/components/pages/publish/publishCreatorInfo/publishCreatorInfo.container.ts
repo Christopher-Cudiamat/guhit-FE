@@ -16,6 +16,8 @@ const mapStateToProps = (state:AppState) => {
 const mapStateToDispatch = (dispatch: Dispatch) => {
   return {
     setCreatorProfile:(data:any) => dispatch(profileAction.setCreatorProfile(data)), 
+    setUpdateProfile:(name:string, value:string) => dispatch(profileAction.setUpdateProfile(name, value)),
+    setUpdateTools:(name:string, value:string) => dispatch(profileAction.setUpdateTools(name, value)),
   }
 }
 

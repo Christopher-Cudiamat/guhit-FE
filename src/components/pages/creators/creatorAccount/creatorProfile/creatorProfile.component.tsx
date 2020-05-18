@@ -15,33 +15,51 @@ const CreatorProfile = (props:any) => {
   return (
 
       <Div profileContainer>
-        <Avatar 
-          // height={"40%"}
-          // width={"40%"}
-          src={profile.profilePic} 
-          alt="Creator profile picture"/>
-
-        <h2>{profile.userName}</h2>
         
-        <p><span>Joined:</span>{profile.joinedDate}</p>
+        {
+          profile.isCreator ?
+          <>
+            <Avatar 
+              // height={"40%"}
+              // width={"40%"}
+              src={profile.profilePic} 
+              alt="Creator profile picture"/>
 
-        <p><MdLocationOn/> {profile.city}</p>
+            <h2>{profile.userName}</h2>
+            
+            <p><span>Joined:</span>{profile.joinedDate}</p>
 
-        <p>{profile.description}</p>
+            <p><MdLocationOn/> {profile.city}</p>
 
-        <p>Tools:</p>
+            <p>{profile.description}</p>
 
-        <ul> 
-          {
-            profile.tools.map((el:string, index:number) => {
-              return <li key={index}>{el}</li>
-            })
-          }
-        </ul>
+            <p>Tools:</p>
 
-        <p><FaPatreon fontSize={"10px"}/> {profile.patreon}</p>
+            <ul> 
+              {
+                profile.tools.map((el:string, index:number) => {
+                  return <li key={index}>{el}</li>
+                })
+              }
+            </ul>
 
-        <LinkRouter  to="./publish-creator-info" secondaryOutline>Edit Profile</LinkRouter>
+            <p><FaPatreon fontSize={"10px"}/> {profile.patreon}</p>
+
+            <LinkRouter  to="./publish-creator-info" secondaryOutline>Edit Profile</LinkRouter>
+            </>
+          :
+          <>
+            <Avatar 
+              // height={"40%"}
+              // width={"40%"}
+              src={profile.profilePic} 
+              alt="Creator profile picture"/>
+
+            <h2 style={{marginBottom: "5rem"}}>{profile.userName}</h2>
+
+            <LinkRouter  to="./publish-creator-info" secondaryOutline>Be a creator</LinkRouter>
+          </>
+        }
        
       </Div>
 

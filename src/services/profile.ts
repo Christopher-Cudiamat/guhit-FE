@@ -33,11 +33,9 @@ export const postInitProfile = async (token:string,email:any) => {
     displayName: email
   }
 
-
   let url = '/api/profiles/init';
 
   const res = await instancePost.post(url,body,config);
-  console.log("INIT RESPONE",res.data);
   return res.data;
 };
 
@@ -61,12 +59,8 @@ export const postProfile = async (token:string,data:any) => {
   body.append('description',data.description);
   body.append('patreon',data.patreon);
   body.append('tools',data.tools.toString());
-  console.log("STRINNGNGG===",data.tools.toString());
-
-  console.log("BODY",body);
 
   const res = await instancePost.post(url,body,config);
-  // console.log("POST PROFILE RESPONE",res.data);
   return res.data;
 };
 

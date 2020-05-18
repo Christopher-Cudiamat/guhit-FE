@@ -136,7 +136,7 @@ ${({grid}) => grid &&
       padding: 2rem 2rem;
       box-shadow: 0 2px 3px rgba(182, 182, 182, 0.75);
       & img:first-child{
-        width: 30%;
+        width: 12rem;
         height: auto;
         border-radius: 50%;
       }
@@ -144,7 +144,7 @@ ${({grid}) => grid &&
         display: flex;
         flex-direction: column;
         justify-content:center;
-        width: 60%;
+        width: 30%;
         & p:first-child{
           font-size: 2.4rem;
           margin-bottom: 1rem;

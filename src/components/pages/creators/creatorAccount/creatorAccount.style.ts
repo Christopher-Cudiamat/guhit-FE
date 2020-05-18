@@ -12,7 +12,9 @@ export const DivAccount = styled.div<ICreatorAccountTypes>`
 
         
       @media ${props => props.theme.media.laptop} {
+        /* position:relative; */
         display: flex;
+        flex-wrap:wrap;
         justify-content:center;
         width: 100rem;  
         margin:auto;

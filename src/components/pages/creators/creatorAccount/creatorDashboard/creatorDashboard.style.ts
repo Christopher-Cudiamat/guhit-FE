@@ -3,12 +3,12 @@ import styled, {css} from "styled-components";
 interface ICreatorDashboardTypes {
   dashboardContainer?:boolean,
   publishOption?: boolean,
+  dashboardNav?: boolean,
 }
 
 
 export const Div = styled.div<ICreatorDashboardTypes>`
   padding: 3rem 2rem;
-  position:relative;
   
   @media ${props => props.theme.media.laptop} {
     box-shadow: 0px 3px 5px rgba(0,0,0,0.2);
@@ -52,14 +52,26 @@ export const Div = styled.div<ICreatorDashboardTypes>`
   
   `};   
 
+
+  ${({dashboardNav}) => dashboardNav && 
+  css`
+    position: relative;
+    padding: 0rem;
   
+    @media ${props => props.theme.media.laptop} {
+      box-shadow: none;
+      border-radius:0rem;
+    }
+    
+  `}; 
+
   ${({publishOption}) => publishOption && 
   css`
     padding: 0rem;
     color: ${props => props.theme.color.white};
     position: absolute;
-    right: -5%;
-    top: 11%;
+    right: 0%;
+    top: 29%;
     display:flex;
     justify-content: space-around;
     align-items: center;

@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Container, Div, Form, P } from './publishComicsSeries.style';
-import { useHistory } from 'react-router-dom';
+import { useHistory,useLocation } from 'react-router-dom';
 import { Input, InputField, Label } from '../../../../styleComponents/ui/input.style';
 import { Select } from '../../../../styleComponents/ui/select.style';
 import { TextArea } from '../../../../styleComponents/ui/textarea.style';
@@ -34,7 +34,7 @@ const PublishComicsSeries = (props:any) => {
     type?: string,
   }
 
-  // const history = useHistory();
+  const history = useHistory();
   
   const [isDisabled,  setIsDisabled] = useState<boolean>(false);
   const [coverPic, setCoverPic] = useState<IImageUploadType[]>([]);
@@ -112,17 +112,16 @@ const PublishComicsSeries = (props:any) => {
   }
 
   const handleSendForm = (event:any) => {
-    event.preventDefault();
+    event.preventDefault(); 
     console.log(seriesData);
     postCreateSeries(registration.token,seriesData)
       .then(res => {
         console.log("RESPONSE",res);
-        // if(response){
-        //   history.push("./publish-comic-chapters");
-         
-        // }
+        history.push({
+          pathname:"./publish-comic-chapters",
+          state:  res.seriesTitle 
+        }); 
     })
-    // history.push("/publish/comic-chapter");
   }
 
   const handleTags = (event:any) => {

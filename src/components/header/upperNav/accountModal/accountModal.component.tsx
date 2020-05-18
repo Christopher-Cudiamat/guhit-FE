@@ -27,6 +27,11 @@ const accountModal = (props:any) => {
     removeUserProfile();
   }
 
+  const handleListsClick = () => {
+    setModalValue();
+    setNavValue();
+  }
+
   return (
 
     <Container>
@@ -34,7 +39,7 @@ const accountModal = (props:any) => {
         <p>{profile.userName}</p>
       </Div>
       <Div accountList>
-        <nav>
+        <nav onClick={handleListsClick}>
           <ul>
             <LinkRouter dark to="./creator-account">
               <li>

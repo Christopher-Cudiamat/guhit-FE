@@ -15,7 +15,6 @@ export const Div = styled.div<ICreatorSeriesTypes >`
   
   ${({seriesCard}) => seriesCard && 
     css`
-    /* background:#ddd; */
     background: ${props => props.theme.color.grayLightest};
     border-top-left-radius: 3rem;
     border-bottom-right-radius: 3rem;
@@ -48,14 +47,10 @@ export const Div = styled.div<ICreatorSeriesTypes >`
   ${({buttons}) => buttons && 
     css`
     
-    @media ${props => props.theme.media.laptop} {
-     
-      /* justify-content:space-evenly; */
-    }
 
     & * {
       @media ${props => props.theme.media.laptop} {
-        width: 80%;
+        width: 90%;
         margin: 0px;
         display: block;
         margin-top: .5rem;

@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Container, Div, Form, P } from './publishComicsChapter.style';
-import { useHistory } from 'react-router-dom';
+import { useHistory,useLocation } from 'react-router-dom';
 
 import { Input, InputField, Label } from '../../../../styleComponents/ui/input.style';
 import { TextArea } from '../../../../styleComponents/ui/textarea.style';
@@ -16,10 +16,12 @@ import uploadChap from '../../../../images/upload.png';
 import {UploaderField, UploaderLabel, UploaderImg, UploaderThumb, UploaderChapter, UploaderBanner, UploaderBannerContainer, UploaderThumbContainer } from '../../../../styleComponents/ui/upload';
 import { CheckBox } from '../../../../styleComponents/ui/checkBox.style';
 import { ScrollToTopOnMount } from '../../../../utility/scrollToTopOnMount';
-import { postPublishChapter } from '../../../../services/publish';
+import {  postCreateChapter } from '../../../../services/publish';
 
 
 const PublishComicsChapter = (props:any) => {
+
+  const {registration,setUpdateProfile} = props;
 
   interface IImageUploadType {
     name?: string,
@@ -31,7 +33,13 @@ const PublishComicsChapter = (props:any) => {
   }
 
   const history = useHistory();
-  const inputEl = useRef<HTMLInputElement>(null)
+  const inputEl = useRef<HTMLInputElement>(null);
+
+  const location = useLocation();
+  const seriesTitle = location.state;
+
+  console.log(location);
+  console.log("TITLE",seriesTitle);
   
   const [isDisabled,  setIsDisabled] = useState<boolean>(false);
   const [chapterCover, setChapterCover] = useState<IImageUploadType[]>([]);
@@ -40,7 +48,7 @@ const PublishComicsChapter = (props:any) => {
   // const [bannerPic, setBannerPic] = useState<IImageUploadType[]>([]);
   const [tags, setTags] = useState<string[]>([]);
   const [tagInputDef, setTagInputDef] = useState<string>("");
-  const [openComments, setOpenComments] = useState<boolean>(false); 
+  const [openForComments, setOpenForComments] = useState<boolean>(false); 
   const [matureContents, setMatureContents] = useState<boolean>(false); 
   const [chaptersData, setChaptersData] = useState({}); 
   const [chapterPages, setChapterPages] = useState<IImageUploadType[]>([]);
@@ -58,17 +66,18 @@ const PublishComicsChapter = (props:any) => {
       chapterTitle,
       chapterDescription,
       tags,
-      openComments,
+      openForComments,
       matureContents,
       // bannerPic,
       chapterPages,
-      date: new Date(),
+      seriesTitle,
     })
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [chapterCover,chapterTitle,chapterPages,chapterDescription,tags,
-    ,openComments,matureContents]);
+    ,openForComments,matureContents,seriesTitle]);
+  
+    console.log("TEST",chaptersData);
 
-    console.log("chapterPages",chapterPages);
 
   useEffect(() => {
     setTagInputDef("");
@@ -80,6 +89,16 @@ const PublishComicsChapter = (props:any) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [chapterPages]);
 
+
+  const handleSendForm = (event:any) => {
+    event.preventDefault();
+    postCreateChapter(registration.token,chaptersData)
+      .then(res => {
+       
+        setUpdateProfile("isCreator",true);
+    })
+    history.push("./creator-account");
+  }
 
 
   //chapter uploads table work in progress
@@ -106,17 +125,6 @@ const PublishComicsChapter = (props:any) => {
   //   setBannerPic(event);
   // };
 
-  const handleSendForm = (event:any) => {
-    event.preventDefault();
-    postPublishChapter(chaptersData)
-      .then(response => {
-        console.log("RESPONSE",response);
-        if(response){
-          history.push("./");    
-        }
-    })
-  };
-
   const handleTags = (event:any) => {
     setTagInputDef("changeplease");
     event.preventDefault();
@@ -138,9 +146,7 @@ const PublishComicsChapter = (props:any) => {
   };
 
   const handleValidateUpload = (e:any) => {
-    if(e[0].type == "image/png" ||
-    e[0].type == "image/jpg" ||
-    e[0].type == "image/jpeg"){
+    if(e[0].type == "image/png" || e[0].type == "image/jpg" || e[0].type == "image/jpeg"){
       return true;
     }
   };
@@ -313,7 +319,7 @@ const PublishComicsChapter = (props:any) => {
         
           <Div checkContainer>
             <Div style={{marginBottom:"1rem"}} consentContainer>
-              <CheckBox onChange={e => setOpenComments(!openComments)}/>
+              <CheckBox onChange={e => setOpenForComments(!openForComments)}/>
               <p>Open for comments</p>
             </Div>
             <Div style={{marginBottom:"1rem"}} consentContainer>

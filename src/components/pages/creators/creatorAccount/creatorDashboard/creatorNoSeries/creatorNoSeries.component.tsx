@@ -12,14 +12,14 @@ const CreatorNoSeries = (props:any) => {
 
 
   return (
-    <div>
-      <h2>No series created yet</h2>
-        <Button secondary>
+    <div style={{height: "30rem",textAlign: "center"}}>
+      <h2 style={{color: "#ccc",margin: "auto"}}>No series created yet</h2>
+        {/* <Button secondary>
           <MdCreate 
             fontSize={"2rem"}
           />
           Create a series
-        </Button>
+        </Button> */}
     </div>    
    
   );

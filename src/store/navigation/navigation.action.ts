@@ -18,7 +18,7 @@ export const setNavigation = (state:INavigationParameter) : INavigationAction =>
 export const setChangeValue = (name:string, value:boolean) : IChangeValueNavigation => {
   return {
     type: CHANGE_VALUE,
-    name: name,
+    name: name, 
     data: value,
   }
 }

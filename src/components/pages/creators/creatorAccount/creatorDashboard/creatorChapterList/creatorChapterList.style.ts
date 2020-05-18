@@ -1,7 +1,7 @@
 import styled, {css} from "styled-components";
 
 interface ICreatorSeriesTypes {
-  seriesCard?: boolean;
+  chapterCard?: boolean;
   buttons?: boolean;
   genre?: boolean;
 }
@@ -13,12 +13,13 @@ export const Div = styled.div<ICreatorSeriesTypes >`
     
   }
   
-  ${({seriesCard}) => seriesCard && 
+  ${({chapterCard}) => chapterCard && 
     css`
     /* background:#ddd; */
     background: ${props => props.theme.color.grayLightest};
     border-top-left-radius: 3rem;
     border-bottom-right-radius: 3rem;
+    margin-top: 4rem;
 
     @media ${props => props.theme.media.laptop} {
       display: flex; 
@@ -28,15 +29,20 @@ export const Div = styled.div<ICreatorSeriesTypes >`
 
     &  img:first-child{
       width: auto;
-      height: 30rem;
+      height: 20rem;
       margin-right:2rem;
     }
 
     &  div:last-child{
       text-align: left;
+
+      & h2:first-child {
+        margin-bottom: 1rem;
+      } 
       
       & p:nth-child(3) {
-        margin-bottom: .5;
+        margin-bottom: 1rem;
+        margin-top: .5rem;
       } 
   
       & p:nth-child(4) {
@@ -55,7 +61,7 @@ export const Div = styled.div<ICreatorSeriesTypes >`
 
     & * {
       @media ${props => props.theme.media.laptop} {
-        width: 80%;
+        width: 60%;
         margin: 0px;
         display: block;
         margin-top: .5rem;

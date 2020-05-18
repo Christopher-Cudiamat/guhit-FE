@@ -16,18 +16,18 @@ import Chapter from './comics/chapters/chapter/chapter.component';
 import { Div } from './pages.style';
 
 // import PublishNovels from './publish/publishComicsChapter/publishComicsChapter.component';
-import PublishComicsChapter from './publish/publishComicsChapter/publishComicsChapter.component';
 
-import Login from './login/login.container';
 import Home from './home/home.container';
+import Login from './login/login.container';
 import SignUp from './signUp/signUp.container';
 import Comics from './comics/comics.container';
 import { Overlay } from '../../styleComponents/ui/overlay.style';
 import Loader from '../loader/loader.component';
-import PublishCreatorInfo from './publish/publishCreatorInfo/publishCreatorInfo.container';
 import CreatorAccount from './creators/creatorAccount/creatorAccount.container';
 import Publish from './publish/publish.container';
+import PublishCreatorInfo from './publish/publishCreatorInfo/publishCreatorInfo.container';
 import PublishComicsSeries from './publish/publishComicsSeries/publishComicsSeries.container';
+import PublishComicsChapter from './publish/publishComicsChapter/publishComicsChapter.container';
 
 
 

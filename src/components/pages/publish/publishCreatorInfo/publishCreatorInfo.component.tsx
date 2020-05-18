@@ -25,7 +25,7 @@ const PublishCreatorInfo = (props:any) => {
     type?: string,
   }
 
-  const {profile,registration,setCreatorProfile} = props;
+  const {profile,registration,setCreatorProfile,setUpdateProfile,setUpdateTools} = props;
 
   const history = useHistory();
   const inputToolsEl = useRef<HTMLInputElement>(null)
@@ -47,6 +47,8 @@ const PublishCreatorInfo = (props:any) => {
   const [profileSize, setProfileSize] = useState<boolean>(false);
   const [sendButton, setSendButton] = useState<boolean>(true);
 
+  console.log("TOOLS", tools)
+
    
   useEffect(() => {
 
@@ -66,7 +68,13 @@ const PublishCreatorInfo = (props:any) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [profilePic,displayName,city,description,social,tools,patreon]);
 
-  console.log("DATA TO BE SENT", creatorsData);
+  useEffect(() => {
+    if(profile.isCreator === true){
+      setPrevProfile(profile.profilePicPreview);
+      // setTools(profile.tools);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     setSocialInputDef("");
@@ -112,12 +120,12 @@ const PublishCreatorInfo = (props:any) => {
 
   const handleTools = (event:any) => {
     event.preventDefault();
-    if(tools.length >= 2) {
+    if(tools.length || profile.tools >= 2) {
       setToolDisabled(true);
     }
     if(inputToolsEl && inputToolsEl.current) {
       inputToolsEl.current.focus();
-      if(inputToolsEl.current.value.length > 1){
+      if(inputToolsEl.current.value.length > 1 && !profile.isCreator){
         setTools([...tools,inputToolsEl.current.value]);
       } else {
         setTools([]);
@@ -145,6 +153,8 @@ const PublishCreatorInfo = (props:any) => {
             if(name === "profile"){
               setPrevProfile(e.target.result);
               setProfilePic(e.target.result);
+              setUpdateProfile("profilePicPreview",e.target.result);
+              console.log("PREV PIC",typeof e.target.result);
               setProfileSize(true);
               handleProfilePic(file);
               console.log(file)
@@ -195,7 +205,7 @@ const PublishCreatorInfo = (props:any) => {
             circular
             thumbnail
             thumbFull={profileSize} 
-            prevThumb={profile.isCreator ? editProfilePic : prevProfile||uploadChap}>
+            prevThumb={prevProfile||uploadChap}>
             <UploaderField
               thumbnail
               type="file"
@@ -203,7 +213,7 @@ const PublishCreatorInfo = (props:any) => {
           </UploaderThumb>
           <UploaderLabel thumbnail>Upload Profile<span>(250 x 250px)</span></UploaderLabel>
         </UploaderThumbContainer>
-
+ 
         <Form>
 
           <Input>
@@ -303,12 +313,13 @@ const PublishCreatorInfo = (props:any) => {
           </Input>
           <div style={{display: "flex",flexDirection:"column",textAlign: "left", color: "#ccc",fontSize: "1.4rem"}}>
             <p style={{marginBottom: "1rem", color: "#aaa"}}>Tools:</p>
-            {tools.map((el,index) => {
-              return <p 
-                      onClick={e => handleDeleteArr(index, "tools")}
-                      style={{lineHeight: "2rem"}}  
-                      key={index}>
-                      {el}<TiEdit fontSize={"2rem"}/></p>
+            {
+              tools.map((el,index) => {
+                return <p 
+                        onClick={e => handleDeleteArr(index, "tools")}
+                        style={{lineHeight: "2rem"}}  
+                        key={index}>
+                        {el}<TiEdit fontSize={"2rem"}/></p>
               })
             }
           </div>
@@ -321,7 +332,7 @@ const PublishCreatorInfo = (props:any) => {
               height={"5.5rem"} 
               secondary 
               onClick={handleSendForm}>
-                Create profile
+                {profile.isCreator ? "Update profile" : "Create profile"}
             </Button>
           </Div>
        

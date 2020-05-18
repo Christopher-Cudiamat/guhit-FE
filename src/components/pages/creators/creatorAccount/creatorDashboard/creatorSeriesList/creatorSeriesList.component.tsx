@@ -11,7 +11,6 @@ const CreatorSeriesList = (props:any) => {
   const {listFilter,token,onOpenChapters} = props;
  
   const [seriesArray, setSeriesArray] = useState<Array<any>>([]);
-  const [openChapterList, setOpenChapterList] = useState<boolean>(false);
 
   const history = useHistory();
 
@@ -20,11 +19,14 @@ const CreatorSeriesList = (props:any) => {
       .then(res => {
         setSeriesArray(res) 
       })
-   
+     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [listFilter]);
 
-  const handleAddChapter = () => {
-    history.push("./publish-comic-chapters");
+  const handleAddChapter = (title:string) => {
+    history.push({
+      pathname:"./publish-comic-chapters",
+      state:  title 
+    }); 
   }
 
   return (
@@ -32,36 +34,33 @@ const CreatorSeriesList = (props:any) => {
     <>
       {
         seriesArray.map((el,index) => {
-          console.log("MAP EL",el.seriesTitle)
           
           return  <>
-                  <Div seriesCard key={index}> 
-                    <img src={el.seriesCover} alt="Series cover"/>
-                    <div>
-                      <h2>{el.seriesTitle}</h2>
-                      <Div genre>
-                        <p>{el.genrePrimary}</p>
-                        <p>{el.genreSecondary}</p>
-                      </Div>
-                      <p>{el.seriesDateCreated}</p>
-                      <p>chapters: 0</p>
-                      <Div buttons>
-                        <Button
-                         blackOutline
-                          onClick={handleAddChapter}
-                         >
-                           Add new chapter
-                        </Button >
-                        <Button 
+                    <Div seriesCard key={index}> 
+                      <img src={el.seriesCover} alt="Series cover"/>
+                      <div>
+                        <h2>{el.seriesTitle}</h2>
+                        <Div genre>
+                          <p>{el.genrePrimary}</p>
+                          <p>{el.genreSecondary}</p>
+                        </Div>
+                        <p>Date published:{el.seriesDateCreated}</p>
+                        <p>chapters: 0</p>
+                        <Div buttons>
+                          <Button
                           blackOutline
-                          onClick={onOpenChapters}
-                          >
-                            Edit chapters
-                        </Button >
-                        <Button blackOutline>Edit Series</Button >
-                      </Div>
-                    </div>
-                  </Div>
+                            onClick={e => handleAddChapter(el.seriesTitle)}>
+                            Add new chapter
+                          </Button>
+                          <Button 
+                            blackOutline
+                            onClick={e => onOpenChapters(el.seriesTitle)}>
+                              Edit chapters
+                          </Button >
+                          <Button blackOutline>Edit Series</Button >
+                        </Div>
+                      </div>
+                    </Div>
                   
                   </>
         })
