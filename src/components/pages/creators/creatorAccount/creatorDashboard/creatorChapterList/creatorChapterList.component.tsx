@@ -8,12 +8,12 @@ import Button from '../../../../../../styleComponents/ui/button.style';
 
 const CreatorChapterList = (props:any) => {
 
-  const {token,seriesTitle} = props;
+  const {token,seriesId} = props;
 
   const [chaptersArray, setChaptersArray] = useState<Array<any>>([]);
 
   useEffect(() => {
-    getAllChapters(token,seriesTitle)
+    getAllChapters(token,seriesId)
       .then(res => {
         setChaptersArray(res);
       }) 

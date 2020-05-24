@@ -10,6 +10,7 @@ import {UploaderField, UploaderLabel, UploaderThumb, UploaderThumbContainer } fr
 import { ScrollToTopOnMount } from '../../../../utility/scrollToTopOnMount';
 import {TiEdit} from 'react-icons/ti';
 import { postProfile} from '../../../../services/profile';
+import { formatToDataUrl } from '../../../../utility/formatImage';
 
 
 
@@ -43,12 +44,26 @@ const PublishCreatorInfo = (props:any) => {
   const [toolsInputDef, setToolsInputDef] = useState<string>("");
   const [creatorsData, setCreatorsData] = useState({}); 
   const [prevProfile, setPrevProfile] = useState<string>("");
-  const [editProfilePic, setEditPrevProfile] = useState<string>(profile.profilePic);
   const [profileSize, setProfileSize] = useState<boolean>(false);
   const [sendButton, setSendButton] = useState<boolean>(true);
 
-  console.log("TOOLS", tools)
-
+  useEffect(() => {
+      
+    if(profile.isCreator){
+      formatToDataUrl(profile.profilePic, function(myBase64:string) {
+        setPrevProfile(myBase64);
+      });
+      setPrevProfile(profile.profilePic);
+      setProfilePic(profile.profilePic);
+      setDisplayName(profile.userName);
+      setCity(profile.city);
+      setDescription(profile.description);
+      setPatreon(profile.patreon);
+      setTools(profile.tools);
+    }
+  
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
    
   useEffect(() => {
 
@@ -68,13 +83,6 @@ const PublishCreatorInfo = (props:any) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [profilePic,displayName,city,description,social,tools,patreon]);
 
-  useEffect(() => {
-    if(profile.isCreator === true){
-      setPrevProfile(profile.profilePicPreview);
-      // setTools(profile.tools);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   useEffect(() => {
     setSocialInputDef("");
@@ -98,38 +106,26 @@ const PublishCreatorInfo = (props:any) => {
     postProfile(registration.token,creatorsData)
       .then(res => {
         setCreatorProfile(res);
-        history.push("./publish-comic-series"); 
+        history.push({
+          pathname:"./publish-comic-series",
+          state:  "isNewSeries"
+        }); 
       })
     
   };
 
-  // const handleSocial = (event:any) => {
-  //   event.preventDefault();
-  //   if(social.length >= 2) {
-  //     setSocialDisabled(true);
-  //   }
-  //   if(inputSocialEl && inputSocialEl.current) {
-  //     inputSocialEl.current.focus();
-  //     if(inputSocialEl.current.value.length > 1){
-  //       setSocial([...social,inputSocialEl.current.value]);
-  //     } else {
-  //       setSocial([]);
-  //     }
-  //   }
-  // };
 
   const handleTools = (event:any) => {
     event.preventDefault();
-    if(tools.length || profile.tools >= 2) {
+    if(tools.length >= 2) {
       setToolDisabled(true);
     }
     if(inputToolsEl && inputToolsEl.current) {
       inputToolsEl.current.focus();
-      if(inputToolsEl.current.value.length > 1 && !profile.isCreator){
+      if(inputToolsEl.current.value.length > 1){
         setTools([...tools,inputToolsEl.current.value]);
-      } else {
-        setTools([]);
-      }
+        console.log("CLICKED")
+      } 
     }
   };
 
@@ -151,13 +147,12 @@ const PublishCreatorInfo = (props:any) => {
           let reader = new FileReader();
           reader.onload = function(e: any) {
             if(name === "profile"){
+              console.log("PREV",e.target.result)
               setPrevProfile(e.target.result);
               setProfilePic(e.target.result);
               setUpdateProfile("profilePicPreview",e.target.result);
-              console.log("PREV PIC",typeof e.target.result);
               setProfileSize(true);
               handleProfilePic(file);
-              console.log(file)
             }
           };
           reader.readAsDataURL(file);
@@ -172,6 +167,8 @@ const PublishCreatorInfo = (props:any) => {
       };
   };
 
+ 
+
   const handleDeleteArr = (indexClicked:number, name:string) => {
     if(name==="social"){
       const newSocial = social.filter((el,index) => index !== indexClicked);
@@ -180,8 +177,12 @@ const PublishCreatorInfo = (props:any) => {
     if(name==="tools"){
       const newTools = tools.filter((el,index) => index !== indexClicked);
       setTools(newTools);
+      if(tools.length < 4){
+        setToolDisabled(false);
+        console.log("toolsDis",toolDisabled);
+      }
     }
-  };
+  };  
 
 
   return (
@@ -197,7 +198,6 @@ const PublishCreatorInfo = (props:any) => {
         message={"Its your first time publishing a series, let us guide you."}
       />
      
-
       <Div formContainer>
         
         <UploaderThumbContainer >
@@ -205,7 +205,8 @@ const PublishCreatorInfo = (props:any) => {
             circular
             thumbnail
             thumbFull={profileSize} 
-            prevThumb={prevProfile||uploadChap}>
+            prevThumb={prevProfile||uploadChap}
+            >
             <UploaderField
               thumbnail
               type="file"
@@ -220,7 +221,7 @@ const PublishCreatorInfo = (props:any) => {
             <Label fixed>Display Name <span  style={{fontSize:"1.6rem"}}>(your nickname in Guhit app)</span></Label>
             <InputField 
               marginTop
-              defaultValue={profile.isCreator ? profile.userName : ""}
+              defaultValue={displayName}
               onChange={(e:any) => setDisplayName(e.target.value)}/>
           </Input>
 
@@ -228,7 +229,7 @@ const PublishCreatorInfo = (props:any) => {
             <Label fixed>City</Label>
             <InputField 
               marginTop
-              defaultValue={profile.isCreator ? profile.city : ""}
+              defaultValue={city}
               onBlur={(e:any) => setCity(e.target.value)}/>
           </Input>
 
@@ -237,7 +238,7 @@ const PublishCreatorInfo = (props:any) => {
               <TextArea 
                 marginTop
                 maxLength={500}
-                defaultValue={profile.isCreator ? profile.description : ""}
+                defaultValue={description}
                 onBlur={(e:any) => setDescription(e.target.value)}
                 placeholder="Less than 500 characters"/>
           </Input>
@@ -246,47 +247,9 @@ const PublishCreatorInfo = (props:any) => {
             <Label fixed>Patreon account<span  style={{fontSize:"1.6rem"}}> (Optional)</span></Label>
             <InputField 
               marginTop
-              defaultValue={profile.isCreator ? profile.patreon: ""}
+              defaultValue={patreon}
               onBlur={(e:any) => setPatreon(e.target.value)}/>
           </Input>
-          
-          
-          {/* ////CREATOR SOCIAL MEDIA 
-              <Input style={{marginBottom:"0rem"}}>
-              <Label fixed>Social Media<span  style={{fontSize:"1.6rem"}}> (Optional, Photoshop etc.)</span></Label>
-              <Div inputTagContainer style={{marginBottom:"0rem"}}>
-                <InputField
-                  marginTop 
-                  style={{marginBottom: "1rem"}}
-                  disabled={socialDisabled}
-                  type="text" 
-                  ref={inputSocialEl} 
-                  onChange={e => setSocialInputDef(e.target.value)}
-                  value={socialInputDef}
-                  />
-                <Button 
-                  width={"20rem"}
-                  height={"5rem"}
-                  style={{marginTop:"10px",marginLeft:"-3px"}}
-                  primaryOutline
-                  onClick={handleSocial} 
-                  disabled={socialDisabled}>
-                  Add tools
-                </Button>
-              </Div>
-          </Input>
-          <div style={{display: "flex", flexDirection:"column",textAlign: "left",color: "#ccc",fontSize: "1.4rem"}}>
-            <p style={{marginBottom: "1rem",color: "#aaa"}}>Social media links:</p>
-            {social.map((el,index) => {
-              return <p 
-                        onClick={e => handleDeleteArr(index, "social")} 
-                        style={{lineHeight: "2rem"}} 
-                        key={index}>
-                        {el}<TiEdit fontSize={"2rem"}/>
-                      </p>
-              })
-            }
-          </div> */}
 
           <Input style={{marginBottom:"0rem"}}>
               <Label fixed>Tools<span  style={{fontSize:"1.6rem"}}> (Optional)</span></Label>
@@ -346,3 +309,56 @@ const PublishCreatorInfo = (props:any) => {
 
 export default  PublishCreatorInfo;
 
+  // const handleSocial = (event:any) => {
+  //   event.preventDefault();
+  //   if(social.length >= 2) {
+  //     setSocialDisabled(true);
+  //   }
+  //   if(inputSocialEl && inputSocialEl.current) {
+  //     inputSocialEl.current.focus();
+  //     if(inputSocialEl.current.value.length > 1){
+  //       setSocial([...social,inputSocialEl.current.value]);
+  //     } else {
+  //       setSocial([]);
+  //     }
+  //   }
+  // };
+
+
+            
+          {/* ////CREATOR SOCIAL MEDIA 
+              <Input style={{marginBottom:"0rem"}}>
+              <Label fixed>Social Media<span  style={{fontSize:"1.6rem"}}> (Optional, Photoshop etc.)</span></Label>
+              <Div inputTagContainer style={{marginBottom:"0rem"}}>
+                <InputField
+                  marginTop 
+                  style={{marginBottom: "1rem"}}
+                  disabled={socialDisabled}
+                  type="text" 
+                  ref={inputSocialEl} 
+                  onChange={e => setSocialInputDef(e.target.value)}
+                  value={socialInputDef}
+                  />
+                <Button 
+                  width={"20rem"}
+                  height={"5rem"}
+                  style={{marginTop:"10px",marginLeft:"-3px"}}
+                  primaryOutline
+                  onClick={handleSocial} 
+                  disabled={socialDisabled}>
+                  Add tools
+                </Button>
+              </Div>
+          </Input>
+          <div style={{display: "flex", flexDirection:"column",textAlign: "left",color: "#ccc",fontSize: "1.4rem"}}>
+            <p style={{marginBottom: "1rem",color: "#aaa"}}>Social media links:</p>
+            {social.map((el,index) => {
+              return <p 
+                        onClick={e => handleDeleteArr(index, "social")} 
+                        style={{lineHeight: "2rem"}} 
+                        key={index}>
+                        {el}<TiEdit fontSize={"2rem"}/>
+                      </p>
+              })
+            }
+          </div> */}

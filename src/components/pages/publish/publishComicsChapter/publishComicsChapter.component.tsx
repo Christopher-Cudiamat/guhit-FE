@@ -13,7 +13,14 @@ import {MdDeleteForever} from 'react-icons/md';
 import {IoMdArrowRoundUp} from 'react-icons/io';
 import {IoMdArrowRoundDown} from 'react-icons/io';
 import uploadChap from '../../../../images/upload.png';
-import {UploaderField, UploaderLabel, UploaderImg, UploaderThumb, UploaderChapter, UploaderBanner, UploaderBannerContainer, UploaderThumbContainer } from '../../../../styleComponents/ui/upload';
+import {
+  UploaderField,
+  UploaderLabel,
+  UploaderImg,
+  UploaderThumb,
+  UploaderChapter,
+  UploaderThumbContainer } 
+from '../../../../styleComponents/ui/upload';
 import { CheckBox } from '../../../../styleComponents/ui/checkBox.style';
 import { ScrollToTopOnMount } from '../../../../utility/scrollToTopOnMount';
 import {  postCreateChapter } from '../../../../services/publish';
@@ -36,16 +43,12 @@ const PublishComicsChapter = (props:any) => {
   const inputEl = useRef<HTMLInputElement>(null);
 
   const location = useLocation();
-  const seriesTitle = location.state;
+  const seriesId = location.state;
 
-  console.log(location);
-  console.log("TITLE",seriesTitle);
-  
   const [isDisabled,  setIsDisabled] = useState<boolean>(false);
   const [chapterCover, setChapterCover] = useState<IImageUploadType[]>([]);
   const [chapterTitle, setChapterTitle] = useState<string>("");
   const [chapterDescription, setChapterDescription] = useState<string>("");
-  // const [bannerPic, setBannerPic] = useState<IImageUploadType[]>([]);
   const [tags, setTags] = useState<string[]>([]);
   const [tagInputDef, setTagInputDef] = useState<string>("");
   const [openForComments, setOpenForComments] = useState<boolean>(false); 
@@ -55,11 +58,6 @@ const PublishComicsChapter = (props:any) => {
   const [prevThumbnail, setprevThumbnail] = useState<string>("");
   const [toggleThumbSize, setToggleThumbSize] = useState<boolean>(false);
 
-  
-  // const [prevBanner, setprevBanner] = useState<string>("");
-  // const [toggleBannerSize, setToggleBannerSize] = useState<boolean>(false);
-
-   
   useEffect(() => {
     setChaptersData({
       chapterCover,
@@ -68,13 +66,12 @@ const PublishComicsChapter = (props:any) => {
       tags,
       openForComments,
       matureContents,
-      // bannerPic,
       chapterPages,
-      seriesTitle,
+      seriesId,
     })
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [chapterCover,chapterTitle,chapterPages,chapterDescription,tags,
-    ,openForComments,matureContents,seriesTitle]);
+    ,openForComments,matureContents,seriesId]);
   
     console.log("TEST",chaptersData);
 
@@ -100,8 +97,6 @@ const PublishComicsChapter = (props:any) => {
     history.push("./creator-account");
   }
 
-
-  //chapter uploads table work in progress
   const handleChangePosition = (name:string,arr:any, old_index:any, new_index:any) => {
     if(name === "up"){
       arr.splice(new_index, 0, arr.splice(old_index, 1)[0]);
@@ -120,10 +115,6 @@ const PublishComicsChapter = (props:any) => {
   const handleChapterCover = (event:any) => {
     setChapterCover(event);
   };
-
-  // const handleBanner = (event:any) => {
-  //   setBannerPic(event);
-  // };
 
   const handleTags = (event:any) => {
     setTagInputDef("changeplease");
@@ -163,18 +154,12 @@ const PublishComicsChapter = (props:any) => {
               setToggleThumbSize(true);
               handleChapterCover(file);
             }
-            // } else if (name === "banner"){
-            //   setprevBanner(e.target.result);
-            //   setToggleBannerSize(true);
-            //   handleBanner(file);
-            // }
           };
           reader.readAsDataURL(file);
         }else {
           e.target.value = "";
           alert("Exceed maximum")
         };
-        // handleUpload(e);
       } else {
         e.target.value = "";
         alert("Please insert correct image type only")
@@ -300,23 +285,6 @@ const PublishComicsChapter = (props:any) => {
             }
           </div>
 
-          
-
-          {/* <UploaderBannerContainer>
-            <UploaderBanner 
-              thumbnail
-              bannerFull={toggleBannerSize} 
-              prevBanner={prevBanner||uploadChap}>
-              <UploaderField
-                banner
-                disabled={bannerPic.length > 1}
-                type="file"
-                onChange={e => handleUpload(e.target.files, "banner")}/>
-            </UploaderBanner>
-            <UploaderLabel banner>Upload chapter banner <span>(Optional) 1280 x 460px</span></UploaderLabel>
-          </UploaderBannerContainer> */}
-
-        
           <Div checkContainer>
             <Div style={{marginBottom:"1rem"}} consentContainer>
               <CheckBox onChange={e => setOpenForComments(!openForComments)}/>

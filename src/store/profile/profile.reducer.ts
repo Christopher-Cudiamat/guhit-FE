@@ -52,7 +52,7 @@ export const profileReducer = (state = initialState, action: any) => {
         novelsSeriesMade: 0,
         comicsChaptersMade: 0,
         novelsChaptersMade: 0,
-        isCreator: false,
+        isCreator: true,
       }
     case SET_UPDATE_PROFILE:
       return {

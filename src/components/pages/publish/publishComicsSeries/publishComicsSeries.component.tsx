@@ -8,7 +8,7 @@ import { CheckBox } from '../../../../styleComponents/ui/checkBox.style';
 import { formatTags } from '../../../../utility/formatTags';
 import Button from '../../../../styleComponents/ui/button.style';
 import PublishHeader from '../publishHeader/publishHeader.container';
-import {postCreateSeries } from '../../../../services/publish';
+import {postCreateSeries, getSeries } from '../../../../services/publish';
 import { ScrollToTopOnMount } from '../../../../utility/scrollToTopOnMount';
 import { 
   UploaderField, 
@@ -18,6 +18,7 @@ import {
   UploaderCoverContainer, 
   UploaderCover } from '../../../../styleComponents/ui/upload';
 import uploadChap from '../../../../images/upload.png';
+import { formatToDataUrl } from '../../../../utility/formatImage';
 
 
 
@@ -27,25 +28,29 @@ const PublishComicsSeries = (props:any) => {
 
   interface IImageUploadType {
     name?: string,
-    lastModified?: number
-    lastModifiedDate?:Date
+    lastModified?: number,
+    lastModifiedDate?:Date,
     webkitRelativePath?: string,
     size?: number,
     type?: string,
   }
 
-  const history = useHistory();
+  const history = useHistory();  
+  const location = useLocation();
+  const isNewSeries = location.state; 
+  console.log("isNewSeries",isNewSeries)
+  console.log("typeof",typeof isNewSeries)
   
   const [isDisabled,  setIsDisabled] = useState<boolean>(false);
-  const [coverPic, setCoverPic] = useState<IImageUploadType[]>([]);
-  const [bannerPic, setBannerPic] = useState<IImageUploadType[]>([]);
+  const [coverPic, setCoverPic] = useState<IImageUploadType[]|string>([]);
+  const [bannerPic, setBannerPic] = useState<IImageUploadType[]|string>([]);
   const [title, setTitle] = useState<string>("");
   const urlLink = `https://guhit.com/series/${title.replace(/ /g,"-")}`;
   const [url, setUrl] = useState<string>(urlLink);
   const [genrePrimary, setGenrePrimary] = useState<string>("");
   const [genreSecondary, setGenreSecondary] = useState<string>("");
   const [summary, setSummary] = useState<string>("");
-
+  // const [seriesId, setSeriesId] = useState("");
   const [tags, setTags] = useState<string[]>([]);
   const [tagInputDef, setTagInputDef] = useState<string>("");
   // const [email, setEmail] = useState<string>("test_user@yopmail.com");
@@ -59,7 +64,37 @@ const PublishComicsSeries = (props:any) => {
   const [prevBanner, setprevBanner] = useState<string>("");
   const [toggleBannerSize, setToggleBannerSize] = useState<boolean>(false);
 
-   
+
+  
+  useEffect(() => {
+    if(isNewSeries !== null) {
+      getSeries(registration.token,isNewSeries)
+      .then((res: any) => {
+        console.log("RESPONSE",res);
+        formatToDataUrl(res.seriesCover, function(myBase64:string) {
+          setprevCover(myBase64);
+          setToggleCoverSize(true)
+        });
+        formatToDataUrl(res.seriesBanner, function(myBase64:string) {
+          setprevBanner(myBase64);
+          setToggleBannerSize(true)
+        });
+  
+        setTitle(res.seriesTitle);
+        setUrl(res.seriesUrl);
+        setSummary(res.summary)
+        setGenrePrimary(res.genrePrimary);
+        setGenreSecondary(res.genreSecondary);
+        setTags(res.tags);
+        setAgreedPolicy(res.condition);
+        setContainExplicit(res.consent)
+      })
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  console.log("SERIES DATA",seriesData);
+
   useEffect(() => {
     setSeriesData({
       coverPic,
@@ -72,12 +107,19 @@ const PublishComicsSeries = (props:any) => {
       tags,
       agreedPolicy,
       containExplicit,
+      isNewSeries
     })
   
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [coverPic,title,url,genrePrimary,genreSecondary,summary,tags,
-    bannerPic,agreedPolicy,containExplicit,]);
+    bannerPic,agreedPolicy,containExplicit]);
 
+  useEffect(() => {
+    if(genrePrimary === ""){
+      setGenreSecondary("");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [genrePrimary]);
   
   useEffect(() => {
     if(genrePrimary === ""){
@@ -113,13 +155,11 @@ const PublishComicsSeries = (props:any) => {
 
   const handleSendForm = (event:any) => {
     event.preventDefault(); 
-    console.log(seriesData);
     postCreateSeries(registration.token,seriesData)
       .then(res => {
-        console.log("RESPONSE",res);
-        history.push({
+          history.push({
           pathname:"./publish-comic-chapters",
-          state:  res.seriesTitle 
+          state:  res._id
         }); 
     })
   }
@@ -136,7 +176,6 @@ const PublishComicsSeries = (props:any) => {
       } else {
         setTags([]);
       }
-      
     }
     // strict null checks need us to check if inputEl and current exist.
     // but once current exists, it is of type HTMLInputElement, thus it
@@ -213,8 +252,9 @@ const PublishComicsSeries = (props:any) => {
 
         <Form>
           <Input>
-            <Label fixed>Title</Label>
+            <Label fixed>Title</Label> 
             <InputField 
+              defaultValue={title}
               marginTop
               onChange={(e:any) => setTitle(e.target.value)}/>
           </Input>
@@ -230,7 +270,9 @@ const PublishComicsSeries = (props:any) => {
           </Input>
 
           <Div genreContainer>
-            <Select medium onChange={e => setGenrePrimary(e.target.value)}>
+            <Select 
+            medium 
+            onChange={e => setGenrePrimary(e.target.value)}>
               {
                 genreList.map((el,index) => {
                   if(index === 0 ){
@@ -264,6 +306,7 @@ const PublishComicsSeries = (props:any) => {
           <Input>
               <Label fixed>Summary</Label>
               <TextArea 
+                defaultValue={summary}
                 marginTop
                 maxLength={500}
                 onBlur={(e:any) => setSummary(e.target.value)}

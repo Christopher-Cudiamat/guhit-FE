@@ -72,6 +72,26 @@ export const getAllSeries = async (token:string) => {
   return res.data;
 };
 
+///////////////////////////////////////////////////////////
+//GET
+///////////////////////////////////////////////////////////
+
+export const getSeries = async (token:string,seriesID:string|any) => {
+ 
+  const config = {
+    headers:{
+      'Content-Type': 'application/json',
+      'Authorization': token,
+      // 'Params': {id:"5ec79ed1a6834a21e4d1fbc2"}
+    }
+  }
+
+  let url = `/api/series/my-series?id=${seriesID}`;
+
+  const res = await instanceGet.get(url, config); 
+  return res.data;
+};
+
 
 
 
@@ -79,17 +99,17 @@ export const getAllSeries = async (token:string) => {
 //GET
 ///////////////////////////////////////////////////////////
 
-export const getAllChapters = async (token:string,seriesTitle:string) => {
+export const getAllChapters = async (token:string,seriesId:string) => {
  
   const config = {
     headers:{
       'Content-Type': 'application/json',
       'Authorization': token,
-      'Params': {title:seriesTitle}
+      'Params': {id:seriesId}
     }
   }
 
-  let url = `/api/chapters/all-my-chapters?title=${seriesTitle}`;
+  let url = `/api/chapters/all-my-chapters?id=${seriesId}`;
 
   const res = await instanceGet.get(url, config);
   return res.data;
@@ -113,7 +133,7 @@ export const postCreateSeries = async (token:string,data:any) => {
   let url = '/api/series/create-series';
 
   const body = new FormData();
-  
+  body.append("isNewSeries",data.isNewSeries)
   body.append("seriesTitle", data.title);
   body.append('seriesCover',data.coverPic);
   body.append('seriesBanner',data.bannerPic);
@@ -121,6 +141,7 @@ export const postCreateSeries = async (token:string,data:any) => {
   body.append('genrePrimary',data.genrePrimary);
   body.append('genreSecondary',data.genreSecondary);
   body.append('summary',data.summary);
+  // body.append('seriesId',data.seriesId);
   body.append('tags',data.tags.toString());
   body.append('condition',data.agreedPolicy.toString());
   body.append('consent',data.containExplicit.toString());
@@ -145,7 +166,8 @@ export const postCreateChapter = async (token:string,data:any) => {
     openForComments,
     matureContents,
     chapterPages,
-    seriesTitle,
+    seriesId,
+    
   } = data;
 
   console.log(data);
@@ -158,10 +180,11 @@ export const postCreateChapter = async (token:string,data:any) => {
   }
 
   let url = '/api/chapters/create-chapter';
+
   
   const body = new FormData();
   
-  body.append("seriesTitle",seriesTitle);
+  body.append("seriesId",seriesId);
   body.append("chapterTitle",chapterTitle);
   body.append("chapterCover",chapterCover);
   body.append("chapterDescription",chapterDescription);

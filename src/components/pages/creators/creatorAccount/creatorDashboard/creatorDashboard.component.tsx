@@ -8,10 +8,6 @@ import { Div } from './creatorDashboard.style';
 import {TiArrowBack} from 'react-icons/ti';
 import { MdClose } from 'react-icons/md';
 import { AiOutlineFileAdd } from 'react-icons/ai';
-// import { LinkRouter } from '../../../../../styleComponents/ui/link.style';
-
-
-
 
 const CreatorDashboard = (props:any) => {
 
@@ -20,24 +16,26 @@ const CreatorDashboard = (props:any) => {
   const [listFilter, setListFilter] = useState<string>("all");
   const [goToChaptersLists, setgoToChaptersLists] = useState<boolean>(false);
   const [showPublishOption, setShowPublishOption] = useState<boolean>(false);
-  const [toggleAddLink, setToggleAddLink] = useState<boolean>(false);
-  const [seriesTitle, setSeriesTitle] =  useState<string>("");
+  const [seriesId, setSeriesId] =  useState<string>("");
   
 
   const history = useHistory();
 
-  const handleChapterLists = (title:string) => {
+  const handleChapterLists = (id:string) => {
     setgoToChaptersLists(!goToChaptersLists);
-    setSeriesTitle(title);
+    setSeriesId(id);
   }
 
   const handPublishRoute = (name:string) => {
     if(name === "publish-comic-series"){
-      history.push("./publish-comic-series")
+      history.push({
+        pathname:"./publish-comic-series",
+        state:  "isNewSeries"
+      }); 
     } else if(name === "publish-comic-chapters"){
       history.push({
         pathname:"./publish-comic-chapters",
-        state:  seriesTitle 
+        state:  seriesId
       }); 
     } else {
       history.push("./novels")
@@ -62,21 +60,17 @@ const CreatorDashboard = (props:any) => {
                 </select>
             }
 
-            {  goToChaptersLists  ?
+            { 
+              goToChaptersLists  ?
               <h4 onClick={e => handPublishRoute("publish-comic-chapters")}>
                 <AiOutlineFileAdd fontSize={"2rem"}/>
                 Add new chapter
               </h4>
               :
               <h4 onClick={(e:any) => setShowPublishOption(!showPublishOption)}>
-                { showPublishOption ?
-                  <MdClose fontSize={"2rem"}/>
-                  :
-                  <AiOutlineFileAdd fontSize={"2rem"}/>
-                }
+                { showPublishOption ? <MdClose fontSize={"2rem"}/> :  <AiOutlineFileAdd fontSize={"2rem"}/>}
                 Add new series
               </h4>
-            
             }
 
             { 
@@ -93,17 +87,16 @@ const CreatorDashboard = (props:any) => {
      
       { 
         profile.comicsSeriesMade === 0 && !goToChaptersLists
-         
-        ? <CreatorSeriesList
-            token={registration.token} 
-            listFilter={listFilter} 
-            onOpenChapters={handleChapterLists}/>
-        : goToChaptersLists || profile.comicsChaptersMade === 0 
-        ? <CreatorChapterList
-            token={registration.token} 
-            seriesTitle={seriesTitle}
-            />
-        : <CreatorNoSeries/>
+          ? <CreatorSeriesList
+              token={registration.token} 
+              listFilter={listFilter} 
+              onOpenChapters={handleChapterLists}/>
+          : goToChaptersLists || profile.comicsChaptersMade === 0 
+          ? <CreatorChapterList
+              token={registration.token} 
+              seriesId={seriesId}
+              />
+          : <CreatorNoSeries/>
       }
 
     </Div>
