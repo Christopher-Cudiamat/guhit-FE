@@ -12,7 +12,7 @@ import { ScrollToTopOnMount } from '../../../../../utility/scrollToTopOnMount';
 const CreatorProfile = (props:any) => {
 
   const {profile} = props;
-  console.log(profile);
+  
   return (
 
       <Div profileContainer>

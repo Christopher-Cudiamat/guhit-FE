@@ -21,6 +21,7 @@ const initialState ={
   comicsChaptersMade: 0,
   novelsChaptersMade: 0,
   isCreator: false,
+  seriesMade: [],
 };
 
 export const profileReducer = (state = initialState, action: any) => {
@@ -53,6 +54,7 @@ export const profileReducer = (state = initialState, action: any) => {
         comicsChaptersMade: 0,
         novelsChaptersMade: 0,
         isCreator: payload.isCreator,
+        seriesMade: payload.seriesMade,
       }
     case SET_UPDATE_PROFILE:
       return {

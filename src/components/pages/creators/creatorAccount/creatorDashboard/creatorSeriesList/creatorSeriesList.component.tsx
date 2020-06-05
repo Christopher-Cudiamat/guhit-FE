@@ -7,25 +7,25 @@ import Button from '../../../../../../styleComponents/ui/button.style';
 import { useHistory } from 'react-router-dom';
 import { ScrollToTopOnMount } from '../../../../../../utility/scrollToTopOnMount';
 
-import {MdDeleteForever} from 'react-icons/md';
+
 import DeleteSeriesModal from '../../../../../globalModals/deleteSeriesModal/deleteSeriesModal';
 
 
 const CreatorSeriesList = (props:any) => {
 
-  const {listFilter,token,onOpenChapters} = props;
+  const {listFilter,token,onOpenChapters,sereiesArrLength} = props;
  
   const [seriesArray, setSeriesArray] = useState<Array<any>>([]);
-  const [seriesId, setSeriesId] = useState<string>('');
+  const [idSeries, setIdSeries] = useState('');
 
   const history = useHistory();
 
-  useEffect(() => {
+  useEffect(() => { 
     getAllSeries(token)
       .then(res => {
-        // console.log(res);
-        // res.map((el:any) => console.log(el._id));
-        setSeriesArray(res) 
+        console.log("SERIRSSSSSSS",res.length);
+        sereiesArrLength(res.length);
+        setSeriesArray(res);
       })
      // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [listFilter]);
@@ -50,7 +50,6 @@ const CreatorSeriesList = (props:any) => {
       <ScrollToTopOnMount/>
       {
         seriesArray.map((el,index) => {
-          console.log("ID",el._id);
           
           return  <>
 
@@ -78,10 +77,14 @@ const CreatorSeriesList = (props:any) => {
                           <Button 
                             blackOutline 
                             onClick={e => handleEditSeries(el._id)}>
-                            Edit Series</Button >
+                            Edit Series</Button>
                         </Div>
-                        <Div deleteSeries>
-                          <DeleteSeriesModal />
+                        <Div deleteSeries 
+                          onClick={(e:any) => setIdSeries(el._id)}>
+                          <DeleteSeriesModal 
+                            token={token}
+                            id={idSeries}
+                            />
                         </Div>
                       </div>
                     </Div>

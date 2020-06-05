@@ -17,20 +17,16 @@ const CreatorDashboard = (props:any) => {
   const [goToChaptersLists, setgoToChaptersLists] = useState<boolean>(false);
   const [showPublishOption, setShowPublishOption] = useState<boolean>(false);
   const [seriesId, setSeriesId] =  useState<string>("");
-  console.log("SERIES ID",seriesId);
+  let [seriesLength,setSeriesLength] =  useState<number>();
+  console.log("seriesLength",seriesLength);
+  
 
   const history = useHistory();
 
-  const handleChapterLists = (id:string) => {
+  const handleChapterLists = (id:string) => { 
     setgoToChaptersLists(!goToChaptersLists);
     setSeriesId(id);
   }
-
-  // const handleChapterLists = (id:string) => {
-
-  //   setSeriesId(id);
-  // }
-
 
   const handPublishRoute = (name:string) => {
     if(name === "publish-comic-series"){
@@ -91,18 +87,18 @@ const CreatorDashboard = (props:any) => {
           </Div> :null
       }
      
-      { 
-        profile.comicsSeriesMade === 0 && !goToChaptersLists
+      {   
+          seriesLength !== 0 && !goToChaptersLists
           ? <CreatorSeriesList
               token={registration.token} 
               listFilter={listFilter} 
+              sereiesArrLength={setSeriesLength}
               onOpenChapters={handleChapterLists}/>
-          : goToChaptersLists || profile.comicsChaptersMade === 0 
+          : goToChaptersLists || seriesLength !== 0 
           ? <CreatorChapterList
               token={registration.token} 
               seriesId={seriesId}
               onOpenChapters={handleChapterLists}
-              // onGetSerieId={handleGetSeriesId}
               />
           : <CreatorNoSeries/>
       }

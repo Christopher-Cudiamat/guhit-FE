@@ -8,6 +8,7 @@ import { Box } from '../../../styleComponents/ui/box.style';
 
 import {MdDeleteForever} from 'react-icons/md';
 import { DivInfo } from './deleteSeriesModal.style';
+import { deleteSeries } from '../../../services/publish';
 
 
 
@@ -15,21 +16,30 @@ import { DivInfo } from './deleteSeriesModal.style';
 
 
 const DeleteSeriesModal = (props:any) => {
-  
+
+  const {token, id} = props;
+
   const history = useHistory();
 
-  const handleDeleteSeries = () => {
-    console.log("close")
-    history.push('/');
-    history.goBack()
+  const handleDeleteSeries = (cb:any) => {
+    cb();
+    deleteSeries(token,id)
+      .then(res => {
+        if(res){
+          history.push('/');
+          history.goBack()
+        }
+      });
   }
+
   
   return (
     
     <PortalWithState 
       closeOnOutsideClick 
       closeOnEsc
-      onClose={handleDeleteSeries}>
+      // onClose={handleDeleteSeries}
+      >
       {({ openPortal, closePortal, portal }) => (
         
         <React.Fragment>
@@ -40,7 +50,7 @@ const DeleteSeriesModal = (props:any) => {
               <Overlay globalModal zIndex={"999"}  onClick={closePortal}>
                 
               </Overlay>
-              <DivInfo>
+              <DivInfo>  
                 <MdClose 
                 onClick={closePortal}
                 color={"black"}
@@ -52,7 +62,7 @@ const DeleteSeriesModal = (props:any) => {
                   fontSize={"2.4rem"}
                   lineHeight={"3rem"}
                   bottom={"-27%"}>
-                  <p>Are you sure you want to continue deleting this series? <span  onClick={closePortal}>Delete</span></p>
+                  <p>Are you sure you want to continue deleting this series? <span  onClick={e =>handleDeleteSeries(closePortal)}>Delete</span></p>
                 </Box>
 
               </DivInfo>

@@ -14,9 +14,11 @@ export const instanceGet = axios.create({
 });
 
 export const instancePost = axios.create({
-    // baseURL: 'https://guhit-app.firebaseio.com/',
-    // baseURL: 'http://localhost:3000/',
     headers: {"Content-Type": "application/json"}
+});
+
+export const instanceDelete = axios.create({
+    
 });
 
 export const instancePostForRedirect = axios.create({
@@ -24,8 +26,38 @@ export const instancePostForRedirect = axios.create({
     headers: {"Content-Type": "application/x-www-form-urlencoded"}
 });
 
+
+
+
+
+
+
+
 instanceGet.interceptors.request.use(async (config) => {
     store.dispatch(setIsLoading({isLoading: true}));
+    return config;
+});
+
+instanceDelete.interceptors.request.use(async (config) => {
+    store.dispatch(setIsLoading({isLoading: true}));
+    return config;
+});
+
+
+instancePost.interceptors.request.use(async (config) => {
+    store.dispatch(setIsLoading({isLoading: true}));
+    return config;
+});
+
+
+
+
+
+
+
+
+instancePost.interceptors.response.use(async (config) => {
+    store.dispatch(setIsLoading({isLoading: false}));
     return config;
 });
 
@@ -35,12 +67,7 @@ instanceGet.interceptors.response.use(async (config) => {
     return config;
 });
 
-instancePost.interceptors.request.use(async (config) => {
-    store.dispatch(setIsLoading({isLoading: true}));
-    return config;
-});
-
-instancePost.interceptors.response.use(async (config) => {
+instanceDelete.interceptors.response.use(async (config) => {
     store.dispatch(setIsLoading({isLoading: false}));
     return config;
 });
@@ -55,6 +82,8 @@ instancePost.interceptors.response.use(function (response) {
     }
     return Promise.reject(error);
 });
+
+
 
 
 instanceGet.interceptors.response.use(undefined, err => {

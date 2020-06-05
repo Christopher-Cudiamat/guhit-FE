@@ -1,4 +1,4 @@
-import {instancePost, instanceGet} from "../configs/axios.config";
+import {instancePost, instanceGet, instanceDelete} from "../configs/axios.config";
 
 // interface IphotoType {
 
@@ -187,8 +187,6 @@ export const postCreateChapter = async (token:string,data:any) => {
     
   } = data;
 
-  console.log("DATAAAAAAAAAAAAAAAAAA",data);
-
   const config = {
     headers:{
       'Content-Type': 'multipart/form-data',
@@ -214,6 +212,26 @@ export const postCreateChapter = async (token:string,data:any) => {
   })}
 
   const res = await instancePost.post(url,body,config); 
+  return res.data;
+};
+
+
+
+///////////////////////////////////////////////////////////
+//POST
+///////////////////////////////////////////////////////////
+export const deleteSeries = async (token:string,seriesID:string|any) => {
+ 
+  const config = {
+    headers:{
+      'Content-Type': 'application/json',
+      'Authorization': token,
+    }
+  }
+
+  let url = `/api/series/delete-series?id=${seriesID}`;
+
+  const res = await instanceDelete.delete(url, config); 
   return res.data;
 };
 

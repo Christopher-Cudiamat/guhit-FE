@@ -2,7 +2,7 @@ import {instanceGet, instancePost} from "../configs/axios.config";
 
 
 export const getProfile = async (token:string) => {
-  console.log(token)
+  // console.log(token)
   const config = {
     headers:{
       'Content-Type': 'application/json',
@@ -14,7 +14,7 @@ export const getProfile = async (token:string) => {
  
 
   const res = await instanceGet.get(url, config);
-  console.log("SECRET RESPONE",res.data);
+  // console.log("SECRET RESPONE",res.data);
   return res.data;
 };
 
@@ -41,7 +41,7 @@ export const postInitProfile = async (token:string,email:any) => {
 
 
 export const postProfile = async (token:string,data:any) => {
-  console.log("DATA",data);
+  // console.log("DATA",data);
   const config = {
     headers:{
       'Content-Type': 'multipart/form-data',

@@ -12,8 +12,7 @@ import store from '../../configs/store.config';
 const PrivateRoute = (props:any) => {
   let{component: Component, ...rest} = props;
   let isAuthenticated = store.getState().registration.isAuthenticated;
-  console.log("PRIVATEROUTE IS AUTH",isAuthenticated);
-
+  
   return<Route
     {...rest}
     render={props =>
