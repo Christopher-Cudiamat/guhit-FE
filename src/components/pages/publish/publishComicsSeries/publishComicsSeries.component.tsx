@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Container, Div, Form, P } from './publishComicsSeries.style';
+import { Container, Div, Form, P, GenreLabel } from './publishComicsSeries.style';
 import { useHistory,useLocation } from 'react-router-dom';
 import { Input, InputField, Label } from '../../../../styleComponents/ui/input.style';
 import { Select } from '../../../../styleComponents/ui/select.style';
@@ -18,7 +18,7 @@ import {
   UploaderCoverContainer, 
   UploaderCover } from '../../../../styleComponents/ui/upload';
 import uploadChap from '../../../../images/upload.png';
-import { formatToDataUrl } from '../../../../utility/formatImage';
+import { formatToDataUrl, formatToImageFile } from '../../../../utility/formatImage';
 
 
 
@@ -67,19 +67,25 @@ const PublishComicsSeries = (props:any) => {
 
   
   useEffect(() => {
+    //If updating existing series
     if(isNewSeries !== null) {
       getSeries(registration.token,isNewSeries)
       .then((res: any) => {
-        console.log("RESPONSE",res);
+        console.log("RESPONSE",res)
         formatToDataUrl(res.seriesCover, function(myBase64:string) {
           setprevCover(myBase64);
-          setToggleCoverSize(true)
+          setToggleCoverSize(true);
         });
         formatToDataUrl(res.seriesBanner, function(myBase64:string) {
           setprevBanner(myBase64);
-          setToggleBannerSize(true)
+          setToggleBannerSize(true);
         });
-  
+        formatToImageFile(res.seriesCover, function(pic:any) {
+          setCoverPic(pic);
+        });
+        formatToImageFile(res.seriesBanner, function(pic:any) {
+          setBannerPic(pic);
+        });
         setTitle(res.seriesTitle);
         setUrl(res.seriesUrl);
         setSummary(res.summary)
@@ -157,10 +163,15 @@ const PublishComicsSeries = (props:any) => {
     event.preventDefault(); 
     postCreateSeries(registration.token,seriesData)
       .then(res => {
+     
+        if(isNewSeries === "isNewSeries"){
           history.push({
-          pathname:"./publish-comic-chapters",
-          state:  res._id
-        }); 
+            pathname:"./publish-comic-chapters",
+            state:  {seriesId: res._id, isNewChapter: true }
+          }); 
+        } else {
+          history.push("./creator-account");  
+        }
     })
   }
 
@@ -231,7 +242,7 @@ const PublishComicsSeries = (props:any) => {
         activeCreators={false}
         activeSeries={true}
         activeChapter={false}
-        title={"Create new series"}
+        title={isNewSeries === "isNewSeries" ? "Create New Series":"Edit Series"}
         message={"Publish a new series in just a minute! but first let us give you some tips"}
       />
 
@@ -270,17 +281,20 @@ const PublishComicsSeries = (props:any) => {
           </Input>
 
           <Div genreContainer>
+            {isNewSeries !== "isNewSeries" ? <GenreLabel>Genres</GenreLabel> : null}
             <Select 
             medium 
             onChange={e => setGenrePrimary(e.target.value)}>
               {
                 genreList.map((el,index) => {
-                  if(index === 0 ){
-                    return <option key={ index} value="">Genre 1</option> 
-                  } else if(el === genreSecondary) {
-                    return <option key={ index} disabled={true} value={el}>{el}</option> 
+                  if(index === 0 && isNewSeries === "isNewSeries" ){
+                    return <option key={index} value="">Genre 1</option> 
+                  } else if(index === 0 && isNewSeries !== "isNewSeries" ){
+                    return <option key={index} value={genrePrimary}>{genrePrimary}</option> 
+                  }else if(el === genreSecondary) {
+                    return <option key={index} disabled={true} value={el}>{el}</option> 
                   } else {
-                    return <option key={ index} value={el}>{el}</option> 
+                    return <option key={index} value={el}>{el}</option> 
                   } 
                 })
               }
@@ -289,14 +303,16 @@ const PublishComicsSeries = (props:any) => {
             <Select medium disabled={genrePrimary === ""}  onChange={e => setGenreSecondary(e.target.value)}>
               {
                 genreList.map((el,index) => {
-                  if(index === 0 ){
-                    return <option key={ index} value="">Genre 2 (Optional)</option> 
+                  if(index === 0 && isNewSeries === "isNewSeries" ){
+                    return <option key={index} value="">Genre 2 (Optional)</option> 
+                  } else if(index === 0 && isNewSeries !== "isNewSeries" ){
+                    return <option key={index} value={genreSecondary}>{genreSecondary}</option> 
                   } else if (genrePrimary === ""){
-                    return <option key={ index} selected={true} value="">Genre 2 (Optional)</option> 
+                    return <option key={index} selected={true} value="">Genre 2 (Optional)</option> 
                   } else if(el === genrePrimary) {
-                    return <option key={ index} disabled={true} value={el}>{el}</option> 
+                    return <option key={index} disabled={true} value={el}>{el}</option> 
                   } else {
-                    return <option key={ index} value={el}>{el}</option> 
+                    return <option key={index} value={el}>{el}</option> 
                   }                           
                 })         
               }
@@ -362,18 +378,18 @@ const PublishComicsSeries = (props:any) => {
           <Div checkContainer>
             <Div consentContainer>
               <div>
-                <CheckBox onChange={e => setAgreedPolicy(!agreedPolicy)}/>
+                <CheckBox checked={agreedPolicy} onChange={e => setAgreedPolicy(!agreedPolicy)}/>
               </div>
               <p>
-                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum SOME EDIT.
+                AGREED POLICY has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum SOME EDIT.
               </p>
             </Div>
             <Div consentContainer>
               <div>
-                <CheckBox onChange={e => setContainExplicit(!containExplicit)}/>
+                <CheckBox checked={containExplicit} onChange={e => setContainExplicit(!containExplicit)}/>
               </div>
               <p>
-                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s.
+                CONTAINE EXPLICIT has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s.
               </p>
             </Div>
           </Div>
@@ -384,7 +400,7 @@ const PublishComicsSeries = (props:any) => {
               height={"5.5rem"}
               secondary 
               onClick={handleSendForm}>
-                Create New chapter
+                  {isNewSeries === "isNewSeries" ? "Create new series" : "Update series"}
             </Button>
           </Div>
        

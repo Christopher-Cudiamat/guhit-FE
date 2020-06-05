@@ -10,7 +10,15 @@ interface ICreatorAccountTypes {
 
 export const DivAccount = styled.div<ICreatorAccountTypes>`
 
-        
+      & h1 { 
+        margin-top: 2rem;
+        margin-left: 1rem;
+        @media ${props => props.theme.media.laptop} {
+          margin-top: 2rem;
+          margin-left: 0rem;
+        }
+      }
+      
       @media ${props => props.theme.media.laptop} {
         /* position:relative; */
         display: flex;

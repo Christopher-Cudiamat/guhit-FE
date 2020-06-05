@@ -28,7 +28,7 @@ import Publish from './publish/publish.container';
 import PublishCreatorInfo from './publish/publishCreatorInfo/publishCreatorInfo.container';
 import PublishComicsSeries from './publish/publishComicsSeries/publishComicsSeries.container';
 import PublishComicsChapter from './publish/publishComicsChapter/publishComicsChapter.container';
-
+import PrivateRoute from './privateRoute';
 
 
 const Pages = (props:any) => {
@@ -42,6 +42,8 @@ const Pages = (props:any) => {
   return (
     
     <Div onClick={handleCloseOverlay}>
+      
+      
       {
         modalData.data.drawerModal || modalData.data.searchModal || modalData.data.notifModal  || modalData.data.libraryModal || modalData.data.accountModal 
         ? <Overlay onClick={handleCloseOverlay}/> 
@@ -68,24 +70,25 @@ const Pages = (props:any) => {
           <Route exact path="/novels">
             <Novels />
           </Route> 
-          <Route exact path="/publish-comic-chapters">
+          {/* <Route exact path="/publish-comic-chapters">
             <PublishComicsChapter />
           </Route>
           <Route exact path="/publish-comic-series">
             <PublishComicsSeries />
-          </Route>
-          <Route exact path="/publish-creator-info">
+          </Route> */}
+          {/* <Route exact path="/publish-creator-info">
             <PublishCreatorInfo />
-          </Route>
+          </Route> */}
+    
           <Route exact path="/publish">
             <Publish />
           </Route>
           <Route exact path="/creators">
             <Creators />
           </Route>
-          <Route exact path="/creator-account">
+          {/* <Route exact path="/creator-account">
             <CreatorAccount />
-          </Route>
+          </Route> */}
           <Route exact path="/login">
             <Login/>
           </Route>
@@ -104,6 +107,23 @@ const Pages = (props:any) => {
           <Route exact path="/thankyoupage">
             <ThankYouPage />
           </Route>
+          <PrivateRoute
+            path="/publish-creator-info"
+            component={PublishCreatorInfo}
+          />;
+           <PrivateRoute
+            path="/publish-comic-series"
+            component={PublishComicsSeries}
+          />;
+          <PrivateRoute
+            path="/publish-comic-chapters"
+            component={PublishComicsChapter}
+          />;
+          <PrivateRoute
+            path="/creator-account"
+            component={CreatorAccount}
+          />;
+           
           <Route exact path="*">
             <ErrorPage />
           </Route>

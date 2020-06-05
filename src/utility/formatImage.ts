@@ -1,5 +1,5 @@
 
-      
+//FORMAT IMAGE URL TO BASE64 IMAGE     
 export const formatToDataUrl = (url:string, callback:any) => {
   var xhr = new XMLHttpRequest();
   xhr.onload = function() {
@@ -14,7 +14,16 @@ export const formatToDataUrl = (url:string, callback:any) => {
   xhr.send();
 }
 
-// toDataUrl(profile.profilePic, function(myBase64:string) {
+//FORMAT IMAGE URL TO IMAGE FILE TYPE
+export const formatToImageFile = async(url:string,callback:any) => {
+    let response = await fetch(url);
+    let data = await response.blob();
+    let metadata = {
+      type: 'image/jpeg'
+    };
+    let file = new File([data], "test.jpg", metadata);
+    console.log("FILEEEEEEE",file)
+    callback(file);
 
-//   setPrevProfile(myBase64);
-// });
+    // ... do something with the file or return it
+}

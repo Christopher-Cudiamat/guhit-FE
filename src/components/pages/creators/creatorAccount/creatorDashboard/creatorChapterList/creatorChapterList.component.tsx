@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { getAllChapters } from '../../../../../../services/publish';
+import { useHistory } from 'react-router-dom';
 
 import { Div } from './creatorChapterList.style';
 import Button from '../../../../../../styleComponents/ui/button.style';
+import { ScrollToTopOnMount } from '../../../../../../utility/scrollToTopOnMount';
 
 // import chapterSample from "../../../../../../images/chapter-3.jpg";
 
@@ -20,9 +22,20 @@ const CreatorChapterList = (props:any) => {
    
   }, []);
 
+  const history = useHistory();
+
+
+  const handleEditChapter = (chapterId:string,seriesId:string) => {
+    console.log("CHAPTER_ID",chapterId);
+    history.push({
+      pathname:"./publish-comic-chapters",
+      state: {seriesId:seriesId, chapterId:chapterId, isNewChapter: false }
+    }); 
+  }
+
   return (
     <React.Fragment>
-      
+       <ScrollToTopOnMount/>
       {
         chaptersArray.map((el,index) => {
           return <Div chapterCard key={index}> 
@@ -32,10 +45,13 @@ const CreatorChapterList = (props:any) => {
                     <p>Date created: {el.chapterDateCreated}</p>
                     <p>chapter: {el.chapterNumber} </p>
                     <Div buttons>
-                      <Button blackOutline>
+                      <Button 
+                        onClick={e => handleEditChapter(el._id,el.seriesId)}
+                        blackOutline>
                         Edit pages
                       </Button >
-                      <Button blackOutline>
+                      <Button 
+                        blackOutline>
                         View Chapters
                       </Button >
                     </Div>

@@ -1,34 +1,44 @@
 import React from 'react';
 import { PortalWithState } from 'react-portal';
-import { DivInfo } from './switchToDesktop.style';
+import { useHistory } from 'react-router-dom';
+
 import { MdClose } from 'react-icons/md';
 import { Overlay } from '../../../styleComponents/ui/overlay.style';
-import laptop from '../../../images/laptop-chibi.png';
 import { Box } from '../../../styleComponents/ui/box.style';
 
-const SwitchToDesktop = (props:any) => {
+import {MdDeleteForever} from 'react-icons/md';
+import { DivInfo } from './deleteSeriesModal.style';
+
+
+
+
+
+
+const DeleteSeriesModal = (props:any) => {
+  
+  const history = useHistory();
+
+  const handleDeleteSeries = () => {
+    console.log("close")
+    history.push('/');
+    history.goBack()
+  }
   
   return (
     
     <PortalWithState 
       closeOnOutsideClick 
-      closeOnEsc>
+      closeOnEsc
+      onClose={handleDeleteSeries}>
       {({ openPortal, closePortal, portal }) => (
         
         <React.Fragment>
-           <button onClick={openPortal} style={{
-                position:"absolute",
-                top: "0px",
-                left: "0px",
-                width: "100%",
-                height: "100%",
-                opacity: "0",
-                }}>
-            Open Portal
-          </button>
+          <MdDeleteForever onClick={openPortal} />
+      
           {portal(
             <>    
-              <Overlay zIndex={"999"} onClick={closePortal}>
+              <Overlay globalModal zIndex={"999"}  onClick={closePortal}>
+                
               </Overlay>
               <DivInfo>
                 <MdClose 
@@ -42,9 +52,9 @@ const SwitchToDesktop = (props:any) => {
                   fontSize={"2.4rem"}
                   lineHeight={"3rem"}
                   bottom={"-27%"}>
-                  Please switch to a laptop or desktop to continue publishing.
+                  <p>Are you sure you want to continue deleting this series? <span  onClick={closePortal}>Delete</span></p>
                 </Box>
-                <img src={laptop} alt=""/>
+
               </DivInfo>
             </>
           
@@ -56,4 +66,4 @@ const SwitchToDesktop = (props:any) => {
   );
 };
 
-export default SwitchToDesktop;
+export default DeleteSeriesModal;

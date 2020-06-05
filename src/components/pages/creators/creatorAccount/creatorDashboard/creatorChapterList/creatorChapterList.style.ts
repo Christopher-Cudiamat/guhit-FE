@@ -61,7 +61,7 @@ export const Div = styled.div<ICreatorSeriesTypes >`
 
     & * {
       @media ${props => props.theme.media.laptop} {
-        width: 60%;
+        width: 80%;
         margin: 0px;
         display: block;
         margin-top: .5rem;

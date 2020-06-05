@@ -5,7 +5,8 @@ interface IOverlayTypes {
   bannerr?: boolean,
   globalSearch?:boolean,
   light?: boolean,
-  zIndex?:string
+  zIndex?:string,
+  globalModal?:boolean,
 }
 
 export const Overlay = styled.div<IOverlayTypes>`
@@ -21,7 +22,7 @@ export const Overlay = styled.div<IOverlayTypes>`
   height: 100vh;
   
   @media ${props => props.theme.media.laptop} { 
-    display: ${props => props.light ? "block" : "none"};
+    display: ${props => props.light || props.globalModal ? "block" : "none"};
   }
 
 `

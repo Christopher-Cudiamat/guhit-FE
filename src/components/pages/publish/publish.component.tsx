@@ -216,7 +216,7 @@ const Publish = (props:any) => {
                   !registration.isAuthenticated 
                   ? {pathname:"/login" , state:true}
                   : profile.isCreator && registration.isAuthenticated 
-                  ? "/publish-comic-series" 
+                  ? {pathname:"./publish-comic-series",state:  "isNewSeries"}
                   : "/publish-creator-info"
                 }
                 >

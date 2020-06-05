@@ -7,11 +7,11 @@ interface ICreatorDashboardTypes {
 }
 
 
-export const Div = styled.div<ICreatorDashboardTypes>`
+export const Div = styled.div<ICreatorDashboardTypes>` 
   padding: 3rem 2rem;
   
   @media ${props => props.theme.media.laptop} {
-    box-shadow: 0px 3px 5px rgba(0,0,0,0.2);
+    box-shadow: 0px 3px 10px rgba(0,0,0,0.2);
     border-radius:1rem;
   }
   

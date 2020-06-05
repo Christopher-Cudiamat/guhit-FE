@@ -17,7 +17,7 @@ const CreatorDashboard = (props:any) => {
   const [goToChaptersLists, setgoToChaptersLists] = useState<boolean>(false);
   const [showPublishOption, setShowPublishOption] = useState<boolean>(false);
   const [seriesId, setSeriesId] =  useState<string>("");
-  
+  console.log("SERIES ID",seriesId);
 
   const history = useHistory();
 
@@ -25,6 +25,12 @@ const CreatorDashboard = (props:any) => {
     setgoToChaptersLists(!goToChaptersLists);
     setSeriesId(id);
   }
+
+  // const handleChapterLists = (id:string) => {
+
+  //   setSeriesId(id);
+  // }
+
 
   const handPublishRoute = (name:string) => {
     if(name === "publish-comic-series"){
@@ -35,7 +41,7 @@ const CreatorDashboard = (props:any) => {
     } else if(name === "publish-comic-chapters"){
       history.push({
         pathname:"./publish-comic-chapters",
-        state:  seriesId
+        state: {seriesId:seriesId, chapterId:"undefined", isNewChapter: true }
       }); 
     } else {
       history.push("./novels")
@@ -95,6 +101,8 @@ const CreatorDashboard = (props:any) => {
           ? <CreatorChapterList
               token={registration.token} 
               seriesId={seriesId}
+              onOpenChapters={handleChapterLists}
+              // onGetSerieId={handleGetSeriesId}
               />
           : <CreatorNoSeries/>
       }

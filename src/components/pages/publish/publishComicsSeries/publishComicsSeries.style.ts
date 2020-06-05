@@ -49,6 +49,11 @@ export const Div = styled.div<IFormTypes>`
     css`
       display: flex;
       justify-content: space-between;
+      flex-wrap: wrap;
+      text-align: left;
+      & select {
+        opacity: 0.5;
+      }
     `
   };
 
@@ -102,9 +107,13 @@ export const Form = styled.form<IFormTypes>`
   width: 70rem;
   & div{
     margin-bottom: 4rem;
-  }
-  
-      
+  }   
 `
 
+export const GenreLabel = styled.label<IFormTypes>`
+  width: 100%;
+  margin-bottom: 1rem;
+  font-size: 2rem;
+  color:  ${props => props.theme.color.blackLight};
+`
 

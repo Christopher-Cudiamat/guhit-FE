@@ -3,7 +3,12 @@ import { getAllSeries } from '../../../../../../services/publish';
 import { Div } from './creatorSeriesList.style';
 import Button from '../../../../../../styleComponents/ui/button.style'; 
 
+
 import { useHistory } from 'react-router-dom';
+import { ScrollToTopOnMount } from '../../../../../../utility/scrollToTopOnMount';
+
+import {MdDeleteForever} from 'react-icons/md';
+import DeleteSeriesModal from '../../../../../globalModals/deleteSeriesModal/deleteSeriesModal';
 
 
 const CreatorSeriesList = (props:any) => {
@@ -28,7 +33,7 @@ const CreatorSeriesList = (props:any) => {
   const handleAddChapter = (seriesId:string) => {
     history.push({
       pathname:"./publish-comic-chapters",
-      state:  seriesId 
+      state:  {seriesId: seriesId, isNewChapter: true, chapterId: "undefined" }
     }); 
   }
 
@@ -42,11 +47,13 @@ const CreatorSeriesList = (props:any) => {
   return (
     
     <>
+      <ScrollToTopOnMount/>
       {
         seriesArray.map((el,index) => {
           console.log("ID",el._id);
           
           return  <>
+
                     <Div seriesCard key={index}> 
                       <img src={el.seriesCover} alt="Series cover"/>
                       <div>
@@ -69,9 +76,12 @@ const CreatorSeriesList = (props:any) => {
                               Edit chapters
                           </Button >
                           <Button 
-                            blackOutline
+                            blackOutline 
                             onClick={e => handleEditSeries(el._id)}>
                             Edit Series</Button >
+                        </Div>
+                        <Div deleteSeries>
+                          <DeleteSeriesModal />
                         </Div>
                       </div>
                     </Div>

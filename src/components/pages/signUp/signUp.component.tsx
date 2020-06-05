@@ -27,13 +27,14 @@ const SignUp = (props:any) => {
   const location = useLocation();
   const continueToPublish = location.state;
 
-  let [email,setEmail] = useState("");
-  let [password,setPassword] = useState("");
-  const [showForm, setshowForm] = useState(false);
+  let [email,setEmail] = useState<string>("");
+  let [password,setPassword] = useState<string>("");
+  const [showForm, setshowForm] = useState<boolean>(false);
 
 
   useEffect(() => {  
     removeAlert();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   },[]);
   
   const handleSendData = async (e:any) => {
@@ -41,6 +42,7 @@ const SignUp = (props:any) => {
     e.persist();
     
     if(!isRequired(email)&&!isRequired(password)){
+      console.log("WORKING")
       setAlert("Please insert Email and Password", "danger");
     } else if (!isLengthCorrect(password)) {
       setAlert("Password must be at least 8 characters", "danger");

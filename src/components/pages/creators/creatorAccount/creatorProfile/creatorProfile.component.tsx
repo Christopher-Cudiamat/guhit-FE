@@ -6,6 +6,7 @@ import Button from '../../../../../styleComponents/ui/button.style';
 import { MdLocationOn } from 'react-icons/md';
 import { FaPatreon } from 'react-icons/fa';
 import { LinkRouter } from '../../../../../styleComponents/ui/link.style';
+import { ScrollToTopOnMount } from '../../../../../utility/scrollToTopOnMount';
 
 
 const CreatorProfile = (props:any) => {
@@ -15,6 +16,7 @@ const CreatorProfile = (props:any) => {
   return (
 
       <Div profileContainer>
+         <ScrollToTopOnMount/>
         
         {
           profile.isCreator ?

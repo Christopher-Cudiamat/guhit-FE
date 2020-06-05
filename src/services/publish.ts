@@ -93,6 +93,23 @@ export const getSeries = async (token:string,seriesID:string|any) => {
 };
 
 
+export const getChapter = async (token:string,chapterID:string|any) => {
+ 
+  const config = {
+    headers:{
+      'Content-Type': 'application/json',
+      'Authorization': token,
+      // 'Params': {id:"5ec79ed1a6834a21e4d1fbc2"}
+    }
+  }
+
+  let url = `/api/chapters/my-chapter?id=${chapterID}`;
+
+  const res = await instanceGet.get(url, config); 
+  return res.data;
+};
+
+
 
 
 ///////////////////////////////////////////////////////////
@@ -105,7 +122,6 @@ export const getAllChapters = async (token:string,seriesId:string) => {
     headers:{
       'Content-Type': 'application/json',
       'Authorization': token,
-      'Params': {id:seriesId}
     }
   }
 
@@ -167,10 +183,11 @@ export const postCreateChapter = async (token:string,data:any) => {
     matureContents,
     chapterPages,
     seriesId,
+    chapterId,
     
   } = data;
 
-  console.log(data);
+  console.log("DATAAAAAAAAAAAAAAAAAA",data);
 
   const config = {
     headers:{
@@ -185,6 +202,7 @@ export const postCreateChapter = async (token:string,data:any) => {
   const body = new FormData();
   
   body.append("seriesId",seriesId);
+  body.append("chapterId",chapterId);
   body.append("chapterTitle",chapterTitle);
   body.append("chapterCover",chapterCover);
   body.append("chapterDescription",chapterDescription);

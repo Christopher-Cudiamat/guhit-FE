@@ -23,12 +23,13 @@ import {
 from '../../../../styleComponents/ui/upload';
 import { CheckBox } from '../../../../styleComponents/ui/checkBox.style';
 import { ScrollToTopOnMount } from '../../../../utility/scrollToTopOnMount';
-import {  postCreateChapter } from '../../../../services/publish';
+import {  postCreateChapter, getChapter } from '../../../../services/publish';
+import { formatToDataUrl, formatToImageFile } from '../../../../utility/formatImage';
 
 
 const PublishComicsChapter = (props:any) => {
 
-  const {registration,setUpdateProfile} = props;
+  const {registration,profile,setUpdateProfile} = props;
 
   interface IImageUploadType {
     name?: string,
@@ -42,8 +43,13 @@ const PublishComicsChapter = (props:any) => {
   const history = useHistory();
   const inputEl = useRef<HTMLInputElement>(null);
 
-  const location = useLocation();
-  const seriesId = location.state;
+  const location = useLocation<{isNewChapter?:boolean, seriesId?: string|undefined, chapterId?:string|undefined  }>();
+  const seriesId = location.state.seriesId;
+  const isNewChapter = location.state.isNewChapter;
+  const chapterId = location.state.chapterId;
+  console.log("seriesId",seriesId);
+  console.log("chapterId",chapterId);
+  console.log("isNewChapter",isNewChapter);
 
   const [isDisabled,  setIsDisabled] = useState<boolean>(false);
   const [chapterCover, setChapterCover] = useState<IImageUploadType[]>([]);
@@ -59,6 +65,38 @@ const PublishComicsChapter = (props:any) => {
   const [toggleThumbSize, setToggleThumbSize] = useState<boolean>(false);
 
   useEffect(() => {
+
+    if(!isNewChapter) {
+      console.log("GO TO UPDATE");
+      getChapter(registration.token,chapterId)
+      .then((res: any) => {
+        console.log("RESPONSE",res)
+        formatToDataUrl(res.chapterCover, function(myBase64:string) {
+          setprevThumbnail(myBase64);
+          setToggleThumbSize(true);
+        });
+        formatToImageFile(res.chapterCover, function(pic:any) {
+          setChapterCover(pic);
+        }); 
+        setChapterTitle(res.chapterTitle);
+        setChapterDescription(res.chapterDescription);
+        setTags(res.tags);
+        setMatureContents(res.matureContents);  
+        setOpenForComments(res.openForComments);      
+        {
+          res.chapterPages.map((el:any) => {
+            formatToImageFile(el, function(pic:any) {
+              chapterPages.push(pic);
+            });
+          })
+        }
+      })
+    }
+  
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
     setChaptersData({
       chapterCover,
       chapterTitle,
@@ -68,6 +106,7 @@ const PublishComicsChapter = (props:any) => {
       matureContents,
       chapterPages,
       seriesId,
+      chapterId,
     })
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [chapterCover,chapterTitle,chapterPages,chapterDescription,tags,
@@ -91,7 +130,7 @@ const PublishComicsChapter = (props:any) => {
     event.preventDefault();
     postCreateChapter(registration.token,chaptersData)
       .then(res => {
-       
+       console.log("CHAPTER RES",res)
         setUpdateProfile("isCreator",true);
     })
     history.push("./creator-account");
@@ -200,6 +239,7 @@ const PublishComicsChapter = (props:any) => {
           <Input>
             <Label fixed>Chapter Title</Label>
             <InputField 
+              defaultValue={chapterTitle}
               marginTop
               onChange={(e:any) => setChapterTitle(e.target.value)}/>
           </Input>
@@ -247,6 +287,7 @@ const PublishComicsChapter = (props:any) => {
           <Input>
               <Label fixed>Chapter Description</Label> 
               <TextArea 
+                defaultValue={chapterDescription}
                 marginTop
                 maxLength={500}
                 onBlur={(e:any) => setChapterDescription(e.target.value)}
@@ -287,11 +328,15 @@ const PublishComicsChapter = (props:any) => {
 
           <Div checkContainer>
             <Div style={{marginBottom:"1rem"}} consentContainer>
-              <CheckBox onChange={e => setOpenForComments(!openForComments)}/>
+              <CheckBox 
+                checked={openForComments} 
+                onChange={e => setOpenForComments(!openForComments)}/>
               <p>Open for comments</p>
             </Div>
             <Div style={{marginBottom:"1rem"}} consentContainer>
-              <CheckBox onChange={e => setMatureContents(!matureContents)}/>
+              <CheckBox 
+                checked={matureContents}  
+                onChange={e => setMatureContents(!matureContents)}/>
               <p>Mature contents</p>
             </Div>
           </Div>
@@ -302,7 +347,7 @@ const PublishComicsChapter = (props:any) => {
               height={"5.5rem"}
               secondary 
               onClick={handleSendForm}>
-                Create new chapter
+                   {isNewChapter? "Create new series" : "Update series"}
             </Button>
           </Div>
        

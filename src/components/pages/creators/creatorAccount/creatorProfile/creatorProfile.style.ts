@@ -13,7 +13,7 @@ export const Div = styled.div<ICreatorAccountTypes>`
     css`
       text-align: center;
       @media ${props => props.theme.media.laptop} {
-        box-shadow: 0px 3px 5px rgba(0,0,0,0.2);
+        box-shadow: 0px 3px 10px rgba(0,0,0,0.2);
         border-radius:1rem;
       }
 
@@ -21,9 +21,11 @@ export const Div = styled.div<ICreatorAccountTypes>`
         margin-bottom: 1rem;
         height: auto;
         width: 60%; 
+        box-shadow: 0px 1px 5px rgba(0,0,0,0.2);
         @media ${props => props.theme.media.laptop} {
           height: auto;
           width: 80%; 
+
           
         }
 
@@ -65,7 +67,10 @@ export const Div = styled.div<ICreatorAccountTypes>`
       }
 
       & a:last-child {
+        display: none;
         @media ${props => props.theme.media.laptop} {
+          display: block;
+          margin:auto;
           width: 50%;  
           
         }

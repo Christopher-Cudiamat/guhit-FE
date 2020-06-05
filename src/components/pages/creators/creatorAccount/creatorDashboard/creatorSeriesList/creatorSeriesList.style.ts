@@ -4,6 +4,7 @@ interface ICreatorSeriesTypes {
   seriesCard?: boolean;
   buttons?: boolean;
   genre?: boolean;
+  deleteSeries?:boolean;
 }
 
 
@@ -15,9 +16,16 @@ export const Div = styled.div<ICreatorSeriesTypes >`
   
   ${({seriesCard}) => seriesCard && 
     css`
+    position:relative;
     background: ${props => props.theme.color.grayLightest};
-    border-top-left-radius: 3rem;
-    border-bottom-right-radius: 3rem;
+    border-radius: 1rem;
+    margin-bottom:3rem;
+    
+    @media ${props => props.theme.media.laptop} {
+      border-top-left-radius: 3rem;
+      border-bottom-right-radius: 3rem;
+      margin-bottom:0rem;
+    }
 
     @media ${props => props.theme.media.laptop} {
       display: flex; 
@@ -26,13 +34,21 @@ export const Div = styled.div<ICreatorSeriesTypes >`
     }
 
     &  img:first-child{
-      width: auto;
-      height: 30rem;
-      margin-right:2rem;
+      width: 100%;
+      height: auto;
+      @media ${props => props.theme.media.laptop} {
+        width: auto;
+        height: 30rem;
+        margin-right:2rem;
+      }
     }
 
     &  div:last-child{
       text-align: left;
+      padding:1rem;
+      @media ${props => props.theme.media.laptop} {
+        padding: 0rem;
+      }
       
       & p:nth-child(3) {
         margin-bottom: .5;
@@ -47,6 +63,11 @@ export const Div = styled.div<ICreatorSeriesTypes >`
   ${({buttons}) => buttons && 
     css`
     
+    display: none;
+
+    @media ${props => props.theme.media.laptop} {
+      display: block;
+    }
 
     & * {
       @media ${props => props.theme.media.laptop} {
@@ -79,6 +100,31 @@ export const Div = styled.div<ICreatorSeriesTypes >`
     }
 
   
+  `};
+
+  ${({deleteSeries}) => deleteSeries && 
+    css`
+      position: absolute;
+      bottom: 0%;
+      right: 0%;
+
+      & svg:last-child {
+        color: ${props => props.theme.color.blackLight};
+        background: ${props => props.theme.color.white};
+        font-size: 2rem;
+        padding: .5rem;  
+        cursor: pointer;
+        border-radius: 50%;
+        
+        &:hover {
+          color: ${props => props.theme.color.white};
+          background: ${props => props.theme.color.error};
+        }
+
+        &:hover * {
+          display:nonek;
+        }
+      }
   `};
 
 

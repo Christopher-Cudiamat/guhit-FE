@@ -10,7 +10,7 @@ import {UploaderField, UploaderLabel, UploaderThumb, UploaderThumbContainer } fr
 import { ScrollToTopOnMount } from '../../../../utility/scrollToTopOnMount';
 import {TiEdit} from 'react-icons/ti';
 import { postProfile} from '../../../../services/profile';
-import { formatToDataUrl } from '../../../../utility/formatImage';
+import { formatToDataUrl, formatToImageFile } from '../../../../utility/formatImage';
 
 
 
@@ -33,7 +33,7 @@ const PublishCreatorInfo = (props:any) => {
   const [toolDisabled,  setToolDisabled] = useState<boolean>(false);
   // const [socialDisabled,  setSocialDisabled] = useState<boolean>(false);
   // const inputSocialEl = useRef<HTMLInputElement>(null)
-   const [profilePic, setProfilePic] = useState<IImageUploadType[]>([]);
+   const [profilePic, setProfilePic] = useState<IImageUploadType[] | File>([]);
   const [displayName, setDisplayName] = useState<string>("");
   const [city, setCity] = useState<string>("");
   const [description, setDescription] = useState<string>("");
@@ -48,13 +48,16 @@ const PublishCreatorInfo = (props:any) => {
   const [sendButton, setSendButton] = useState<boolean>(true);
 
   useEffect(() => {
-      
+
     if(profile.isCreator){
-      formatToDataUrl(profile.profilePic, function(myBase64:string) {
+      formatToDataUrl(profile.profilePic, function(myBase64:any) {
         setPrevProfile(myBase64);
       });
-      setPrevProfile(profile.profilePic);
-      setProfilePic(profile.profilePic);
+
+      formatToImageFile(profile.profilePic, function(pic:any) {
+        setProfilePic(pic);
+      });
+
       setDisplayName(profile.userName);
       setCity(profile.city);
       setDescription(profile.description);
@@ -82,7 +85,7 @@ const PublishCreatorInfo = (props:any) => {
     })
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [profilePic,displayName,city,description,social,tools,patreon]);
-
+  console.log("CREATORS DATA ======>",creatorsData);
 
   useEffect(() => {
     setSocialInputDef("");
@@ -102,16 +105,19 @@ const PublishCreatorInfo = (props:any) => {
 //THIS IS FOR SENDING API TO BE USED LATER
 
   const handleSendForm = (event:any) => {
-    event.preventDefault();
+    event.preventDefault(); 
     postProfile(registration.token,creatorsData)
       .then(res => {
         setCreatorProfile(res);
-        history.push({
-          pathname:"./publish-comic-series",
-          state:  "isNewSeries"
-        }); 
-      })
-    
+        if(profile.isCreator){
+          history.push("./creator-account");  
+        } else {
+          history.push({
+            pathname:"./publish-comic-series",
+            state:  "isNewSeries"
+          }); 
+        }
+      });
   };
 
 
