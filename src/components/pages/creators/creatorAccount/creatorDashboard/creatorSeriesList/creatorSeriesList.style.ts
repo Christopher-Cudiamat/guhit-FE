@@ -25,23 +25,51 @@ export const Div = styled.div<ICreatorSeriesTypes >`
       border-top-left-radius: 3rem;
       border-bottom-right-radius: 3rem;
       margin-bottom:0rem;
-    }
-
-    @media ${props => props.theme.media.laptop} {
       display: flex; 
       padding: 2rem 3rem;
       margin-bottom:2rem;
     }
 
-    &  img:first-child{
-      width: 100%;
-      height: auto;
+    /* @media ${props => props.theme.media.laptop} {
+      display: flex; 
+      padding: 2rem 3rem;
+      margin-bottom:2rem;
+    } */
+    
+    & div:first-child {
+      position: relative;
       @media ${props => props.theme.media.laptop} {
-        width: auto;
-        height: 30rem;
+        background: black;
+        width: 40%;
         margin-right:2rem;
       }
+   
+      &  img:first-child{
+        @media ${props => props.theme.media.laptop} {
+          &:hover {
+            cursor:pointer;
+            opacity: 0.8;
+          }
+          &:hover + div {
+            display: block;
+          }
+        }
+      }
+
+      &  div:last-child{
+        display:none;
+        @media ${props => props.theme.media.laptop} {
+          text-align:center;
+          position:absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%); 
+          color: ${props => props.theme.color.white};
+          pointer-events: none;
+        }
+      }
     }
+    
 
     &  div:last-child{
       text-align: left;

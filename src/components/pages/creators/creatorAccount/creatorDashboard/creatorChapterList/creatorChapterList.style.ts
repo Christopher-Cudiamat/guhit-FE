@@ -4,6 +4,7 @@ interface ICreatorSeriesTypes {
   chapterCard?: boolean;
   buttons?: boolean;
   genre?: boolean;
+  deleteChapter?: boolean;
 }
 
 
@@ -20,6 +21,8 @@ export const Div = styled.div<ICreatorSeriesTypes >`
     border-top-left-radius: 3rem;
     border-bottom-right-radius: 3rem;
     margin-top: 4rem;
+    position: relative;
+    text-align: left;
 
     @media ${props => props.theme.media.laptop} {
       display: flex; 
@@ -33,8 +36,7 @@ export const Div = styled.div<ICreatorSeriesTypes >`
       margin-right:2rem;
     }
 
-    &  div:last-child{
-      text-align: left;
+    &  div:nth-child(2){
 
       & h2:first-child {
         margin-bottom: 1rem;
@@ -90,6 +92,31 @@ export const Div = styled.div<ICreatorSeriesTypes >`
     }
 
   
+  `};
+
+
+  
+  ${({deleteChapter}) => deleteChapter && 
+    css`
+      position: absolute;
+      bottom: 0%;
+      right: 0%;
+
+      & svg:last-child {
+        color: ${props => props.theme.color.blackLight};
+        background: ${props => props.theme.color.white};
+        font-size: 2rem;
+        padding: .5rem;  
+        cursor: pointer;
+        border-radius: 50%;
+        
+        &:hover {
+          color: ${props => props.theme.color.white};
+          background: ${props => props.theme.color.error};
+        }
+
+       
+      }
   `};
 
 

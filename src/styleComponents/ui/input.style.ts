@@ -9,7 +9,8 @@ interface IInputTypes {
   fixed?:boolean,
   marginTop?: boolean,
   globalSearchInput?:boolean,
-  // ref?: any,
+  disabledInput?:boolean,
+
 }
 
   
@@ -23,7 +24,7 @@ export const Input = styled.div<IInputTypes>`
         color: ${props => props.theme.color.grayLight};
         position: absolute;
         font-size: 2rem;
-        top: 19%;
+        top: 25%;
         left: 3%;
         
       }
@@ -41,6 +42,7 @@ export const InputField = styled.input<IInputTypes>`
   box-sizing: border-box;
   font-size:1.8rem;
   outline: none;
+  background: ${props => props.disabledInput ? props.theme.color.grayLight : props.theme.color.white};
 
   @media ${props => props.theme.media.laptop} { 
     margin-top : ${props => props.marginTop ? "1rem" : "0rem"};
@@ -64,7 +66,7 @@ export const InputField = styled.input<IInputTypes>`
 
   &:focus + label, &:valid + label {
     position: absolute;
-    top: -21%;
+    top: -23%;
     left: 2%;
     font-size: 14px;
     transition: all .3s;

@@ -7,22 +7,22 @@ import { Overlay } from '../../../styleComponents/ui/overlay.style';
 import { Box } from '../../../styleComponents/ui/box.style';
 
 import {MdDeleteForever} from 'react-icons/md';
-import { DivInfo } from './deleteSeriesModal.style';
-import { deleteSeries } from '../../../services/publish';
+import { DivInfo } from './deleteChapterModal.style';
+import { deleteChapter } from '../../../services/publish';
 
 
-const DeleteSeriesModal = (props:any) => {
+const DeleteChapterModal = (props:any) => {
 
   const {token, id} = props;
+  console.log("ID CHAPTER IN MODAL", id);
 
   const history = useHistory();
 
-  const handleDeleteSeries = (cb:any) => {
+  const handleDeleteChapter = (cb:any) => {
     cb();
-    deleteSeries(token,id)
+    deleteChapter(token,id)
       .then(res => {
         if(res){
-          // history.push('/');
           history.go(0);
         }
       });
@@ -33,7 +33,6 @@ const DeleteSeriesModal = (props:any) => {
     <PortalWithState 
       closeOnOutsideClick 
       closeOnEsc
-      // onClose={handleDeleteSeries}
       >
       {({ openPortal, closePortal, portal }) => (
         
@@ -57,9 +56,8 @@ const DeleteSeriesModal = (props:any) => {
                   fontSize={"2.4rem"}
                   lineHeight={"3rem"}
                   bottom={"-27%"}>
-                  <p>Are you sure you want to continue deleting this series? <span  onClick={e =>handleDeleteSeries(closePortal)}>Delete</span></p>
+                  <p>Are you sure you want to continue deleting this chapter? <span  onClick={e =>handleDeleteChapter(closePortal)}>Delete</span></p>
                 </Box>
-
               </DivInfo>
             </>
           
@@ -71,4 +69,4 @@ const DeleteSeriesModal = (props:any) => {
   );
 };
 
-export default DeleteSeriesModal;
+export default DeleteChapterModal;

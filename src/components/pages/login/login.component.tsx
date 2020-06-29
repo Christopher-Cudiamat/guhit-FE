@@ -2,7 +2,7 @@ import React, {useState, useEffect } from 'react';
 import { LinkRouter } from '../../../styleComponents/ui/link.style';
 // import FacebookLogin from 'react-facebook-login';
 import GoogleLogin from 'react-google-login';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useHistory, useLocation} from 'react-router-dom';
 
 import { Box } from '../../../styleComponents/ui/box.style';
 import { Input, InputField, Label } from '../../../styleComponents/ui/input.style';
@@ -132,14 +132,15 @@ const Login = (props:any) => {
               <Label>Password</Label>
             </Input>
             
-
             <Button
               type="button"
               onClick={handleLogin} 
               secondary>
               Login
             </Button>
+            
             <Div loginOptions>
+              <LinkRouter passRecLink to="password-recovery">Forgot your password?</LinkRouter>
               <p onClick={handleToggleLogin}>or<span>Login</span> with Google or Facebook</p>
             </Div>
           </>
@@ -176,6 +177,7 @@ const Login = (props:any) => {
                 </Div>
               )}
             />
+        
             <Div loginOptions>
               <p onClick={handleToggleLogin}>or<span>Login</span>with account</p>
             </Div>

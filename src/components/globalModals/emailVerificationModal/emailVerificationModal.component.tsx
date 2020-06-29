@@ -6,26 +6,16 @@ import { MdClose } from 'react-icons/md';
 import { Overlay } from '../../../styleComponents/ui/overlay.style';
 import { Box } from '../../../styleComponents/ui/box.style';
 
-import {MdDeleteForever} from 'react-icons/md';
-import { DivInfo } from './deleteSeriesModal.style';
-import { deleteSeries } from '../../../services/publish';
+import { DivInfo } from './emailVerificationModal.style';
+import Button from '../../../styleComponents/ui/button.style';
 
 
-const DeleteSeriesModal = (props:any) => {
 
-  const {token, id} = props;
+const EmailVerificationModal = (props:any) => {
 
-  const history = useHistory();
 
-  const handleDeleteSeries = (cb:any) => {
-    cb();
-    deleteSeries(token,id)
-      .then(res => {
-        if(res){
-          // history.push('/');
-          history.go(0);
-        }
-      });
+  const handleConfirmation = (cb:any) => {
+  
   }
 
   return (
@@ -33,12 +23,15 @@ const DeleteSeriesModal = (props:any) => {
     <PortalWithState 
       closeOnOutsideClick 
       closeOnEsc
-      // onClose={handleDeleteSeries}
       >
       {({ openPortal, closePortal, portal }) => (
         
         <React.Fragment>
-          <MdDeleteForever onClick={openPortal} />
+          <Button 
+            onClick={openPortal}
+            secondary> 
+            Sign up
+          </Button>
       
           {portal(
             <>    
@@ -54,12 +47,14 @@ const DeleteSeriesModal = (props:any) => {
   
                 <Box 
                   secondaryTalkBubble
-                  fontSize={"2.4rem"}
+                  fontSize={"1.8rem"}
                   lineHeight={"3rem"}
                   bottom={"-27%"}>
-                  <p>Are you sure you want to continue deleting this series? <span  onClick={e =>handleDeleteSeries(closePortal)}>Delete</span></p>
+                  <p>We have sent you an email with a verification code, insert the numbers here and click confirm</p>
                 </Box>
-
+                <Button primary> 
+                    Confirm
+                </Button>
               </DivInfo>
             </>
           
@@ -71,4 +66,4 @@ const DeleteSeriesModal = (props:any) => {
   );
 };
 
-export default DeleteSeriesModal;
+export default EmailVerificationModal;

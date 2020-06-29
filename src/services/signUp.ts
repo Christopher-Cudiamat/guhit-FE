@@ -1,48 +1,48 @@
 import {instancePost} from "../configs/axios.config";
 
-interface auth{
+interface IAuth{
   email?:string,
   password?:string,
 }
 
-export const signUp = async (data:auth) => {
+export const emailVerify = async (data:IAuth) => {
+    const {email,password} = data;
 
-    const config = {
-      headers:{
-        'Content-Type': 'application/json'
-      }
-    }
-
-    let url = '/api/users/signup';
-   
-    let body = {
-        //to ask what data we will send in BE?
-        "email": data.email,
-        "password": data.password,
-    };
+    const config = {headers:{'Content-Type': 'application/json'}}
+    let url = '/api/users/email-verification';
+    let body = {email,password};
 
     const res = await instancePost.post(url,body,config );
-    console.log("SERVICE RESPONE",res.data);
+    console.log("EMAIL VERIFICATION RESPONE",res.data);
     return res.data;
 };
 
+interface ISignUp{
+  token?:string,
+  verificationCode?:string,
+}
 
-export const signIn = async (data:auth) => {
 
+export const signUp = async (data:ISignUp) => {
+  console.log("serviceDATA",data)
+  const {token, verificationCode} = data;
+
+  const config = {headers:{'Content-Type': 'application/json'}}
+  let url = '/api/users/signup';
+  let body = {token,verificationCode};
+
+  const res = await instancePost.post(url,body,config);
+  console.log("SIGN UP RESPONE",res.data);
+  return res.data;
+};
+
+
+export const signIn = async (data:IAuth) => {
+  const {email,password} = data;
   try {
-    const config = {
-      headers:{
-        'Content-Type': 'application/json'
-      }
-    }
-  
+    const config = {headers:{'Content-Type': 'application/json'}}
     let url = '/api/users/signin';
-   
-    let body = {
-        //to ask what data we will send in BE?
-        "email": data.email,
-        "password": data.password,
-    };
+    let body = {email,password};
   
     const res = await instancePost.post(url,body,config);
     

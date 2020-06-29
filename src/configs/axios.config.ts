@@ -39,7 +39,7 @@ instanceGet.interceptors.request.use(async (config) => {
 });
 
 instanceDelete.interceptors.request.use(async (config) => {
-    store.dispatch(setIsLoading({isLoading: true}));
+    store.dispatch(setIsLoading({isLoading: false}));
     return config;
 });
 

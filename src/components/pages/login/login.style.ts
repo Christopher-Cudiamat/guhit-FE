@@ -27,7 +27,7 @@ export const Div = styled.div<IFormTypes>`
       width: 90%;
       text-align: center;
       margin: auto;
-      margin-top: 12rem;
+      margin-top: 6rem;
     `
   };
 
@@ -37,8 +37,9 @@ export const Div = styled.div<IFormTypes>`
         margin-bottom: 3rem;
         color: ${props => props.theme.color.gray};
         & span {
+          line-height: 2.4rem;
           font-size: 1.6rem;
-          font-weight: bold;
+          /* font-weight: bold; */
           color: 
           ${props => props.signUp ? props.theme.color.secondary : props.theme.color.primary };
           padding: 0rem .6rem;
@@ -66,13 +67,17 @@ export const Form = styled.form<IFormTypes>`
     margin-bottom: 1rem;
   }
 
-  & input {
+  & > a {
     margin: 0rem 0rem 2rem 0rem;
+  }
+
+  & input {
+    margin: 0rem 0rem 1.5rem 0rem;
   }
 
   & > button {
     width: 85%;
-    margin-bottom: 2rem;
+    margin: 2rem 0rem 2rem 0rem;
     
   }
  

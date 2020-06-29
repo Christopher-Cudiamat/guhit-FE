@@ -5,22 +5,20 @@ import { TitleSection } from '../../../styleComponents/ui/title.syle';
 import Button from '../../../styleComponents/ui/button.style';
 import loginImage from '../../../images/loginImage.png'
 import { LinkRouter } from '../../../styleComponents/ui/link.style';
-import {signUp} from '../../../services/signUp';
+import {emailVerify} from '../../../services/signUp';
 import { isMail, isLengthCorrect, isRequired } from '../../../utility/validator';
 import { Box } from '../../../styleComponents/ui/box.style';
 import { useHistory, useLocation } from 'react-router-dom';
-import { getProfile,postInitProfile } from '../../../services/profile';
 
 
+import EmailVerificationModal from '../../globalModals/emailVerificationModal/emailVerificationModal.component';
 
 
 const SignUp = (props:any) => {
 
   let {
-    setUserProfile,
     setAlert,
     alert,
-    setRegistration,
     removeAlert} = props;
  
   const history = useHistory();
@@ -50,25 +48,20 @@ const SignUp = (props:any) => {
       setAlert("Please insert a correct Email", "danger");
     } else {
       const data = {email, password};
-      signUp(data)
+      emailVerify(data)
         .then(res => {
-          if(res){   
-            setRegistration(res);
-            postInitProfile(res.token,email)
-            // getProfile(res.token)
-              .then( res => {
-                console.log("GET PROFILE RESPONSE",res);
-                setUserProfile(res);
-              });
-              if(continueToPublish){
-                history.push('/publish-creator-info');
-              }else{
-                history.push("./thankyoupage");
-              }
-
+          console.log("EMAIL VER", res);
+          if(res){    
+            history.push({
+              pathname:'./email-verification-code',
+              state:  {token: res.token}
+            });
           } else {
             history.push("./errorpage");
           } 
+      })
+      .catch(err => {
+        setAlert("Email already in use.", "danger");
       })   
     }
   }
@@ -105,6 +98,7 @@ const SignUp = (props:any) => {
                 onChange={(e) => setPassword(e.target.value)}/>
               <Label>Password</Label>
             </Input>
+
             <Button 
               secondary 
               onClick={handleSendData}>
@@ -124,3 +118,24 @@ const SignUp = (props:any) => {
 
 export default SignUp;
 
+// const data = {email, password};
+//       emailVerify(data)
+//         .then(res => {
+//           if(res){    
+//             setRegistration(res);
+//             postInitProfile(res.token,email)
+//             // getProfile(res.token)
+//               .then( res => {
+//                 console.log("GET PROFILE RESPONSE",res);
+//                 setUserProfile(res);
+//               });
+//               if(continueToPublish){
+//                 history.push('/publish-creator-info');
+//               }else{
+//                 history.push("./thankyoupage");
+//               }
+
+//           } else {
+//             history.push("./errorpage");
+//           } 
+//       })   

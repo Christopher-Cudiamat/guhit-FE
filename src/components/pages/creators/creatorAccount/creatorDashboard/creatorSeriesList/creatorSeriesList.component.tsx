@@ -7,7 +7,7 @@ import Button from '../../../../../../styleComponents/ui/button.style';
 import { useHistory } from 'react-router-dom';
 import { ScrollToTopOnMount } from '../../../../../../utility/scrollToTopOnMount';
 
-
+import { BsEye } from 'react-icons/bs';
 import DeleteSeriesModal from '../../../../../globalModals/deleteSeriesModal/deleteSeriesModal';
 
 
@@ -43,6 +43,10 @@ const CreatorSeriesList = (props:any) => {
       state:  seriesId 
     }); 
   }
+  
+  const handleViewSeries = () => {
+    history.push("/comics-series"); 
+  }
 
   return (
     
@@ -54,7 +58,16 @@ const CreatorSeriesList = (props:any) => {
           return  <>
 
                     <Div seriesCard key={index}> 
-                      <img src={el.seriesCover} alt="Series cover"/>
+                      <div>
+                        <img 
+                          onClick={handleViewSeries}
+                          src={el.seriesCover} 
+                          alt="Series cover"/>
+                        <div>
+                          <BsEye color="white" fontSize="3.4rem"/>
+                          <p>View series</p>
+                        </div>
+                      </div>  
                       <div>
                         <h2>{el.seriesTitle}</h2>
                         <Div genre>
@@ -68,7 +81,7 @@ const CreatorSeriesList = (props:any) => {
                           blackOutline
                             onClick={e => handleAddChapter(el._id)}>
                             Add new chapter
-                          </Button>
+                          </Button> 
                           <Button 
                             blackOutline
                             onClick={e => onOpenChapters(el._id)}>

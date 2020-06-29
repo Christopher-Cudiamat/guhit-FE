@@ -17,6 +17,7 @@ const CreatorDashboard = (props:any) => {
   const [goToChaptersLists, setgoToChaptersLists] = useState<boolean>(false);
   const [showPublishOption, setShowPublishOption] = useState<boolean>(false);
   const [seriesId, setSeriesId] =  useState<string>("");
+  const [chapterId, setChapterId] =  useState<string>("");
   let [seriesLength,setSeriesLength] =  useState<number>();
   console.log("seriesLength",seriesLength);
   
@@ -97,6 +98,7 @@ const CreatorDashboard = (props:any) => {
           : goToChaptersLists || seriesLength !== 0 
           ? <CreatorChapterList
               token={registration.token} 
+              chapterId={chapterId}
               seriesId={seriesId}
               onOpenChapters={handleChapterLists}
               />

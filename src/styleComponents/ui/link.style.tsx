@@ -5,6 +5,7 @@ interface ILinkTypes {
   primary?: boolean,
   secondary?: boolean,
   underlined?: boolean,
+  passRecLink?: boolean,
   footer?: boolean,
   togglenav?: boolean,
   dark?:boolean,
@@ -26,6 +27,7 @@ const Links = styled.a<ILinkTypes>`
       color: ${props => props.theme.color.secondaryDark};
     `
   };
+
 
   ${({underlined}) => underlined &&
     css`
@@ -99,6 +101,14 @@ export const LinkRouter = styled(Link)<ILinkTypes>`
     css`
       font-size: 2.2rem;
       color: ${props => props.theme.color.primaryDark};
+    `
+  };
+
+  ${({passRecLink}) => passRecLink &&
+    css`
+      line-height: 2.8rem;
+      font-size: 1.6rem;
+      color: ${props => props.theme.color.gray};
     `
   };
 `

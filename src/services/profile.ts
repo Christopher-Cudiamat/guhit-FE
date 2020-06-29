@@ -22,6 +22,8 @@ export const getProfile = async (token:string) => {
 
 export const postInitProfile = async (token:string,email:any) => {
   
+  console.log("PST INIT TOKEN",token);
+
   const config = {
     headers:{
       'Content-Type': 'application/json',

@@ -5,14 +5,18 @@ import { useHistory } from 'react-router-dom';
 import { Div } from './creatorChapterList.style';
 import Button from '../../../../../../styleComponents/ui/button.style';
 import { ScrollToTopOnMount } from '../../../../../../utility/scrollToTopOnMount';
+import DeleteChapterModal from '../../../../../globalModals/deleteChapterModal/deleteChapterModal.component';
 
 // import chapterSample from "../../../../../../images/chapter-3.jpg";
 
 const CreatorChapterList = (props:any) => {
 
-  const {token,seriesId} = props;
+  const {token,seriesId,chapterId} = props;
 
   const [chaptersArray, setChaptersArray] = useState<Array<any>>([]);
+  const [idChapter, setIdChapter] = useState('');
+
+  console.log("ID CHAPTER", idChapter);
 
   useEffect(() => {
     getAllChapters(token,seriesId)
@@ -51,11 +55,18 @@ const CreatorChapterList = (props:any) => {
                         Edit pages
                       </Button >
                       <Button 
-                        blackOutline>
+                        blackOutline> 
                         View Chapters
                       </Button >
                     </Div>
                   </div>
+                  <Div deleteChapter
+                    onClick={(e:any) => setIdChapter(el._id)}>
+                    <DeleteChapterModal 
+                      token={token}
+                      id={idChapter}
+                      />
+                  </Div>
                 </Div>
         })
       }

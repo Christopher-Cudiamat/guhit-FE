@@ -14,6 +14,7 @@ import Events from './events/events.component';
 import Chapters from './comics/chapters/chapters.component';
 import Chapter from './comics/chapters/chapter/chapter.component';
 import { Div } from './pages.style';
+import PasswordRecovery from './login/passwordRecovery/passwordRecovery.component';
 
 // import PublishNovels from './publish/publishComicsChapter/publishComicsChapter.component';
 
@@ -29,6 +30,8 @@ import PublishCreatorInfo from './publish/publishCreatorInfo/publishCreatorInfo.
 import PublishComicsSeries from './publish/publishComicsSeries/publishComicsSeries.container';
 import PublishComicsChapter from './publish/publishComicsChapter/publishComicsChapter.container';
 import PrivateRoute from './privateRoute';
+import VerifyToken from './signUp/verifyToken/verifyToken.container';
+
 
 
 const Pages = (props:any) => {
@@ -42,7 +45,6 @@ const Pages = (props:any) => {
   return (
     
     <Div onClick={handleCloseOverlay}>
-      
       
       {
         modalData.data.drawerModal || modalData.data.searchModal || modalData.data.notifModal  || modalData.data.libraryModal || modalData.data.accountModal 
@@ -89,11 +91,17 @@ const Pages = (props:any) => {
           {/* <Route exact path="/creator-account">
             <CreatorAccount />
           </Route> */}
+          <Route exact path="/password-recovery">
+            <PasswordRecovery/>
+          </Route>
           <Route exact path="/login">
             <Login/>
           </Route>
           <Route exact path="/signup">
             <SignUp />
+          </Route>
+          <Route exact path="/email-verification-code">
+            <VerifyToken/>
           </Route>
           <Route exact path="/about">
             <About />

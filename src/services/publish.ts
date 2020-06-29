@@ -56,7 +56,6 @@ import {instancePost, instanceGet, instanceDelete} from "../configs/axios.config
 ///////////////////////////////////////////////////////////
 //GET
 ///////////////////////////////////////////////////////////
-
 export const getAllSeries = async (token:string) => {
  
   const config = {
@@ -72,10 +71,10 @@ export const getAllSeries = async (token:string) => {
   return res.data;
 };
 
+
 ///////////////////////////////////////////////////////////
 //GET
 ///////////////////////////////////////////////////////////
-
 export const getSeries = async (token:string,seriesID:string|any) => {
  
   const config = {
@@ -93,6 +92,9 @@ export const getSeries = async (token:string,seriesID:string|any) => {
 };
 
 
+///////////////////////////////////////////////////////////
+//GET
+///////////////////////////////////////////////////////////
 export const getChapter = async (token:string,chapterID:string|any) => {
  
   const config = {
@@ -115,7 +117,6 @@ export const getChapter = async (token:string,chapterID:string|any) => {
 ///////////////////////////////////////////////////////////
 //GET
 ///////////////////////////////////////////////////////////
-
 export const getAllChapters = async (token:string,seriesId:string) => {
  
   const config = {
@@ -218,7 +219,7 @@ export const postCreateChapter = async (token:string,data:any) => {
 
 
 ///////////////////////////////////////////////////////////
-//POST
+//DELETE
 ///////////////////////////////////////////////////////////
 export const deleteSeries = async (token:string,seriesID:string|any) => {
  
@@ -230,6 +231,25 @@ export const deleteSeries = async (token:string,seriesID:string|any) => {
   }
 
   let url = `/api/series/delete-series?id=${seriesID}`;
+
+  const res = await instanceDelete.delete(url, config); 
+  return res.data;
+};
+
+
+///////////////////////////////////////////////////////////
+//DELETE
+///////////////////////////////////////////////////////////
+export const deleteChapter = async (token:string,chaptersId:string|any) => {
+  console.log("ID CHAPTER IN SERVICE", chaptersId);
+  const config = {
+    headers:{
+      'Content-Type': 'application/json',
+      'Authorization': token,
+    }
+  }
+
+  let url = `/api/chapters/delete-chapter?id=${chaptersId}`;
 
   const res = await instanceDelete.delete(url, config); 
   return res.data;

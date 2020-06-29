@@ -23,7 +23,7 @@ export const Div = styled.div<ICreatorDashboardTypes>`
     &  div:first-child{
       display:flex;
       justify-content: space-between;
-      width: 100%;
+      /* width: 100%; */
       & select {
         width: 50%;
         height: 4rem;
