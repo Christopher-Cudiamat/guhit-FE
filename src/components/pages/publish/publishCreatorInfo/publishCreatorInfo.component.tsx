@@ -85,7 +85,6 @@ const PublishCreatorInfo = (props:any) => {
     })
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [profilePic,displayName,city,description,social,tools,patreon]);
-  console.log("CREATORS DATA ======>",creatorsData);
 
   useEffect(() => {
     setSocialInputDef("");

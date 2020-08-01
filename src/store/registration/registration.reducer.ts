@@ -4,13 +4,15 @@ import {
   REGISTER_SUCCESS_FB,
   LOGIN_SUCCESS,
   LOGOUT,
+  IRegistrationParameter,
 } from './registration.type';
 
-const initialState = {
+const initialState: IRegistrationParameter = {
   token: localStorage.getItem('token'),
   isAuthenticated: false,
   loading: true,
   user: null,
+  email: ""
 } 
 
 export const registrationReducer = (state = initialState, action:any) => {
@@ -18,11 +20,13 @@ export const registrationReducer = (state = initialState, action:any) => {
 
   switch(type) {
     case REGISTER_SUCCESS:
-      localStorage.setItem('token', payload.token);
+      localStorage.setItem('token', payload.newToken);
       return {
         ...state,
-        ...payload,
+        // ...payload,
         isAuthenticated: true,
+        email: payload.email,
+        token: payload.newToken
       }
     case REGISTER_FAILED:
       localStorage.removeItem('token');

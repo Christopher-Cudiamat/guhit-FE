@@ -2,23 +2,20 @@ import {
   SET_MODAL,
   CHANGE_MODAL,
   IModalAction,
-  IModalParameter} 
+  IModalParameter}  
 from "./modal.type";
-
-import { IChangeValueModal } from "./modal.type";
 
 export const setModal = (state:IModalParameter) : IModalAction => {
   return {
     type: SET_MODAL,
-    modal: state,
+    modal: state, 
   }
 }
 
-
-export const setChangeValue = (name:string, value:boolean) : IChangeValueModal => {
+export const setChangeValue = (name:string, value:boolean) : IModalAction => {
   return {
     type: CHANGE_MODAL,
-    name: name,
+    name: name, 
     data: value,
   }
 }

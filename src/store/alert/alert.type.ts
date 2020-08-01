@@ -12,3 +12,11 @@ export interface ISetAlert {
   type: typeof SET_ALERT,
   payload: IAlertParameter,
 }
+
+export interface IRemoveAlert {
+  type: typeof REMOVE_ALERT,
+  payload: string,
+}
+
+
+export type IAlertAction = ISetAlert | IRemoveAlert;

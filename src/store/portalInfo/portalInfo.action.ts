@@ -1,6 +1,10 @@
-export const UPDATE_PORTAL_INFO = "UPDATE_PORTAL_INFO";
+import { 
+  UPDATE_PORTAL_INFO, IPortalInfoAction 
+} from 
+"./portalInfo.type";
 
-export const setPortalInfo = (key: string, value:string) => {
+
+export const setPortalInfo = (key: string, value:string): IPortalInfoAction => {
   return {
     type: UPDATE_PORTAL_INFO,
     key,

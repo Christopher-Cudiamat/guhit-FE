@@ -3,31 +3,33 @@ import {
   REMOVE_USER_PROFILE,
   SET_CREATOR_PROFILE,
   SET_UPDATE_PROFILE,
-  SET_UPDATE_TOOLS
+  SET_UPDATE_TOOLS,
+  IProfileParameter,
+  IProfileActions 
  } from "./profile.type"
 
-export const setUserProfile = (payload:any) => {
+export const setUserProfile = (data:any): IProfileActions => {
   return {
     type: GET_USER_PROFILE,
-    payload,
+    payload:data,
   }
 }
 
-export const removeUserProfile = () => {
+//TO BE REMOVED WHEN WE CODE THE REMOVE USER PROFILE IN ACCOUNT LINK INSIDE DRAWER
+export const removeUserProfile = (): IProfileActions => {
   return {
     type: REMOVE_USER_PROFILE,
-  }
+  } 
 }
 
-
-export const setCreatorProfile = (payload:any) => {
+export const setCreatorProfile = (data:any): IProfileActions => {
   return {
     type: SET_CREATOR_PROFILE,
-    payload,
+    payload:data,
   }
 }
 
-export const setUpdateProfile = (name: string,value:boolean|string|number) => {
+export const setUpdateProfile = (name: string,value:boolean|string|number): IProfileActions => {
   return {
     type: SET_UPDATE_PROFILE,
     name,
@@ -35,9 +37,9 @@ export const setUpdateProfile = (name: string,value:boolean|string|number) => {
   }
 }
 
-export const setUpdateTools = (name: string,value:string) => {
+export const setUpdateTools = (name: string,value:string): IProfileActions => {
   return {
-    type: SET_UPDATE_PROFILE,
+    type: SET_UPDATE_TOOLS,
     name,
     value
   }

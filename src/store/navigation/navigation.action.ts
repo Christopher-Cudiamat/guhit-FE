@@ -1,13 +1,13 @@
 import {
-  SET_NAVIGATION,
+  SET_NAVIGATION, 
   CHANGE_VALUE,
-  INavigationAction,
-  INavigationParameter} 
+  INavigationParameter,
+  INavigationActionTypes,
+} 
 from "./navigation.type";
 
-import { IChangeValueNavigation } from "./navigation.type";
 
-export const setNavigation = (state:INavigationParameter) : INavigationAction => {
+export const setNavigation = (state:INavigationParameter) : INavigationActionTypes => {
   return {
     type: SET_NAVIGATION,
     navigation: state,
@@ -15,7 +15,7 @@ export const setNavigation = (state:INavigationParameter) : INavigationAction =>
 }
 
 
-export const setChangeValue = (name:string, value:boolean) : IChangeValueNavigation => {
+export const setChangeValue = (name:string, value:boolean) : INavigationActionTypes => {
   return {
     type: CHANGE_VALUE,
     name: name, 

@@ -1,12 +1,16 @@
-import {UPDATE_PORTAL_INFO} from './portalInfo.type'
+import {
+  UPDATE_PORTAL_INFO,
+  IPortalInfoParameter,
+  IPortalInfoAction,
+} from './portalInfo.type'
 
 
-const initialState ={
-  deviceType: "",
+const initialState: IPortalInfoParameter = {
+  deviceType: "",  
   browserType: "",
 };
 
-export const portalInfoReducer = (state = initialState, action: any) => {
+export const portalInfoReducer = (state = initialState, action: IPortalInfoAction) => {
   const {type, key, value} = action;
   
   switch(type) {

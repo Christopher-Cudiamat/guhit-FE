@@ -3,7 +3,6 @@ export const CHANGE_MODAL = "CHANGE_MODAL";
 
 export interface IModalParameter {
   //Modals
-  
   searchModal?: boolean,
   drawerModal?: boolean,
   notifModal?: boolean,
@@ -28,4 +27,4 @@ export interface IChangeValueModal {
   data: boolean,
 }
 
-export type IModalAction = IValueModal;
+export type IModalAction = IValueModal | IChangeValueModal;

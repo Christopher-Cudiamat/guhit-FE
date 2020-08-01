@@ -5,6 +5,10 @@ const Novels = (props:any) => {
   return (
     <>
       <h1>NOVELS</h1>
+
+      
+
+   
     </>
   );
 };

@@ -1,25 +1,26 @@
-import { INavigationState, CHANGE_VALUE, SET_NAVIGATION} from './navigation.type';
-// import {INavigationAction, INavigationParameter} from "./navigation.type";
+import { 
+  INavigationState,
+  CHANGE_VALUE,
+  SET_NAVIGATION,
+  INavigationActionTypes
+} from './navigation.type';
 
 const initialState: INavigationState = {
   data:{
-    // brandLogo: true,
     homeLink: true,
     comicsLink: false,
-    novelsLink: false,
+    novelsLink: false, 
     menuLink: false,
     loginLink: false, 
-
     libraryLink: false,
     publishLink: false,
   
   }
 };
 
-export const navigationReducer = (state = initialState, action: any): INavigationState => {
+export const navigationReducer = (state = initialState, action: INavigationActionTypes): INavigationState => {
   switch(action.type) {
     case SET_NAVIGATION:
-      // const newObj = Object.assign({}, state.data, action.data);
       return {...state, data: {
         brandLogo: false,
         comicsLink: false,

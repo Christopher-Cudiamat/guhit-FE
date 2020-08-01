@@ -43,7 +43,7 @@ export const postInitProfile = async (token:string,email:any) => {
 
 
 export const postProfile = async (token:string,data:any) => {
-  // console.log("DATA",data);
+  console.log("TOKEN VERIFY",token);
   const config = {
     headers:{
       'Content-Type': 'multipart/form-data',

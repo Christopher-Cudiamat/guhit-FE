@@ -1,22 +1,25 @@
-import { IModalState, CHANGE_MODAL, SET_MODAL} from './modal.type';
-// import {INavigationAction, INavigationParameter} from "./navigation.type";
+import { 
+  IModalState,
+  CHANGE_MODAL,
+  SET_MODAL,
+  IModalAction
+} from './modal.type';
+
 
 const initialState: IModalState = {
   data:{
-  
     searchModal: false,
     drawerModal: false,
     notifModal: false,
     libraryModal: false,
-    accountModal: false,
+    accountModal: false, 
     openModal: false,
   }
 };
 
-export const modalReducer = (state = initialState, action: any): IModalState => {
+export const modalReducer = (state = initialState, action: IModalAction): IModalState => {
   switch(action.type) {
     case SET_MODAL:
-      // const newObj = Object.assign({}, state.data, action.data);
       return {...state, data: {
         searchModal: false,
         drawerModal: false,
