@@ -4,17 +4,6 @@ interface ISwitchToDesktopTypes {
   
 }
 
-// export const DivUnderlay = styled.div<ISwitchToDesktopTypes>`
-//   position: fixed;
-//   width: 100%;
-//   height: 101vh;
-//   background:  ${props => props.theme.color.black};
-//   opacity: .9;
-//   top: 0px;
-//   z-index: 999;
-
-// `
-
 export const DivInfo = styled.div<ISwitchToDesktopTypes>`
 
   background:  ${props => props.theme.color.white};

@@ -11,15 +11,16 @@ interface IUpperNavTypes {
   modalsContainer?:boolean,
   account?: boolean,
   alignBaseLine?:boolean,
+  modalCloseIcon?:boolean,
+  searchCloseIcon?:boolean,
+  toggleHeight?:boolean
 }
 
 export const Container = styled.div<IUpperNavTypes>`
-position: relative;
-     
+  position: relative;
   @media ${props => props.theme.media.laptop} { 
     max-width: 110rem;
     margin:auto; 
-
   }
 `
 
@@ -36,8 +37,7 @@ export const Brand = styled.div<IUpperNavTypes>`
   font-style: italic;
      
   @media ${props => props.theme.media.laptop} { 
-    padding-top: 1.5rem;
-
+    padding-top: 1.2rem;
   }
 `
 
@@ -72,14 +72,12 @@ export const Div = styled.div<IUpperNavTypes>`
       @media ${props => props.theme.media.laptop} { 
         margin-right: 1rem;
       } 
-      
     }
-
     `
   };
 
 
-  ${({svg}) => svg&&
+  ${({svg}) => svg &&
     css`
     display:none;
     opacity: .5;
@@ -96,37 +94,31 @@ export const Div = styled.div<IUpperNavTypes>`
 
   ${({searchMobile}) => searchMobile&&
     css`
-    display:inline;
-    margin-top:-1px;
-      @media ${props => props.theme.media.laptop} { 
-        display:none;
-      } 
+      display:inline;
+      margin-top:-1px;
+        @media ${props => props.theme.media.laptop} { 
+          display:none;
+        } 
     `
   };
   
-
   ${({left}) => left && 
     css`
-
       & > * {
       margin-right: 1rem;
       }
 
       &:last-child p {
-        
         @media ${props => props.theme.media.laptop} { 
           margin-top: -2.1rem;
-          /* margin-left: 0rem; */
         }
-       
       }
 
       @media ${props => props.theme.media.laptop} { 
         align-items:flex-end;
         margin-top:0px;
       }
-
-  `
+    `
   };
 
   ${({modalsContainer}) => modalsContainer &&
@@ -142,20 +134,36 @@ export const Div = styled.div<IUpperNavTypes>`
       right: 0%;
       top: 90%;
     }
-  
   `
   };
-
 `
-
-
 export const Avatar = styled.img<IUpperNavTypes>`
   margin-top: -5px;
-  width: 2/8rem;
+  width: 2.8rem;
   height: 2.8rem;
   border-radius: 50%;
   margin-left: 1rem;
+`
 
+export const Close = styled.h1<IUpperNavTypes>`
+  ${({modalCloseIcon}) => modalCloseIcon && 
+    css`
+      position: absolute;
+      top: 0%;
+      right: 2%;
+      opacity: 0.6;
+    `
+  };
+
+
+  ${({searchCloseIcon}) => searchCloseIcon && 
+      css`
+        position: absolute;
+        top: 11%;
+        right: 2%;
+        opacity: 0.6;
+      `
+  };
 `
 
 

@@ -23,11 +23,8 @@ const mapStateToProps = (state:AppState) => {
 
 const mapStateToDispatch = (dispatch: Dispatch) => {
   return {
-    // setIsRegistration: (isRegistered:IRegistrationParameter) => dispatch(setIsRegistration(isRegistered)),
-    
     setNavValue: (data:any) => dispatch(navAction.setNavigation(data)),
     changeNavValue: (name:string, value: boolean) => dispatch(navAction.setChangeValue(name, value)),
-
     setModalValue: (data:any) => dispatch(modalAction.setModal(data)),
     changeModalValue: (name:string, value: boolean) => dispatch(modalAction.setChangeValue(name, value)),
   }

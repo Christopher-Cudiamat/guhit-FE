@@ -1,23 +1,23 @@
 import React from 'react';
+import  {icon} from '../../../../images/imgConst';
+
 import { LinkRouter } from '../../../../styleComponents/ui/link.style';
 import { Container, Div } from './accountModal.style';
 
-import { IoMdLogOut } from 'react-icons/io';
-import { FiSettings } from 'react-icons/fi';
-import { MdHelpOutline } from 'react-icons/md';
-import { AiOutlineShop } from 'react-icons/ai';
-import { MdPublish} from 'react-icons/md';
 
-
-const accountModal = (props:any) => {
-
+const AccountModal = (props:any) => {
+ 
   const {
     profile,
     removeUserProfile,
     logout,
     setModalValue,
     setNavValue,
-    changeNavValue} = props;
+    changeNavValue
+  } = props;
+
+  let profileName = profile.userName.split("@")[0];
+
 
   const handleLogout = (name:string) => {
     logout();
@@ -36,7 +36,7 @@ const accountModal = (props:any) => {
 
     <Container>
       <Div account>
-        <p>{profile.userName}</p>
+        <p>{profileName}</p>
       </Div>
       <Div accountList>
         <nav onClick={handleListsClick}>
@@ -44,37 +44,31 @@ const accountModal = (props:any) => {
             <LinkRouter dark to="./creator-account">
               <li>
                 <a>Account</a>
-                <AiOutlineShop fontSize={"2.2rem"}/>
+                <icon.account fontSize={"2.2rem"}/>
               </li>
             </LinkRouter>
-            <LinkRouter dark to=""> 
-              <li>
-                <a>Publish</a>
-                <MdPublish fontSize={"2.2rem"}/>
-              </li>
-            </LinkRouter>
+            {/* Missing Link for Settings - to be added */}
             <LinkRouter  dark  to="">
               <li>
                 <a>Settings</a>
-                <FiSettings fontSize={"2.2rem"}/>
+                <icon.settings fontSize={"2.2rem"}/>
               </li>
             </LinkRouter>
+            {/* Missing Link for Help - to be added */}
             <LinkRouter dark to="">
               <li>
                 <a>Help</a>
-                <MdHelpOutline fontSize={"2.2rem"}/>
+                <icon.help fontSize={"2.2rem"}/>
               </li>
             </LinkRouter>
-            
-
           </ul>
         </nav>
       </Div>
-      <Div accountLogout onClick={(e:any) => handleLogout("loginLink")}>
+      <Div accountLogout onClick={() => handleLogout("loginLink")}>
         <LinkRouter dark to="./login">
           <div>
             <p>Log out</p>
-            <IoMdLogOut fontSize={"2.2rem"}/>
+            <icon.logout fontSize={"2.2rem"}/>
           </div>
         </LinkRouter>
       </Div>
@@ -83,4 +77,4 @@ const accountModal = (props:any) => {
   );
 };
 
-export default accountModal;
+export default AccountModal;

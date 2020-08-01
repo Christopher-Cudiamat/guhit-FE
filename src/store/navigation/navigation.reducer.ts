@@ -14,7 +14,7 @@ const initialState: INavigationState = {
     loginLink: false, 
     libraryLink: false,
     publishLink: false,
-  
+    creatorLink: false,
   }
 };
 
@@ -29,6 +29,7 @@ export const navigationReducer = (state = initialState, action: INavigationActio
         loginLink: false,
         libraryLink: false,
         publishLink: false,
+        creatorLink: false,
       }};
     case CHANGE_VALUE:
       const newObject = Object.assign({}, state.data, {[action.name]:action.data});

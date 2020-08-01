@@ -11,6 +11,7 @@ export interface INavigationParameter {
   menuLink?: boolean,
   libraryLink?:  boolean,
   publishLink?:  boolean,
+  creatorLink?:  boolean,
 }
 
 export interface INavigationState {

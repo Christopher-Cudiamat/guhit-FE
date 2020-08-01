@@ -15,13 +15,12 @@ interface IIconTypes {
 }
 
 export const Icon = styled.div<IIconTypes>`
-
+ 
   height: 2.4rem;
   width: 2.4rem;
   color: 
-  ${props => props.togglenav 
-  ? props.theme.color.primary 
-  : props.colorMenu
+  
+  ${props => props.colorMenu
   ? props.theme.color.primary 
   : props.theme.color.white };
   transition: .5s all;

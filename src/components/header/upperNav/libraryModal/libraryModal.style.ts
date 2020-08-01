@@ -15,7 +15,6 @@ width: 100%;
     max-width: 40rem;
   }
 `
-
  
 export const Div = styled.div<ILibraryTypes>`
 background: ${props => props.theme.color.white};
@@ -53,12 +52,14 @@ margin-right: 0rem;
 
   ${({libraryList}) => libraryList &&
     css`
-      padding: 4rem 1.5rem;
+      padding: 4rem 2rem;
       text-align: center;
-      
       color: ${props => props.theme.color.gray};
       border-bottom: 1px solid #ccc;
       letter-spacing: 1px;
+      & > p {
+        line-height: 2rem;
+      }
     } 
     `
   };
@@ -70,7 +71,7 @@ margin-right: 0rem;
       @media ${props => props.theme.media.laptop} { 
         border-bottom-left-radius: 10px;
         border-bottom-right-radius: 10px;
-        box-shadow: 0px 15px 10px -15px #a8a8a8;  
+        box-shadow: 0px 15px 10px -15px rgba(0,0,0,0.2);   
       }
     } 
     `

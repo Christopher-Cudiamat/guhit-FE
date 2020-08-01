@@ -32,10 +32,9 @@ const SwitchToDesktop = (props:any) => {
               </Overlay>
               <DivInfo>
                 <MdClose 
-                onClick={closePortal}
-                color={"black"}
-                fontSize={"3rem"}
-                />
+                  onClick={closePortal}
+                  color={"black"}
+                  fontSize={"3rem"}/>
   
                 <Box 
                   secondaryTalkBubble
@@ -44,7 +43,7 @@ const SwitchToDesktop = (props:any) => {
                   bottom={"-27%"}>
                   Please switch to a laptop or desktop to continue publishing.
                 </Box>
-                <img src={laptop} alt=""/>
+                <img src={laptop} alt="laptop image"/>
               </DivInfo>
             </>
           

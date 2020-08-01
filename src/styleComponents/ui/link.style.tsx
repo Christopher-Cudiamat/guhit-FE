@@ -46,12 +46,10 @@ const Links = styled.a<ILinkTypes>`
     };
   `
 ;
-
-
 export default Links;
 
 export const LinkRouter = styled(Link)<ILinkTypes>`
-  font-size: ${props => props.togglenav ? "1.8rem" : "1.6rem"};
+  font-size: 1.6rem;
   font-weight: 500;
   letter-spacing: 1px;
   color: ${props => props.togglenav ? props.theme.color.primary : props.theme.color.white};

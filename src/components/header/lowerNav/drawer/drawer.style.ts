@@ -16,8 +16,6 @@ position:relative;
 
 export const DivContainer = styled.div<IUlTypes>`
   position: absolute;
-  /* top: ${props => (props.toggle ? "0rem" : "-60rem")};
-  transition: top .1s ease-in; */
   width: 95%;
   display:  ${props => (props.toggle ? "block" : "none")};
 
@@ -61,7 +59,7 @@ export const DivLink = styled.div`
 `
 
 export const Link = styled.a`
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   font-weight: 400;
   color: ${props=> props.theme.color.white};
 `

@@ -76,7 +76,6 @@ margin-right: 0rem;
     } 
     `
   };
-
   
 ${({accountLogout}) => accountLogout&&
     css`
@@ -92,12 +91,11 @@ ${({accountLogout}) => accountLogout&&
       }
       &  p  {
         font-weight: 700;
-        /* line-height:2.4; */
       }
       @media ${props => props.theme.media.laptop} { 
         border-bottom-left-radius: 10px;
         border-bottom-right-radius: 10px;
-        box-shadow: 0px 15px 10px -15px #a8a8a8;  
+        box-shadow: 0px 15px 10px -15px rgba(0,0,0,0.2);  
       }
     } 
     `

@@ -2,11 +2,6 @@ import styled, {css} from "styled-components";
 
 interface IUpperNavTypes {
   searchContainer?: boolean,
-  signUp?: boolean,
-  active?:boolean,
-  left?:boolean,
-  relative?:boolean,
-  svg?:boolean,
   searchMobile?:boolean,
 }
 

@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { Container,Div } from './notificationModal.style';
 import { LinkRouter } from '../../../../styleComponents/ui/link.style';
 
