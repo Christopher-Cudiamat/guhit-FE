@@ -39,8 +39,17 @@ export const Menu = styled.div<ILowerNavTypes>`
           ? props.theme.color.primary 
           : props.theme.color.white };
           transition: .5s all;
+        &:hover {
+          font-size: 1.48rem;
+        }
       }
     }
+
+    &:hover {
+      cursor:pointer;
+      opacity: .8;
+    }
+
     & div:last-child {
       display: block;
       @media ${props => props.theme.media.laptop} { 
@@ -63,8 +72,10 @@ export const Ul = styled.ul`
 `
 export const List = styled.li`
   margin-right: 1.8rem;
-  font-size: 1.6rem;
   font-weight: 500;
+  &:hover {
+    opacity: .8;
+  }
 `
 
 

@@ -47,7 +47,7 @@ export const Div = styled.div<IHomeTypes>`
           width:40%;
         }
         & img:first-child{
-          width: 50%;
+          width: 70%;
           margin: auto;
           @media ${props => props.theme.media.tablet} { 
             width: 100%;

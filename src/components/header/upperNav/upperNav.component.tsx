@@ -62,7 +62,7 @@ const UpperNav = (props:any) => {
             <Input onClick={() => handleModal("searchDesktop")}>
               <InputField 
                 searchGlobal 
-                placeholder="Search.."/>
+                placeholder="Search comics"/>
             </Input>
             <Div svg>
               <icon.search size={"20"}/>
@@ -105,7 +105,7 @@ const UpperNav = (props:any) => {
           } 
         </Div>
       </Nav>
-      
+       
       <Div modalsContainer account>
         {modalData.data.searchModal ?
           <GlobalSearchModal toggle={modalToggle}/>

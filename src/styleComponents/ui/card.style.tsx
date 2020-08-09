@@ -53,7 +53,7 @@ background: none;
     css`  
       display: flex;
       flex-wrap: wrap;
-      justify-content: space-evenly;
+      justify-content: space-between;
     `
   }; 
 
@@ -67,8 +67,8 @@ background: none;
 
   ${({primary}) => primary &&
     css`  
-    width: 45%;
-    margin-bottom: 1rem;
+    width: 48%;
+    margin-bottom: 2rem;
 
     @media ${props => props.theme.media.tablet} { 
       width: 20%;

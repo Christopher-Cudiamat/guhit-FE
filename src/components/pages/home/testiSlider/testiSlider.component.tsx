@@ -7,12 +7,11 @@ import {TitleSection } from '../../../../styleComponents/ui/title.syle';
 import { Div } from "./testiSlider.style"
 import Button from '../../../../styleComponents/ui/button.style';
 
-import comics1 from "../../../../images/comics-6.jpg";
-import comics2 from "../../../../images/comics-2.jpg";
-import comics3 from "../../../../images/comics-3.jpg";
-import comics4 from "../../../../images/comics-4.jpg";
-import comics5 from "../../../../images/comics-5.jpg";
-import cover from "../../../../images/cover.jpg";
+import comics10 from "../../../../images/cover/29.jpg";
+import comics11 from "../../../../images/cover/weird-day.jpg";
+import comics12 from "../../../../images/cover/inked.jpg";
+import comics13 from "../../../../images/cover/balut-penoy.jpg";
+import comics14 from "../../../../images/cover/king.jpg";
 
 import {FaQuoteLeft} from 'react-icons/fa';
 import {IoIosArrowForward} from 'react-icons/io';
@@ -39,34 +38,34 @@ const TestiSlider = (props:any) => {
 
   const testiArr = [
     {
-      cover: cover,
-      message: "Steve & Kate’s camp runs summer camps for children across the U.S. The unique thing about Steve & Kate’s camp is that their entire website is essentially a series of customer testimonials.",
+      cover: comics10,
+      message: "A cold stoic assasin on his quest for vengeance. This one will keep you at the edge of your seat. What more could you ask for?",
       creatorName: "KARL PERALTA",
-      creatorDisplayName: "@KarlMarvin14",
+      creatorDisplayName: "@Kaloy14",
     },
     {
-      cover: comics4,
+      cover: comics11,
       message: "Steve & Kate’s camp runs website is essentially a series of customer summer camps for children across the U.S. The unique thing about Steve & Kate’s camp is that their entire website is essentially a series of customer testimonials.",
       creatorName: "REJIK CAUNTAY",
       creatorDisplayName: "@jik-jik",
     },
     {
-      cover: comics3,
-      message: "Steve & Kate’s camp runs summer camps for children across the U.S. The unique thing about Steve & Kate’s camp is that their entire.",
-      creatorName: "TOPS VALENCIA",
-      creatorDisplayName: "@ChrisCudi",
+      cover: comics12,
+      message: "The series proves that women can be fierce and loyal, as well as empathetic.",
+      creatorName: "PATRICK DE LEON",
+      creatorDisplayName: "@Puting-Kuneho",
     },
     {
-      cover: comics1,
+      cover: comics13,
       message: "Steve & Kate’s camp runs website is essentially a series of customer summer camps for children across the U.S. The unique thing about Steve & Kate’s camp is that their entire website is essentially a series of customer testimonials.",
       creatorName: "REJIK CAUNTAY",
       creatorDisplayName: "@jik-jik",
     },
     {
-      cover: comics5,
-      message: "Steve & Kate’s camp runs summer camps for children across the U.S. The unique thing about Steve & Kate’s camp is that their entire.Steve & Kate’s camp runs website is essentially a series of customer summer camps.",
-      creatorName: "TOPS VALENCIA",
-      creatorDisplayName: "@ChrisCudi",
+      cover: comics14,
+      message: "The series proves that women can be fierce and loyal, as well as empathetic.",
+      creatorName: "PATRICK DE LEON",
+      creatorDisplayName: "@Puting-Kuneho",
     },
   ];
 

@@ -25,7 +25,7 @@ const Drawer = (props:any) => {
     <Container>
         <DivContainer toggle={modalData.data.drawerModal}>
           <LinkRouter to="./">
-            <DivLink onClick={e => handleClickLink("homeLink")}>
+            <DivLink onClick={() => handleClickLink("homeLink")}>
               <p>Publish</p>
               <icon.rightArrow size={22} color={"white"}/>
               <SwitchToDesktop/>
@@ -33,21 +33,21 @@ const Drawer = (props:any) => {
           </LinkRouter>
 
           <LinkRouter to="./about">
-            <DivLink onClick={e => handleClickLink("menuLink")}>
+            <DivLink onClick={() => handleClickLink("menuLink")}>
               <p>About Us</p>
               <icon.rightArrow size={22} color={"white"}/>
             </DivLink>
           </LinkRouter>
 
           <LinkRouter to="/events">
-            <DivLink onClick={e => handleClickLink("menuLink")}>
+            <DivLink onClick={() => handleClickLink("menuLink")}>
               <p>News and Events</p>
               <icon.rightArrow size={22} color={"white"}/>
             </DivLink>
           </LinkRouter>
 
           <LinkRouter to="contacts">
-            <DivLink onClick={e => handleClickLink("menuLink")}>
+            <DivLink onClick={() => handleClickLink("menuLink")}>
               <p>Contact Us</p>
               <icon.rightArrow size={22} color={"white"}/>
             </DivLink>

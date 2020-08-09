@@ -18,7 +18,6 @@ export const DivContainer = styled.div<IUlTypes>`
   position: absolute;
   width: 95%;
   display:  ${props => (props.toggle ? "block" : "none")};
-
   background: ${props => props.theme.color.blackLight};
   padding-top: 1rem;
   padding-left: 1rem;
@@ -56,6 +55,9 @@ export const DivLink = styled.div`
   padding: 1.5rem 0 1.5rem 0;
   opacity: 0.8;
   position: relative;
+  &:hover {
+      opacity: 0.6;
+  }
 `
 
 export const Link = styled.a`

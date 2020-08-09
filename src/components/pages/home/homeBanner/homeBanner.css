@@ -1,0 +1,12 @@
+.slick-slider {
+	background:  #08E5BE;
+	/* background:  #F0B110; */
+	/* background: "#0ACCA9"; */
+	/* background: "#08E5BE"; */
+}
+
+.slick-slide, .slick-slide *{ outline: none !important; }
+
+.slick-slide {
+	outline: none;
+} 

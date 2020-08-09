@@ -153,7 +153,7 @@ const Login = (props:any) => {
               <FaFacebook
                 color={"white"}
                 size={"32px"} 
-                style={{position:"absolute", right:"10%", top:"12%"}}/>
+                style={{position:"absolute", right:"7%", top:"12%"}}/>
             </Div>
 
 
@@ -173,7 +173,7 @@ const Login = (props:any) => {
                   <FaGooglePlus 
                     color={"white"}
                     size={"32px"} 
-                    style={{position:"absolute", right:"10%", top:"12%"}}/>
+                    style={{position:"absolute", right:"7%", top:"12%"}}/>
                 </Div>
               )}
             />

@@ -13,7 +13,8 @@ interface IUpperNavTypes {
   alignBaseLine?:boolean,
   modalCloseIcon?:boolean,
   searchCloseIcon?:boolean,
-  toggleHeight?:boolean
+  toggleHeight?:boolean,
+  searchActive?:boolean,
 }
 
 export const Container = styled.div<IUpperNavTypes>`
@@ -68,7 +69,7 @@ export const Div = styled.div<IUpperNavTypes>`
       font-size: 1.4rem;
       padding-top:3px;
       opacity: .8;
-      width: 13rem;
+      width: 14rem;
       @media ${props => props.theme.media.laptop} { 
         margin-right: 1rem;
       } 
@@ -86,8 +87,8 @@ export const Div = styled.div<IUpperNavTypes>`
       display:inline-block;
       position:absolute;
       top: -13%;
-      right: 12%;
-      pointer-events: none;
+      right: ${props => props.searchActive ?  "5%": "12%"};
+      cursor:pointer;
     } 
     `
   };
@@ -106,6 +107,7 @@ export const Div = styled.div<IUpperNavTypes>`
     css`
       & > * {
       margin-right: 1rem;
+      
       }
 
       &:last-child p {
@@ -117,6 +119,7 @@ export const Div = styled.div<IUpperNavTypes>`
       @media ${props => props.theme.media.laptop} { 
         align-items:flex-end;
         margin-top:0px;
+        &:hover {cursor:pointer;}
       }
     `
   };
@@ -128,11 +131,13 @@ export const Div = styled.div<IUpperNavTypes>`
     width: 100%;
     z-index: 9999;
     margin-right: 0rem;
+    
 
     @media ${props => props.theme.media.laptop} { 
       width: 35rem;
       right: 0%;
       top: 90%;
+
     }
   `
   };
@@ -143,6 +148,7 @@ export const Avatar = styled.img<IUpperNavTypes>`
   height: 2.8rem;
   border-radius: 50%;
   margin-left: 1rem;
+  &:hover {cursor:pointer;}
 `
 
 export const Close = styled.h1<IUpperNavTypes>`
@@ -162,8 +168,10 @@ export const Close = styled.h1<IUpperNavTypes>`
         top: 11%;
         right: 2%;
         opacity: 0.6;
+
       `
   };
+
 `
 
 

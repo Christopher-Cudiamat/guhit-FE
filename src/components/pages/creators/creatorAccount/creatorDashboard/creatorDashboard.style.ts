@@ -18,12 +18,10 @@ export const Div = styled.div<ICreatorDashboardTypes>`
   ${({dashboardContainer}) => dashboardContainer && 
     css`
     text-align:center;
-    /* background: ${props => props.theme.color.grayLightest}; */
 
     &  div:first-child{
       display:flex;
       justify-content: space-between;
-      /* width: 100%; */
       & select {
         width: 50%;
         height: 4rem;
@@ -34,7 +32,6 @@ export const Div = styled.div<ICreatorDashboardTypes>`
         @media ${props => props.theme.media.laptop} {
           width: 40%;  
         }
-
         & option{
           border: none;
           outline: none;

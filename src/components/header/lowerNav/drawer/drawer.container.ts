@@ -8,9 +8,6 @@ import * as modalAction from '../../../../store/modal/modal.action';
 import { selectorsModal } from '../../../../store/modal/modal.selector';
 
 
-
-
-
 const mapStateToProps = (state:AppState) => {
   return{
     navData: selectorsNavigation.getNavigation(state),

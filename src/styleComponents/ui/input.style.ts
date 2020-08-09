@@ -53,7 +53,7 @@ export const InputField = styled.input<IInputTypes>`
     display:none;
     @media ${props => props.theme.media.laptop} { 
       display:flex;
-      padding-right:2.9rem;
+      padding-right:3.2rem;
       background: white;
       height: 3rem;
       border:none;

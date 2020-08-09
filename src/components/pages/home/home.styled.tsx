@@ -11,12 +11,15 @@ interface IHomeTypes {
   status?:boolean,
   testimonials?: boolean,
   downloadApp?: boolean,
-}
+  mobile?: boolean,
+  desktop?: boolean,
+
+} 
 
 export const Container = styled.div`
  
   @media ${props => props.theme.media.laptop} { 
-    max-width: 80rem;
+    max-width: 120rem;
     margin:auto;
     margin-top:-4rem; 
   }
@@ -32,39 +35,55 @@ export const Div = styled.div<IHomeTypes>`
 
   ${({banner}) => banner &&
     css`
-      text-align:center;
+      max-width: 80rem;
+      margin: auto;
+      text-align: center;
       padding-left: 0rem;
       padding-right: 0rem;
       
       @media ${props => props.theme.media.laptop} { 
-        width: 70rem;
+        text-align: left;
+        display:flex !important;
+        height: 65vh;
       }
 
-      & h1:first-child {
-        margin: 0rem .5rem;
-        margin-bottom: 3rem;
-        margin-top:6rem;
-        color: ${props => props.theme.color.black};
-
+      & div:first-child {
+        width:100%;
         @media ${props => props.theme.media.laptop} { 
-          width: 50%;
-          margin: 4rem auto 3rem auto;
+          width:55%;
         }
-      }
-
-      p:nth-child(2) {
-        margin-bottom: 3rem;
-        color: ${props => props.theme.color.black};
-        display:none;
-
-        @media ${props => props.theme.media.laptop} { 
-          display: block;
-          line-height: 2rem;
-          width: 60rem;
-          margin:auto;
-          margin-bottom: 4rem;
-          font-size:2rem;
+  
+        & h1:nth-child(1),
+        & h1:nth-child(2) {
+          margin: 4rem  .5rem 3rem .5rem;
+          color: ${props => props.theme.color.black};
+          font-size: 4.4rem;
+          @media ${props => props.theme.media.laptop} { 
+            margin: 4rem auto 2rem auto;
+          }
         }
+
+        p:nth-child(3) {
+          margin-bottom: 3rem;
+          color: ${props => props.theme.color.black};
+          padding-left: 2rem;
+          padding-right: 2rem;
+          line-height: 2.2rem;
+          font-size:1.6rem;
+          /* display:none; */
+
+          @media ${props => props.theme.media.laptop} { 
+            display: block;
+            margin:auto;
+            margin-bottom: 4rem;
+            padding-left: 0rem;
+            padding-right: 0rem;
+          }
+        }
+        & button:last-child {
+
+        }
+
       }
 
       & img {
@@ -73,6 +92,9 @@ export const Div = styled.div<IHomeTypes>`
       }
     `
   };
+
+  
+ 
  
 
   ${({featuredSection}) => featuredSection &&
