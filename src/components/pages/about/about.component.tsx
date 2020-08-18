@@ -125,19 +125,13 @@ const About = (props:any) => {
       
       <Div banner>
         <Banner height={"55vh"} bgImg={bannera}>
-          <p>
-            About Us
-          </p>
-          <p>
-            We are a small team who love drawings and story-telling
-          </p>
+          <p>About Us</p>
+          <p>We are a small team who love drawings and story-telling</p>
         </Banner>
       </Div>
  
       <Div history>
-        <TitleSection>
-          History
-        </TitleSection>
+        <TitleSection>History</TitleSection>
         <p>
         There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text.
         </p>
@@ -149,9 +143,7 @@ const About = (props:any) => {
       </Div>
 
       <Div missionVision>
-        <TitleSection>
-          Mission & Vision
-        </TitleSection>
+        <TitleSection>Mission & Vision</TitleSection>
         <p>
           <b>Our Mission</b> many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable
         </p>
@@ -163,9 +155,7 @@ const About = (props:any) => {
       </Div>
 
       <Div team>
-        <TitleSection>
-          Team Guhit
-        </TitleSection>
+        <TitleSection>Team Guhit</TitleSection>
 
         { 
           teamMembersArr.map((el,index)=>{
@@ -185,9 +175,7 @@ const About = (props:any) => {
       </Div>
 
       <Div media>
-        <TitleSection>
-          Media Recognitions
-        </TitleSection>
+        <TitleSection>Media Recognitions</TitleSection>
 
         <Slider {...settings}>
           <div >

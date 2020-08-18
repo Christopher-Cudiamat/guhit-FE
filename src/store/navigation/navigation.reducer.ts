@@ -15,22 +15,18 @@ const initialState: INavigationState = {
     libraryLink: false,
     publishLink: false,
     creatorLink: false,
+    aboutLink: false,
+    eventLink: false,
+    contactLink: false,
   }
 };
 
 export const navigationReducer = (state = initialState, action: INavigationActionTypes): INavigationState => {
+
   switch(action.type) {
     case SET_NAVIGATION:
-      return {...state, data: {
-        brandLogo: false,
-        comicsLink: false,
-        novelsLink: false,
-        menuLink: false,
-        loginLink: false,
-        libraryLink: false,
-        publishLink: false,
-        creatorLink: false,
-      }};
+      Object.keys(state.data).map((el) => state.data[el] = false);
+      return {...state};
     case CHANGE_VALUE:
       const newObject = Object.assign({}, state.data, {[action.name]:action.data});
       return {...state, data: {...newObject}};

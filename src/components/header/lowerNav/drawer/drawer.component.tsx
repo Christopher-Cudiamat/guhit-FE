@@ -9,7 +9,7 @@ import { LinkRouter } from '../../../../styleComponents/ui/link.style';
 
 const Drawer = (props:any) => {
   
-  let {modalData,setNavValue,changeModalValue,changeNavValue} = props;
+  let {modalData,setNavValue,changeModalValue,changeNavValue,navData} = props;
 
   const handleClickLink = (name:string,) => {
     if(name === "drawerToggle"){
@@ -17,7 +17,13 @@ const Drawer = (props:any) => {
     } else {
       setNavValue();
       changeModalValue(["drawerModal"], false);
-      changeNavValue([name], true);
+      if(name === "homeLink"){
+        changeNavValue([name], true);
+      } else {
+        changeNavValue(["menuLink"], true);
+        changeNavValue([name], true);
+      }
+
     }
   }
   
@@ -33,23 +39,35 @@ const Drawer = (props:any) => {
           </LinkRouter>
 
           <LinkRouter to="./about">
-            <DivLink onClick={() => handleClickLink("menuLink")}>
+            <DivLink 
+              linkColor={navData.data.aboutLink} 
+              onClick={() => handleClickLink("aboutLink")}>
               <p>About Us</p>
-              <icon.rightArrow size={22} color={"white"}/>
+              <icon.rightArrow 
+                size={22} 
+                color={navData.data.aboutLink ? "#08E5BE" : "FFF"}/>
             </DivLink>
           </LinkRouter>
 
           <LinkRouter to="/events">
-            <DivLink onClick={() => handleClickLink("menuLink")}>
+            <DivLink 
+              linkColor={navData.data.eventsLink} 
+              onClick={() => handleClickLink("eventsLink")}>
               <p>News and Events</p>
-              <icon.rightArrow size={22} color={"white"}/>
+              <icon.rightArrow 
+                size={22} 
+                color={navData.data.eventsLink ? "#08E5BE" : "FFF"}/>
             </DivLink>
           </LinkRouter>
 
-          <LinkRouter to="contacts">
-            <DivLink onClick={() => handleClickLink("menuLink")}>
+          <LinkRouter to="/contacts">
+            <DivLink 
+              linkColor={navData.data.contactLink} 
+              onClick={() => handleClickLink("contactLink")}>
               <p>Contact Us</p>
-              <icon.rightArrow size={22} color={"white"}/>
+              <icon.rightArrow 
+              size={22} 
+              color={navData.data.contactLink ? "#08E5BE" : "FFF"}/>
             </DivLink>
           </LinkRouter>
 

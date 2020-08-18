@@ -2,7 +2,8 @@ import styled from "styled-components";
 
 interface IUlTypes {
   toggle?: boolean, 
-  showMenu?: boolean
+  showMenu?: boolean,
+  linkColor?: boolean,
 }
 
 export const Container = styled.div<IUlTypes>`
@@ -49,12 +50,13 @@ export const DivContainer = styled.div<IUlTypes>`
       
 `
 
-export const DivLink = styled.div`
+export const DivLink = styled.div<IUlTypes>`
   display: flex;
   justify-content: space-between;
   padding: 1.5rem 0 1.5rem 0;
   opacity: 0.8;
   position: relative;
+  color:  ${props => props.linkColor ? props.theme.color.primaryLight : props.theme.color.white};
   &:hover {
       opacity: 0.6;
   }
