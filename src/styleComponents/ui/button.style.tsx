@@ -28,8 +28,13 @@ border:none;
 width: ${props => props.width ? props.width  : props.width };
 height: ${props => props.height ? props.height  : props.height};
 
-&:hover {
-  cursor: pointer;
+  @media ${props => props.theme.media.laptop} { 
+      &:hover {
+        opacity: 0.8;
+        cursor: pointer;
+        transition: all .5s;
+    }
+  }
 }
 
   ${({primary}) => primary &&

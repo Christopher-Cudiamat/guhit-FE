@@ -29,6 +29,8 @@ const SignUp = (props:any) => {
   let [password,setPassword] = useState<string>("");
   const [showForm, setshowForm] = useState<boolean>(false);
 
+  console.log("EMAIL TEST",email);
+
 
   useEffect(() => {  
     removeAlert();
@@ -48,8 +50,10 @@ const SignUp = (props:any) => {
       setAlert("Please insert a correct Email", "danger");
     } else {
       const data = {email, password};
+      console.log("DATA",email);
       emailVerify(data)
         .then(res => {
+          console.log("RES",res);
           console.log("EMAIL VER", res);
           if(res){    
             history.push({

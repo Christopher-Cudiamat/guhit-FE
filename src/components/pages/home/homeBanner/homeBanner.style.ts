@@ -23,6 +23,7 @@ export const Div = styled.div<IHomeBannerTypes>`
   @media ${props => props.theme.media.laptop} { 
     padding-left: 0rem;
     padding-right: 0rem;
+    padding-bottom: 10rem;
   }
 
   ${({banner}) => banner &&
@@ -36,7 +37,7 @@ export const Div = styled.div<IHomeBannerTypes>`
       @media ${props => props.theme.media.laptop} { 
         text-align: left;
         display:flex !important;
-        height: 65vh;
+        /* height: 65vh; */
       }
 
       & div:first-child {

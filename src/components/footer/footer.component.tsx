@@ -1,100 +1,84 @@
 import React from 'react';
+import { icon } from '../../images/imgConst';
+
 import { Div, Ul, List, Brand } from './footer.style';
-import Link from '../../styleComponents/ui/link.style';
-import { FaFacebookSquare } from 'react-icons/fa';
-import { AiFillInstagram } from 'react-icons/ai';
-import { FaLinkedin } from 'react-icons/fa';
+import Link, { LinkRouter } from '../../styleComponents/ui/link.style';
+
 import logo from "../../images/logos/heade-logo.png"
 
+const upperFooterArr = [
+  {name: "Home", route: "./"},
+  {name: "Comics", route: "./comics"},
+  {name: "Creators", route: "./creators"},
+  {name: "Publish", route: "./publish"},
+  {name: "About Us", route: "./about"},
+  {name: "News and Events", route: "./events"},
+  {name: "Contact Us", route: "./contacts"},
+];
+
+const socialFooterArr = [
+  {icon: icon.facebook, route: "www.google.com",target:"_blank"},
+  {icon: icon.instagram, route: "www.google.com",target:"_blank"},
+  {icon: icon.linkedIn, route: "www.google.com",target:"_blank"},
+];
+
+const lowerFooterArr = [
+  {name: "@Guhit 2020", route: "./"},
+  {name: "Privacy", route: "./error"},
+  {name: "Help", route: "./error"},
+  {name: "Terms & Conditions", route: "./error"},
+]
+
+interface IupperFooter {
+  name:string,
+  route:string,
+}
 
 
 
-
-const Footer = (props:any) => {
+const Footer = () => {
   return (
     <>
       <Div>
-
-      <Brand>
-          <img src={logo} alt="logo"/>
-          <p>Guhit</p>
-      </Brand>
-
-      
+        <Brand>
+            <img src={logo} alt="logo"/>
+            <p>Guhit</p>
+        </Brand>
 
         <Ul upperFooter>
-          <List>
-              <Link footer>
-                Publish
-              </Link>
-          </List>
-          <List>
-              <Link footer>
-                Creators
-              </Link>
-          </List>
-          <List>
-              <Link footer>
-                News and events
-              </Link>
-          </List>
-          <List>
-              <Link footer> 
-                About Us
-              </Link>
-          </List>
-          <List>
-              <Link footer>
-                Contact Us
-              </Link>
-          </List>
+          {
+            upperFooterArr.map((el:IupperFooter,index:number) => {
+              return  <List key={index}>
+                        <LinkRouter footer to={el.route}>
+                          {el.name}
+                        </LinkRouter>
+                      </List>
+            })
+          }
         </Ul>
 
-
         <Ul socialFooter>
-          {/* <List social>
-              <Link>
-                <FaFacebookSquare size={40}/>
-              </Link>
-          </List> */}
-          <List social>
-              <Link footer>
-                <FaFacebookSquare size={40}/>
-              </Link>
-          </List>
-          <List social>
-              <Link footer>
-                <AiFillInstagram size={40}/>
-              </Link>
-          </List>
-          <List social>
-              <Link footer> 
-                <FaLinkedin size={40}/>
-              </Link>
-          </List>
+          {
+            socialFooterArr.map((el:any,index:number) => {
+              return  <List social key={index}>
+                        <Link footer href={el.route} target={el.target}>
+                          <el.icon size={40}/>
+                        </Link>
+                      </List>
+            })
+          }
         </Ul>
 
         <Ul lowerFooter>
-          <List>
-              <Link footer>
-                @Guhit 2020
-              </Link>
-          </List>
-          <List>
-              <Link footer>
-                Privacy
-              </Link>
-          </List>
-          <List>
-              <Link footer>
-                Terms & Conditions
-              </Link>
-          </List>
-          <List>
-              <Link footer>
-                Content
-              </Link>
-          </List>
+          {
+            lowerFooterArr.map((el:IupperFooter,index:number) => {
+              return  <List key={index}>
+                        <LinkRouter footer to={el.route}>
+                          {el.name}
+                        </LinkRouter>
+                      </List>
+            })
+          }
         </Ul>
       </Div>
     </>

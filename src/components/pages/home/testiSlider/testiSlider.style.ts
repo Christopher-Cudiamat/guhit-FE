@@ -1,12 +1,12 @@
 import styled, {css} from "styled-components";
 
-interface IHomeTypes {
+interface IReactionsTypes {
   testimonials?:boolean,
   contents?:boolean,
 }
 
 
-export const Div = styled.div<IHomeTypes>`
+export const Div = styled.div<IReactionsTypes>`
  
   ${({testimonials}) => testimonials &&
     css`

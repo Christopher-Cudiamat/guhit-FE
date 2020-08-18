@@ -23,7 +23,8 @@ export const Ul = styled.ul<IUlTypes>`
   @media ${props => props.theme.media.laptop} { 
     flex-direction: row;
     justify-content: center;
-      }
+  }
+
 
   ${({socialFooter}) => socialFooter &&
     css`
@@ -32,6 +33,15 @@ export const Ul = styled.ul<IUlTypes>`
       display: flex;
       flex-direction: row; 
       margin-bottom: 2rem;
+      @media ${props => props.theme.media.laptop} { 
+        margin-bottom: 4rem;
+          & a:hover {
+            opacity: 0.7;
+            transform: opacity .4s;
+          }
+        }
+      }
+
     `
   };
 
@@ -44,10 +54,18 @@ export const Ul = styled.ul<IUlTypes>`
       padding: 2rem 1rem 2rem 1rem;
   
       & a{
-        font-size: 1.8rem;
+        font-size: 1.6rem;
         font-weight:700;
         margin-left: 1.5rem;
         margin-right:1.5rem;
+
+        @media ${props => props.theme.media.laptop} { 
+          font-size: 1.4rem;
+          &:hover {
+            opacity: 0.7;
+            transform: opacity .4s;
+          }
+        }
       }
 
      
@@ -114,11 +132,25 @@ export const Brand = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  color: ${props => props.theme.color.primary};
-  font-size:5rem;
-  font-weight: bold;
-  font-style: italic;
   margin-bottom: 2rem;
   padding-top: 5rem;
+  & img {
+    opacity: 0.5;
+    @media ${props => props.theme.media.laptop} { 
+      width: 5rem;
+      height:auto
+    }
+  }
+  & p {
+    padding: .5rem 0rem 0rem .5rem;
+    opacity: 0.5;
+    color: ${props => props.theme.color.black};
+    font-size:5rem;
+    font-weight: bold;
+    font-style: italic;
+    @media ${props => props.theme.media.laptop} { 
+      font-size:6rem;
+    }
+  }
 `
 

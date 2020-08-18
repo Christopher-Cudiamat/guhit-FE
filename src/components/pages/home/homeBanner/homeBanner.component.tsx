@@ -26,8 +26,8 @@ const HomeBanner = (props:any) => {
         <Slider {...settings}>
           <Div banner>
             <div>
-              <TitleMain desktop fontWeight={"bold"}>Awesome comics at your fingertips.</TitleMain>
-              <TitleMain mobile fontWeight={"bold"}>Read awesome comics at your fingertips.</TitleMain>
+              <TitleMain desktop fontWeight={"bold"}>Read Guhit comics at your fingertips.</TitleMain>
+              <TitleMain mobile fontWeight={"bold"}>Read Guhit comics at your fingertips.</TitleMain>
               <p>
                 Guhit is home to a creator community that has published great web comics. We’re sure you’re going to find a story just for you in here!
               </p>

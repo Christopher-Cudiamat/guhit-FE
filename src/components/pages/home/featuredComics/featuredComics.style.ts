@@ -34,7 +34,7 @@ export const Div = styled.div<IFeaturedComicsTypes>`
       margin-top: 5rem;
     }
 
-    & div {v
+    & div {
       margin-bottom:1rem;
     }
     `
@@ -56,6 +56,13 @@ export const Div = styled.div<IFeaturedComicsTypes>`
 
       & a {
         color: ${props => props.theme.color.primaryDark};
+        @media ${props => props.theme.media.tablet} { 
+          &:hover {
+            font-weight: bold;
+            cursor:pointer;
+            transition: all .5s;
+          }
+        }
       }
     
   `}; 

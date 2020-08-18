@@ -5,15 +5,8 @@ import HomeBanner from './homeBanner/homeBanner.component';
 import FeaturedComics from './featuredComics/featuredComics.component';
 import NewReleasedComics from './newReleasedComics/newReleasedComics.component';
 import TestiSlider from './testiSlider/testiSlider.component';
+import BeACreator from './beACreator/beACreator.component';
 
-import { TitleSection } from '../../../styleComponents/ui/title.syle';
-import { Div } from "./home.styled"
-import Button from '../../../styleComponents/ui/button.style';
-import Card from '../../../styleComponents/ui/card.style';
-import Link, { LinkRouter } from '../../../styleComponents/ui/link.style';
-
-import creator from "../../../images/creator.png";
-import phone from "../../../images/phone.png";
 import comics1 from "../../../images/cover/my-body-my-rule.jpg";
 import comics2 from "../../../images/cover/deep-inside-mt-makulot.jpg";
 import comics3 from "../../../images/cover/little-blue-witch.jpg";
@@ -24,13 +17,12 @@ import comics6 from "../../../images/cover/bad-grass.jpg";
 import comics7 from "../../../images/cover/drama.jpg";
 import comics8 from "../../../images/cover/angelo.jpg";
 
-
-
-import { FaGlobe } from 'react-icons/fa';
-import { FaPencilAlt } from 'react-icons/fa';
-import { FaDollarSign } from 'react-icons/fa';
-import google from '../../../images/google.png';
-import apple from '../../../images/apple.png';
+import comics10 from "../../../images/cover/29.jpg";
+import comics11 from "../../../images/cover/weird-day.jpg";
+import comics12 from "../../../images/cover/inked.jpg";
+import comics13 from "../../../images/cover/balut-penoy.jpg";
+import comics14 from "../../../images/cover/king.jpg";
+import MobileApp from './mobileApp/mobileApp.component';
 
 
 const Home = (props:any) => {
@@ -62,6 +54,39 @@ const Home = (props:any) => {
     {thumb:  comics7, genre: "Drama", likes:1},
     {thumb:  comics8, genre: "Sports", likes:9},
   ];
+
+  const reactionsArr = [
+    {
+      cover: comics10,
+      message: "A cold stoic assasin on his quest for vengeance. This one will keep you at the edge of your seat. What more could you ask for?",
+      creatorName: "KARL PERALTA",
+      creatorDisplayName: "@Kaloy14",
+    },
+    {
+      cover: comics11,
+      message: "Steve & Kate’s camp runs website is essentially a series of customer summer camps for children across the U.S. The unique thing about Steve & Kate’s camp is that their entire website is essentially a series of customer testimonials.",
+      creatorName: "REJIK CAUNTAY",
+      creatorDisplayName: "@jik-jik",
+    },
+    {
+      cover: comics12,
+      message: "The series proves that women can be fierce and loyal, as well as empathetic.",
+      creatorName: "PATRICK DE LEON",
+      creatorDisplayName: "@Puting-Kuneho",
+    },
+    {
+      cover: comics13,
+      message: "Steve & Kate’s camp runs website is essentially a series of customer summer camps for children across the U.S. The unique thing about Steve & Kate’s camp is that their entire website is essentially a series of customer testimonials.",
+      creatorName: "REJIK CAUNTAY",
+      creatorDisplayName: "@jik-jik",
+    },
+    {
+      cover: comics14,
+      message: "The series proves that women can be fierce and loyal, as well as empathetic.",
+      creatorName: "PATRICK DE LEON",
+      creatorDisplayName: "@Puting-Kuneho",
+    },
+  ];
   
   const handleButtons = (name:string) => {
     changeModalValue(["drawerModal"], false);
@@ -91,50 +116,11 @@ const Home = (props:any) => {
           newComArr={newComArr}
           handleButtons={handleButtons}/>
 
-        <TestiSlider/>
+        <TestiSlider reactionsArr={reactionsArr}/>
 
-        <Div status>
-            <div>   
-              <FaPencilAlt/>
-              <p>1.Create</p>
-              <p>Share your drawings and original story on Guhit. Find the writing resources you need to craft a story only you can tell.</p>
-            </div>
-            <div>
-              <FaGlobe/>
-              <p>2.Build</p>
-              <p>Establish a global fan base as your story gains readership and momentum. Connect with other like-minded writers through storytelling.</p>
-            </div>
-            <div>
-              <FaDollarSign/>
-              <p>3.Amplify</p>
-              <p>Gain Wattpad Star status and get your story published or adapted into film or television with Wattpad Books and Wattpad Studios!.</p>
-            </div>
-        </Div>
+        <BeACreator/>
 
-        <Div creatorSection>
-          <TitleSection fontWeight={"bold"}>Are you a creator?</TitleSection>
-          <p>Join Our Community of people who are passionate of drawing and story telling.</p>
-          <Div  imgContainer><img src={creator} alt="creator doodle"/></Div>
-          <Button secondary={true}>Learn more</Button>
-        </Div>
-
-        <Div downloadApp>
-         
-            <div>
-              <TitleSection 
-                fontWeight={"bold"}>
-                Download our app and read wherever you are.
-              </TitleSection>
-              <img src={google} alt="buttons" />
-              <img src={apple} alt="buttons" />
-              {/* <Button secondary>Learn more</Button>
-              <Button secondary>Learn more</Button> */}
-            </div>
-            <div>
-              <img src={phone} alt="phone"/>
-            </div>
-        
-        </Div>
+        <MobileApp />
         
     </div> 
   );

@@ -12,7 +12,7 @@ interface IComicsTypes {
 
 
 export const Div = styled.div<IComicsTypes>`
-  padding: 3rem 2rem;
+  /* padding: 3rem 2rem; */
  
 
   ${({banner}) => banner && 

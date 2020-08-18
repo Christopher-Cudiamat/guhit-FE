@@ -16,7 +16,16 @@ interface ICardTypes {
 
 
 const Card = styled.div<ICardTypes>`
-background: none;
+  background: none;
+
+  @media ${props => props.theme.media.tablet} { 
+    & img:hover {
+      opacity: 0.7;
+      cursor:pointer;
+      transform: scale(1.07);
+      transition: all .5s;
+    }
+  }
 
   ${({container}) => container &&
     css`  
@@ -67,7 +76,7 @@ background: none;
 
   ${({primary}) => primary &&
     css`  
-    width: 48%;
+    width: 48%; 
     margin-bottom: 2rem;
 
     @media ${props => props.theme.media.tablet} { 
@@ -233,24 +242,3 @@ ${({horizontalSquare}) => horizontalSquare &&
 `
 
 export default Card;
-
-
-// .card-1:hover {
-//   box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
-// }
-
-// .card-2 {
-//   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-// }
-
-// .card-3 {
-//   box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
-// }
-
-// .card-4 {
-//   box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
-// }
-
-// .card-5 {
-//   box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
-// }

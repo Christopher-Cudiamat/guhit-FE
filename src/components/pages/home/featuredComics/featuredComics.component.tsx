@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { Div } from "./featuredComics.style"
+
 import Card from '../../../../styleComponents/ui/card.style';
 import Link from '../../../../styleComponents/ui/link.style';
 import { TitleSection } from '../../../../styleComponents/ui/title.syle';
