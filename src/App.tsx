@@ -15,21 +15,20 @@ import store from './configs/store.config';
 const App = () => {
   
   let loader = store.getState().loader.isLoading;
+  console.log("LOADER",loader);
 
   return (
 
     <ThemeProvider theme={theme}>
-      <div style={{position:"relative"}}>
-
+      <>
         {loader ? <Overlay light/> : null }
-
+        <Loader/>
         <Router>
-          <Loader/> 
           <Header/> 
           <Pages />
           <Footer/>
         </Router>
-      </div>
+      </>
     </ThemeProvider>
 
   );

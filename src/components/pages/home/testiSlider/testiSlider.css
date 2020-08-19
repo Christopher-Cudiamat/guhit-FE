@@ -44,14 +44,23 @@
 	color:#ccc;
 	height:50px;
 	width: 50px;
+	top: 30rem;
 	transition: all .3s;
 	border-radius: 50%;
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (min-width: 1024px) {
 	.slick-prev,
 	.slick-next {
-		top: 30rem;
+		top: 50%;
+		height:70px;
+		width: 70px;
+	}
+	.slick-prev {
+		left:-7%;
+	}
+	.slick-next {
+		right:-7%;
 	}
 }
 

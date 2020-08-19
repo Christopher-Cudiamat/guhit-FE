@@ -1,6 +1,5 @@
 import React from 'react';
 import store from '../../configs/store.config';
-// import loaderImage from '../../images/loader/loader.gif';
 import loaderGif from '../../images/loader/loader.gif';
 
 

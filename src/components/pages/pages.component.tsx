@@ -23,7 +23,6 @@ import Login from './login/login.container';
 import SignUp from './signUp/signUp.container';
 import Comics from './comics/comics.container';
 import { Overlay } from '../../styleComponents/ui/overlay.style';
-import Loader from '../loader/loader.component';
 import CreatorAccount from './creators/creatorAccount/creatorAccount.container';
 import Publish from './publish/publish.container';
 import PublishCreatorInfo from './publish/publishCreatorInfo/publishCreatorInfo.container';
@@ -48,13 +47,11 @@ const Pages = (props:any) => {
       
       {
         modalData.data.drawerModal || modalData.data.searchModal || modalData.data.notifModal  || modalData.data.libraryModal || modalData.data.accountModal 
-        ? <Overlay onClick={handleCloseOverlay}/> 
+        ? <Overlay onClick={handleCloseOverlay} zIndex={"99"}/> 
         : loader.isLoading
         ?  <Overlay light/> 
         : null 
       }
-
-        <Loader/>
 
         <Switch>
           <Route exact path="/">
