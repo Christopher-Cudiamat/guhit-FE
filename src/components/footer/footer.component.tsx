@@ -6,14 +6,15 @@ import Link, { LinkRouter } from '../../styleComponents/ui/link.style';
 
 import logo from "../../images/logos/heade-logo.png"
 
+
 const upperFooterArr = [
-  {name: "Home", route: "./"},
-  {name: "Comics", route: "./comics"},
-  {name: "Creators", route: "./creators"},
-  {name: "Publish", route: "./publish"},
-  {name: "About Us", route: "./about"},
-  {name: "News and Events", route: "./events"},
-  {name: "Contact Us", route: "./contacts"},
+  {name: "Home", route: "./",linkName:"homeLink"},
+  {name: "Comics", route: "./comics",linkName:"comicsLink"},
+  {name: "Creators", route: "./creators",linkName:"creatorLink"},
+  // {name: "Publish", route: "./publish"},
+  {name: "About Us", route: "./about",linkName:"aboutLink"},
+  {name: "News and Events", route: "./events",linkName:"eventsLink"},
+  {name: "Contact Us", route: "./contacts",linkName:"contactLink"},
 ];
 
 const socialFooterArr = [
@@ -32,11 +33,28 @@ const lowerFooterArr = [
 interface IupperFooter {
   name:string,
   route:string,
+  linkName: string,
+}
+
+interface IlowerFooter {
+  name:string,
+  route:string,
 }
 
 
+const Footer = (props:any) => {
 
-const Footer = () => {
+  let {changeNavValue, setNavValue} = props;
+
+  const handleLinkNav = (name:string) => {
+    setNavValue();
+    changeNavValue([name], true);
+    if((name === "aboutLink" || name === "eventsLink") || name === "contactLink"){
+      changeNavValue(["menuLink"], true);
+    }
+  }
+  
+
   return (
     <>
       <Div>
@@ -48,7 +66,7 @@ const Footer = () => {
         <Ul upperFooter>
           {
             upperFooterArr.map((el:IupperFooter,index:number) => {
-              return  <List key={index}>
+              return  <List key={index} onClick={() => handleLinkNav(el.linkName)}>
                         <LinkRouter footer to={el.route}>
                           {el.name}
                         </LinkRouter>
@@ -71,7 +89,7 @@ const Footer = () => {
 
         <Ul lowerFooter>
           {
-            lowerFooterArr.map((el:IupperFooter,index:number) => {
+            lowerFooterArr.map((el:IlowerFooter,index:number) => {
               return  <List key={index}>
                         <LinkRouter footer to={el.route}>
                           {el.name}
