@@ -13,15 +13,7 @@
 .bg {
 	background:  #fff !important;
 }
-.slick-prev {
-	left:-7%;
-	color:#ccc;
-	height:70px;
-	width: 70px;
-	transition: all .3s;
-	border-radius: 50%;
-	
-}
+
 
 .slick-prev:hover {
 	color:#eee;
@@ -38,20 +30,28 @@
 }
 
 .slick-next{
-	right:-7%;
-	/* background: yellow; */
+	right:-4%;
 	color:#ccc;
-	height:70px;
-	width: 70px;
+	height:50px;
+	width: 50px;
 	transition: all .3s;
 	border-radius: 50%;
 }
 
-/* .slick-next::before{
-	right:0%;
+.slick-prev {
+	z-index: 99999;
+	left:-4%;
+	color:#ccc;
+	height:50px;
+	width: 50px;
+	transition: all .3s;
+	border-radius: 50%;
 }
 
-.slick-prev::before{
-	left:-100%;
-} */
+@media screen and (max-width: 1024px) {
+	.slick-prev,
+	.slick-next {
+		top: 30rem;
+	}
+}
 

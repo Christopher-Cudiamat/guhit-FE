@@ -23,7 +23,7 @@ export const Div = styled.div<IHomeBannerTypes>`
   @media ${props => props.theme.media.laptop} { 
     padding-left: 0rem;
     padding-right: 0rem;
-    padding-bottom: 10rem;
+    /* padding-bottom: 10rem; */
   }
 
   ${({banner}) => banner &&
@@ -43,7 +43,7 @@ export const Div = styled.div<IHomeBannerTypes>`
       & div:first-child {
         width:100%;
         @media ${props => props.theme.media.laptop} { 
-          width:55%;
+          width:50%;
         }
   
         & h1:nth-child(1),
@@ -78,10 +78,23 @@ export const Div = styled.div<IHomeBannerTypes>`
         }
 
       }
-
+ 
       & img {
         margin: auto;
         margin-top: 3rem;
+        margin-right: 1rem;
+        width:90%;
+        height: auto;
+        @media ${props => props.theme.media.laptop} { 
+          width:45%;
+        }
+      }
+
+      & button {
+        width: 50%; 
+        @media ${props => props.theme.media.laptop} { 
+          width: 30rem;
+        }
       }
     `
   };

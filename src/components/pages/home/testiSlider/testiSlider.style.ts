@@ -25,7 +25,6 @@ export const Div = styled.div<IReactionsTypes>`
       & h2{
         @media ${props => props.theme.media.tablet} { 
           margin-left: 2rem;
-          /* padding: 2rem 5rem 5rem 5rem; */
         }
       }
     `
@@ -40,7 +39,6 @@ export const Div = styled.div<IReactionsTypes>`
         align-items: center;
         justify-content: space-around;
       }
-
 
       & div:first-child {
         @media ${props => props.theme.media.tablet} { 
@@ -99,7 +97,5 @@ export const Div = styled.div<IReactionsTypes>`
       }
     `
   };
- 
-  
-  
+
 `

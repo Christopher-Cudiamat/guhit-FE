@@ -3,7 +3,7 @@ import Slider from "react-slick";
 
 import { TitleMain} from '../../../../styleComponents/ui/title.syle';
 import Button from '../../../../styleComponents/ui/button.style';
-import banner1 from "../../../../images/main-banner-image-1.png";
+import banner1 from "../../../../images/testing.png";
 import { Div } from "./homeBanner.style";
 import './homeBanner.css';
 
@@ -33,7 +33,7 @@ const HomeBanner = (props:any) => {
               </p>
               <Button 
                 onClick={e => handleButtons("comicsLink")}
-                whiteOutline>
+                secondary>
                 Read now
               </Button>
             </div>

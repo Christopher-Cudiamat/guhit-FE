@@ -22,10 +22,9 @@ const TestiSlider = (props:any) => {
     slidesToScroll: 1,
     arrows:true,
     speed: 500,
-    // adaptiveHeight: true,
-   
+    adaptiveHeight: true,
+    prevArrow: <icon.prevArrow fontSize={"8rem"}/>,
     nextArrow: <icon.nextArrow fontSize={"8rem"}/>,
-    prevArrow: <icon.prevArrow fontSize={"8rem"}/>
   };
 
   return (

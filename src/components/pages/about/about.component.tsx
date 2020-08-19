@@ -165,7 +165,6 @@ const About = (props:any) => {
                             <h2>{el.nickName}</h2>
                             <p>{el.name}</p>
                             <p>{el.position}</p>
-                            {/* <p>{el.motto}</p> */}
                           </div>;
 
             return render
@@ -192,17 +191,21 @@ const About = (props:any) => {
           </div>
         </Slider>
       </Div>
-
+      
+      {/* 
       <Div dropdown>
         <label>Jump to:</label>
 
+        {/* 
+        Note - this feature will be used in the future. Dont delete
         <select id="cars">
           <option value="history">History</option>
           <option value="mission">Mision & Vision</option>
           <option value="team">Guhit Team</option>
           <option value="media">Media</option>
-        </select>
+        </select> 
       </Div>
+       */}``
       
     </div>
   );
