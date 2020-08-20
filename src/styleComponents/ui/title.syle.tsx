@@ -20,7 +20,7 @@ export const TitleSection = styled.h2<ITitleTypes>`
   color: ${props => props.theme.color.blackLight};
   font-size:  2.8rem;
   margin-bottom: ${props => props.marginBottom ? props.marginBottom : "2rem"}; 
-  font-weight:  ${props => props.fontWeight ? props.fontWeight : "500"}; 
+  font-weight:  ${props => props.fontWeight ? props.fontWeight : "bold"}; 
 `
 
 export const TitleMain = styled.h1<ITitleTypes>`

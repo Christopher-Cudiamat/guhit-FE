@@ -53,7 +53,7 @@ const Drawer = (props:any) => {
             <DivLink 
               linkColor={navData.data.eventsLink} 
               onClick={() => handleClickLink("eventsLink")}>
-              <p>News and Events</p>
+              <p>Events</p>
               <icon.rightArrow 
                 size={22} 
                 color={navData.data.eventsLink ? "#08E5BE" : "FFF"}/>

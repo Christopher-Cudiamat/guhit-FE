@@ -100,6 +100,7 @@ export const Ul = styled.ul<IUlTypes>`
       & li::before {
         @media ${props => props.theme.media.tablet} { 
           content: "-";
+          opacity: 0.3;
           margin:0rem 2rem 0rem 2rem;
           font-size: 1.4rem;
         }

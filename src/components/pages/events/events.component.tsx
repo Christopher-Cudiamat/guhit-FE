@@ -1,43 +1,77 @@
-import React from 'react';
-import {Div} from "./events.style";
+import React, { useState, useEffect } from 'react';
+import {Div, InfoBox} from "./events.style";
 import { TitleSection } from '../../../styleComponents/ui/title.syle';
-// import { MdSettingsCell } from 'react-icons/md';
-// import { MdLocalPostOffice } from 'react-icons/md';
-// import { MdPlace } from 'react-icons/md';
-
-// import award1 from '../../../images/about/award3.jpg';
-// import award2 from '../../../images/about/award2.jpg';
-// import award3 from '../../../images/about/award1.jpg';
-import award4 from '../../../images/about/award4.png';
+import {eventsArr} from './events.json'
+import Button from '../../../styleComponents/ui/button.style';
+import { Select } from '../../../styleComponents/ui/select.style';
 
 
-const newsEventsArr = [
+const Events = () => {
+
+  const [linkIndex, setLinkIndex] = useState<number | null>(null);
+  const [filteredData, setFilteredData]= useState(eventsArr);
   
-  {image: award4},
-  {image: award4},
-  {image: award4},
-  {image: award4},
- 
-]
+  useEffect(() => {
+    
+    return () => {
+      setFilteredData(eventsArr.sort((a, b) => (Date.parse(a.date) < Date.parse(b.date)) ? -1 : 1));
+    };
+  }, []);
 
+  const handleToggleInfo = (index:number,status:string) => {
+    if(status === "show"){
+      setLinkIndex(index);
+    } else {
+      setLinkIndex(null);
+    }
+  };
 
-const Events = (props:any) => {
+  const handleFilterEvents = (value:any) => {
+    let newArr = filteredData;
+    if(value === "soon"){
+      newArr = eventsArr.sort((a, b) => (Date.parse(a.date) < Date.parse(b.date)) ? -1 : 1);
+    } else {
+      newArr = eventsArr.sort((a, b) => (Date.parse(a.date) > Date.parse(b.date)) ? -1 : 1);
+    }
+    setFilteredData(newArr);
+  };
+
   return (
     <>
-      <Div >
-      <TitleSection>
-        News & Events
-      </TitleSection>
-      {/* <p>
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Mollitia, itaque aliquid neque porro aperiam aut maxime iusto ipsa sed explicabo animi! Cum nesciunt, natus dolorum libero illo nam a hic?
-      </p>
-         */}
-      {
-        newsEventsArr.map((el,index) => {
-             return <div key={index}>
-                        <img src={el.image} alt="events posters"/> 
-                      </div>
-                    })
+      <Div>
+        <div>
+          <TitleSection>Events</TitleSection>
+          <Select onChange={(e:any) => handleFilterEvents(e.currentTarget.value)}>
+            <option value="soon">Events coming up sooner</option>
+            <option value="later">Events coming up later</option>
+          </Select>
+        </div>
+
+        {
+          filteredData.map((el,index) => 
+            <div key={index}>
+                <img src={el.image} alt="events posters"/> 
+                <InfoBox view={index === linkIndex ? true : false}>
+                  <h3>{el.title}</h3>
+                  <caption>{el.date}</caption>
+                  <p>{el.desc}</p>
+                </InfoBox>
+                {
+                  linkIndex === index ?
+                  <Button 
+                    noFill
+                    onClick={() => handleToggleInfo(index,"hide")}>
+                    Hide info
+                  </Button>
+                  :
+                  <Button 
+                    noFill
+                    onClick={() => handleToggleInfo(index,"show")}>
+                    More info
+                  </Button>
+                }
+            </div>
+          )
         } 
       </Div>
     </>

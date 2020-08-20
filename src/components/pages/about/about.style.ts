@@ -1,6 +1,6 @@
 import styled, {css} from "styled-components";
 
-interface IComicsTypes {
+interface IAboutTypes {
   history?:boolean,
   team?:boolean,
   banner?:boolean,
@@ -11,14 +11,16 @@ interface IComicsTypes {
 }
 
 
-export const Div = styled.div<IComicsTypes>`
-  /* padding: 3rem 2rem; */
- 
+export const Div = styled.div<IAboutTypes>`
+  padding: 5rem 2rem 5rem 2rem; 
 
+  & h2 {margin-bottom: 4rem;}
+ 
   ${({banner}) => banner && 
     css`
-      padding: 0rem;
+      padding: 0rem !important;
       margin-top: -1px;
+
      
       & p:first-child  {
         color: ${props => props.theme.color.white};
@@ -28,7 +30,6 @@ export const Div = styled.div<IComicsTypes>`
       }
       & p:last-child {
         color: ${props => props.theme.color.white};
-        padding: 0px 2rem;
         font-size: 2.4rem;
         line-height: 2.7rem;
       } 
@@ -59,7 +60,17 @@ export const Div = styled.div<IComicsTypes>`
       margin: auto;
       background: #eee;
 
+      & div {
+        @media ${props => props.theme.media.laptop} {
+          display:flex;
+          justify-content:space-evenly;
+          margin:auto;
+          max-width: 80rem;
+        }
+      }
+
       & p {
+        text-align:left;
         border: 1px solid #ccc;
         border-radius: 10px;
         font-size: 1.8rem;
@@ -69,10 +80,10 @@ export const Div = styled.div<IComicsTypes>`
         box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
         @media ${props => props.theme.media.laptop} {
           margin: auto; 
-          width:50rem;
+          width:30rem;
+          min-height: 17rem;
         }
       }
-     
   `}; 
 
   ${({team}) => team && 
@@ -92,7 +103,6 @@ export const Div = styled.div<IComicsTypes>`
         width:110rem;
       }
       
-
       & h2:first-child{
         @media ${props => props.theme.media.tablet} {
           width:100%;
@@ -117,8 +127,7 @@ export const Div = styled.div<IComicsTypes>`
           width:30%;
           border-bottom: none;
         }
-        
-
+      
           & p:first-child {
             height: 25rem;
             background: yellow;
@@ -131,7 +140,6 @@ export const Div = styled.div<IComicsTypes>`
             margin: auto;
             color: ${props => props.theme.color.grayDark};
             font-size: 2.4rem;
-            margin-bottom: 1rem;
             background:  ${props => props.theme.color.primary};
             padding: 1rem 4rem;
 
@@ -139,7 +147,6 @@ export const Div = styled.div<IComicsTypes>`
               width:fit-content;
 
             }
-            /* clip-path: polygon(80% 0, 100% 50%, 82% 100%, 0% 100%, 11% 51%, 0% 0%); */
           }
 
           & p:nth-child(3) {
@@ -150,13 +157,36 @@ export const Div = styled.div<IComicsTypes>`
           & p:nth-child(4) {
             color: ${props => props.theme.color.gray};
             font-size: 1.6rem;
-           
           }
+      }
+
+      & div:last-child {
+        border-bottom: none;
       }
      
   `};  
 
   
+  
+  ${({media}) => media && 
+    css`
+      text-align: center;
+      margin: auto;
+      padding: 3rem 0rem 6rem  0rem;
+      background: #eee;
+      
+          
+      & div:last-child{
+         background: #eee;
+      }
+     
+  `};     
+ 
+
+  
+  /* 
+  Note - this feature will be used in the future. Dont delete.
+
   ${({dropdown}) => dropdown && 
     css`
       overflow: hidden;
@@ -199,27 +229,8 @@ export const Div = styled.div<IComicsTypes>`
         }
       }
      
-  `};  
+  `};   */
 
-
-  
-  ${({media}) => media && 
-    css`
-      text-align: center;
-      margin: auto;
-      padding: 3rem 0rem 8rem  0rem;
-      background: #eee;
-      
-      & h2:first-child{
-        margin-bottom: 4rem;
-      }
-          
-      & div:last-child{
-         background: #eee;
-      }
-     
-  `};     
- 
 
 `
 

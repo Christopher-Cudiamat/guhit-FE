@@ -1,6 +1,5 @@
 import styled, {css} from "styled-components";
 
-
 interface IButtonTypes {
   primary?: boolean,
   secondary?: boolean,
@@ -14,6 +13,7 @@ interface IButtonTypes {
   height?: string,
   primaryOutline?: boolean,
   disabled?:boolean,
+  noFill?:boolean,
   
 }
 
@@ -129,8 +129,11 @@ ${({whiteOutline}) => whiteOutline &&
     `
   };
 
-
-  
+  ${({noFill}) => noFill &&
+    css`
+      color: ${props => props.theme.color.primaryLight};
+    `
+  };
 `
 
 export default Button;

@@ -14,7 +14,7 @@ export const Banner = styled.div<IBannerTypes>`
   height: ${props => props.height ? props.height : "100vh"};
   background: url(${props => props.bgImg});
   padding: 3rem 2rem;
-  width: 100%;
+  /* width: 100%; */
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
