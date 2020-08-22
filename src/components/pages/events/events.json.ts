@@ -1,10 +1,9 @@
+import moment from 'moment';
+
 import event1 from '../../../images/events/event-1.jpg';
 import event2 from '../../../images/events/event-2.png';
 import event3 from '../../../images/events/event-3.jpg';
 import event4 from '../../../images/events/event-4.jpg';
-import moment from 'moment';
-
-console.log(moment("12-25-1995", "MM-DD-YYYY").toString());
 
 export const eventsArr = [
   {

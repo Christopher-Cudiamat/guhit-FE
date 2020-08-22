@@ -1,59 +1,61 @@
 import styled from "styled-components";
-import map from '../../../images/contacts/map.jpg';
 
 
-interface IContactsTypes {
+export const Div = styled.div`
+  padding: 0rem 2rem;
+  @media ${props => props.theme.media.tablet} { 
+    display: flex;
+    justify-content: center;
+    margin-top: 3rem;
+  }
 
-}
+  & ul{
+    margin-top: 3rem;
+    @media ${props => props.theme.media.tablet} { 
+      margin-top: 4rem;
+      margin-right: 2rem;
+    }
 
-
-export const Div = styled.div<IContactsTypes>`
-
-  text-align: center;
-  margin: auto;
-
-
- & div{
-    height:80vh;
-    background: url(${map});
-    background-repeat: no-repeat;
-    background-position: center; 
-    background-size: cover;
-    position: relative;
-
-
-    & ul:last-child{
-      padding: 1rem 2rem 1rem  2rem ;
-      position: absolute;
-      bottom: 0%;
-      background:rgba(250,250,250, 0.9);
-      width: 100%;
-      text-align: left;
-      font-size: 1.6rem;
-      border-radius: 10px;
-
-      @media ${props => props.theme.media.laptop} { 
-        width: 50rem;
-        bottom: -19%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+    & li {
+      margin-bottom: 1.2rem;
+      display:flex;
+      align-items: center;
+      &:last-child {
+        margin-bottom: 2.5rem;
       }
+    }
 
-      & li:first-child {
-        padding-bottom: 1.5rem;
+    & li > h2 {
+      margin-bottom: 2rem;
+      font-size:2.8rem;
+    }
 
-        & h2 {
-          font-size:30px;
-        }
-      }
+    & li > svg {
+      color:${props => props.theme.color.primary};
+      font-size: 3rem;
+      margin-right: 1rem;
+    }
 
-      & * {
-        display: flex;
-        padding-bottom: .5rem;
+    & li a {
+      color:${props => props.theme.color.blackLight};
+      transition: .5 all;
+      font-size:1.8rem;
+      &:hover {
+        color:${props => props.theme.color.primary};
       }
     }
   }
 
+  & img{
+    @media ${props => props.theme.media.tablet} { 
+      width:45rem;
+      height: auto;
+    }
+    @media ${props => props.theme.media.laptop} { 
+      width:40rem;
+    }
+
+  }
 
 `
 

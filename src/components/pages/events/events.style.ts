@@ -100,7 +100,6 @@ export const InfoBox = styled.div<IEventsTypes>`
         color:${props => props.theme.color.white};
       }
     }
-  }
      
 ` 
 

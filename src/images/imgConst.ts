@@ -17,13 +17,18 @@ import {FaQuoteLeft} from 'react-icons/fa';
 import { FaGlobe } from 'react-icons/fa';
 import { FaPencilAlt } from 'react-icons/fa';
 import { FaDollarSign } from 'react-icons/fa';
-import { FaFacebookSquare } from 'react-icons/fa';
+import { FaFacebookSquare } from 'react-icons/fa'; 
 import { AiFillInstagram } from 'react-icons/ai';
 import { FaLinkedin } from 'react-icons/fa';
+import { MdSettingsCell } from 'react-icons/md';
+import { MdLocalPostOffice } from 'react-icons/md';
+import { MdPlace } from 'react-icons/md';
+
 
 import googlePlayBtn from './google.png';
 import appleBtn from './apple.png';
 import phoneImg from "./phone.png";
+import house from './contacts/house.jpg';
 
 
 export let icon =  {
@@ -46,10 +51,14 @@ export let icon =  {
   facebook: FaFacebookSquare,
   instagram: AiFillInstagram,
   linkedIn: FaLinkedin,
+  cellphone: MdSettingsCell,
+  map: MdPlace,
+  email: MdLocalPostOffice,
 }
 
 export let image =  {
   googlePlayBtn,
   appleBtn,
   phoneImg,
+  house,
 }
