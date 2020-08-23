@@ -1,26 +1,20 @@
 import React, {useState, useEffect } from 'react';
-import { LinkRouter } from '../../../styleComponents/ui/link.style';
-// import FacebookLogin from 'react-facebook-login';
-import GoogleLogin from 'react-google-login';
+import { signUpGoogle, signIn } from '../../../services/signUp';
+import { getProfile, postInitProfile } from '../../../services/profile';
+import { ScrollToTopOnMount } from '../../../utility/scrollToTopOnMount';
+import LoginForm from './loginForm/loginForm.component';
 import { useHistory, useLocation} from 'react-router-dom';
+import LoginSocialMedia from './loginSocialMedia/loginSocialMedia.component';
 
 import { Box } from '../../../styleComponents/ui/box.style';
-import { Input, InputField, Label } from '../../../styleComponents/ui/input.style';
 import { Form, Div, Container } from './login.style';
 import { TitleSection } from '../../../styleComponents/ui/title.syle';
-import Button from '../../../styleComponents/ui/button.style';
+import { LinkRouter } from '../../../styleComponents/ui/link.style';
 
-import { FaGooglePlus } from 'react-icons/fa';
-import { FaFacebook } from 'react-icons/fa';
+
 import loginImage from '../../../images/loginImage.png'
-import { signUpGoogle, signIn } from '../../../services/signUp';
-import { getProfile } from '../../../services/profile';
-import { ScrollToTopOnMount } from '../../../utility/scrollToTopOnMount';
 
 const Login = (props:any) => {
-
-  // let {setRegFacebook, setRegGoogle,setLogin} = props;
-  // const {goBackToProfile} = props.location.state;
 
   let {
     setCreatorProfile,
@@ -30,13 +24,15 @@ const Login = (props:any) => {
     setLogin,
     alert,
     removeAlert,
-    setRegGoogle,
+    setGoogleRegistration,
+
   } = props;
 
   
   const [showForm, setshowForm] = useState<boolean>(false); 
   let [email,setEmail] = useState<string>("");
   let [password,setPassword] = useState<string>("");
+  
   const history = useHistory();
   const location = useLocation();
   const continueToPublish = location.state;
@@ -47,7 +43,7 @@ const Login = (props:any) => {
 
   const handleLogin = (e:any) => {
     e.preventDefault()
- 
+
     const data = {email,password}   
     signIn(data)
       .then((res) =>{
@@ -83,9 +79,16 @@ const Login = (props:any) => {
   }
 
   const responseGoogle = (res:any) => {
-    // console.log("GOOGLE")
-    // console.log("REACTGOOGLE",res.accessToken);
-    // setRegGoogle(res.accessToken);
+    signUpGoogle(res.accessToken)
+      .then(res => {
+        setGoogleRegistration(res);
+        postInitProfile(res.token,res.email)
+          .then( res => {
+            setUserProfile(res);
+            history.push("./thankyoupage");
+          });
+      })
+    
   }
 
   return (
@@ -103,6 +106,8 @@ const Login = (props:any) => {
 
         <Form>
           <TitleSection>Login</TitleSection>
+
+          
           <Div loginOptions signUp>
             <p>Dont have an account?<span>
             <LinkRouter 
@@ -118,124 +123,25 @@ const Login = (props:any) => {
       
           { showForm ?
 
-          <>
-            <Input>
-              <InputField 
-                required 
-                onBlur={e => setEmail(e.target.value)}/>
-              <Label>Email</Label>
-            </Input>
-            <Input>
-              <InputField 
-                required 
-                onBlur={e => setPassword(e.target.value)}/>
-              <Label>Password</Label>
-            </Input>
-            
-            <Button
-              type="button"
-              onClick={handleLogin} 
-              secondary>
-              Login
-            </Button>
-            
-            <Div loginOptions>
-              <LinkRouter passRecLink to="password-recovery">Forgot your password?</LinkRouter>
-              <p onClick={handleToggleLogin}>or<span>Login</span> with Google or Facebook</p>
-            </Div>
-          </>
+            <LoginForm
+              setEmail={setEmail}
+              setPassword={setPassword} 
+              handleToggleLogin={handleToggleLogin}
+              handleLogin={handleLogin}/>
           :
-          <>
-            <Div socialContainer>
-              <Button loginFaceBook>
-                Continue with Facebook
-              </Button>
-              <FaFacebook
-                color={"white"}
-                size={"32px"} 
-                style={{position:"absolute", right:"7%", top:"12%"}}/>
-            </Div>
-
-
-            <GoogleLogin
-              clientId="37421698326-su5uk9dg2842l636g5s9ugvajtbh0k3o.apps.googleusercontent.com"
-              buttonText="Continue with Google"
-              onSuccess={responseGoogle}
-              onFailure={responseGoogle}
-              render={renderProps => (
-                <Div socialContainer>
-                  <Button 
-                    loginGoogle 
-                    onClick={renderProps.onClick } 
-                    disabled={renderProps.disabled}>
-                    Continue with Google
-                  </Button>
-                  <FaGooglePlus 
-                    color={"white"}
-                    size={"32px"} 
-                    style={{position:"absolute", right:"7%", top:"12%"}}/>
-                </Div>
-              )}
-            />
-        
-            <Div loginOptions>
-              <p onClick={handleToggleLogin}>or<span>Login</span>with account</p>
-            </Div>
-          </>
+            <LoginSocialMedia
+              handleToggleLogin={handleToggleLogin}
+              responseGoogle={responseGoogle}/>
+  
           }
         </Form>
       </Div>
       <img src={loginImage} alt="footer" />
     </Container>
+    
   );
 };
 
 export default Login;
 
 
-
-
-
-// <Div socialContainer>
-//               <Button loginFaceBook>
-//                 Continue with Facebook
-//               </Button>
-//               <FaFacebook
-//                 color={"white"}
-//                 size={"32px"} 
-//                 style={{position:"absolute", right:"10%", top:"12%"}}/>
-//             </Div>
-//             <Div socialContainer>
-//               <Button loginGoogle>
-//                 Continue with Google
-//               </Button>
-//               <FaGooglePlus  
-//                 color={"white"}
-//                 size={"32px"} 
-//                 style={{position:"absolute", right:"10%", top:"12%"}}/>
-//             </Div>
-
-
-
-
-{/* <FacebookLogin
-              appId="2504905576489719"
-              autoLoad={true}
-              textButton="Continue with Facebook"
-              fields="id, displayName, name, gender, photos"
-              callback={responseFacebook} */}
-              {/* // render={(renderProps: any) => ( */}
-              //   <Div socialContainer>
-              //     <Button 
-              //       loginFaceBook
-              //       onClick={renderProps.onClick } 
-              //       disabled={renderProps.disabled}>
-              //       Continue with Facebook
-              //     </Button>
-              //     <FaFacebook
-              //       color={"white"}
-              //       size={"32px"} 
-              //       style={{position:"absolute", right:"10%", top:"12%"}}/>
-              //   </Div>
-              // )}
-            // />

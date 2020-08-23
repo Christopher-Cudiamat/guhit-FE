@@ -202,6 +202,10 @@ export const Div = styled.div<IPublishTypes>`
   ${({publishOption}) => publishOption && 
     css`
       overflow-x: hidden;
+
+      & div {
+        width: 100%;
+      }
    
       & div > div {
         flex-direction: row;

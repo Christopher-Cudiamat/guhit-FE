@@ -13,7 +13,7 @@ import { AiOutlineMenu } from 'react-icons/ai';
 import { MdKeyboardArrowRight } from 'react-icons/md';
 import {IoIosArrowForward} from 'react-icons/io';
 import {IoIosArrowBack} from 'react-icons/io';
-import {FaQuoteLeft} from 'react-icons/fa';
+import {FaQuoteLeft} from 'react-icons/fa'; 
 import { FaGlobe } from 'react-icons/fa';
 import { FaPencilAlt } from 'react-icons/fa';
 import { FaDollarSign } from 'react-icons/fa';
@@ -23,6 +23,9 @@ import { FaLinkedin } from 'react-icons/fa';
 import { MdSettingsCell } from 'react-icons/md';
 import { MdLocalPostOffice } from 'react-icons/md';
 import { MdPlace } from 'react-icons/md';
+import { FaGooglePlus } from 'react-icons/fa';
+import { FaFacebook } from 'react-icons/fa';
+
 
 
 import googlePlayBtn from './google.png';
@@ -54,6 +57,8 @@ export let icon =  {
   cellphone: MdSettingsCell,
   map: MdPlace,
   email: MdLocalPostOffice,
+  googleIcon: FaGooglePlus,
+  facebookIcon: FaFacebook,
 }
 
 export let image =  {

@@ -5,6 +5,7 @@ import {
   LOGIN_SUCCESS,
   LOGOUT,
   IRegistrationParameter,
+  REGISTER_SUCCESS_GOOGLE,
 } from './registration.type';
 
 const initialState: IRegistrationParameter = {
@@ -23,7 +24,6 @@ export const registrationReducer = (state = initialState, action:any) => {
       localStorage.setItem('token', payload.newToken);
       return {
         ...state,
-        // ...payload,
         isAuthenticated: true,
         email: payload.email,
         token: payload.newToken
@@ -49,10 +49,16 @@ export const registrationReducer = (state = initialState, action:any) => {
         token: null,
         isAuthenticated: false,
       }
+    case  REGISTER_SUCCESS_GOOGLE:
+      console.log("GOOGLE PAYLOAD",payload);
+      return {
+        token: payload.token,
+        isAuthenticated: true,
+        email: payload.email,
+      }
     case  REGISTER_SUCCESS_FB:
-      console.log("FACEBOOK PAYLOAD",payload);
-    case  REGISTER_SUCCESS_FB:
-      console.log("GOOGLE PAYLOAD", payload);
+
+      break;
     default:
       return state;
   }

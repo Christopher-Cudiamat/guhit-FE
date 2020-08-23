@@ -10,6 +10,7 @@ import { signUpGoogle, signIn } from '../../../services/signUp';
 import { selectorsAlert } from '../../../store/alert/alert.selector';
 import { selectorsRegistration } from '../../../store/registration/registration.selector';
 import { selectorsProfile } from '../../../store/profile/profile.selectors';
+import * as registerAction from '../../../store/registration/registration.action';
 
 
 const mapStateToProps = (state:AppState) => {
@@ -32,6 +33,7 @@ const mapStateToDispatch = (dispatch: Dispatch) => {
     setLogin:(data:any) => dispatch(loginAction.setLogin(data)), 
     setUserProfile:(data:any) => dispatch(profileAction.setUserProfile(data)), 
     setCreatorProfile:(data:any) => dispatch(profileAction.setCreatorProfile(data)), 
+    setGoogleRegistration:(data:any) => dispatch(registerAction.setGoogleRegistration(data)), 
     
   }
 }

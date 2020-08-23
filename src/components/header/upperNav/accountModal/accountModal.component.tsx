@@ -18,7 +18,6 @@ const AccountModal = (props:any) => {
 
   let profileName = profile.userName.split("@")[0];
 
-
   const handleLogout = (name:string) => {
     logout();
     setModalValue();

@@ -35,18 +35,20 @@ const VerifyToken = (props:any) => {
 
     signUp(data)
     .then(res => {
-      console.log("RES",res);
-      console.log("RES TOKEN",res.newToken);
       setRegistration(res);
       postInitProfile(res.newToken,res.email)
       .then( res => {
         setUserProfile(res);
       });
+
+        //WILL USE THIS WHEN THE USER REGISTER COMING FROM CLICKING PUBLISH
         // if(continueToPublish){
         //   history.push('/publish-creator-info');
         // }else{
-          // history.push("./thankyoupage");
-      // }
+        //   history.push("./thankyoupage");
+        // }
+
+        history.push("./thankyoupage");
 
     })
     .catch(err => {

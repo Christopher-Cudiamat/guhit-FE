@@ -50,11 +50,8 @@ const SignUp = (props:any) => {
       setAlert("Please insert a correct Email", "danger");
     } else {
       const data = {email, password};
-      console.log("DATA",email);
       emailVerify(data)
         .then(res => {
-          console.log("RES",res);
-          console.log("EMAIL VER", res);
           if(res){    
             history.push({
               pathname:'./email-verification-code',
@@ -121,25 +118,3 @@ const SignUp = (props:any) => {
 };
 
 export default SignUp;
-
-// const data = {email, password};
-//       emailVerify(data)
-//         .then(res => {
-//           if(res){    
-//             setRegistration(res);
-//             postInitProfile(res.token,email)
-//             // getProfile(res.token)
-//               .then( res => {
-//                 console.log("GET PROFILE RESPONSE",res);
-//                 setUserProfile(res);
-//               });
-//               if(continueToPublish){
-//                 history.push('/publish-creator-info');
-//               }else{
-//                 history.push("./thankyoupage");
-//               }
-
-//           } else {
-//             history.push("./errorpage");
-//           } 
-//       })   
