@@ -1,5 +1,5 @@
 import React, {useState, useEffect } from 'react';
-import { signUpGoogle, signIn } from '../../../services/signUp';
+import { signUpGoogle, signIn, signUpFacebook } from '../../../services/signUp';
 import { getProfile, postInitProfile } from '../../../services/profile';
 import { ScrollToTopOnMount } from '../../../utility/scrollToTopOnMount';
 import LoginForm from './loginForm/loginForm.component';
@@ -25,7 +25,7 @@ const Login = (props:any) => {
     alert,
     removeAlert,
     setGoogleRegistration,
-
+    setFaceBookRegistration
   } = props;
 
   
@@ -74,12 +74,24 @@ const Login = (props:any) => {
   };
 
   const responseFacebook = (res:any) => {
-    // console.log("REACT",res.accessToken);
-    // setRegFacebook(res.accessToken)
+    
+    if(res.accessToken){
+      signUpFacebook(res.accessToken)
+      .then(res => {
+        setFaceBookRegistration(res);
+        postInitProfile(res.token,res.email)
+          .then( res => {
+            setUserProfile(res);
+            history.push("./thankyoupage");
+          });
+      })
+    }
+   
   }
 
   const responseGoogle = (res:any) => {
-    signUpGoogle(res.accessToken)
+    if(res.accessToken){
+      signUpGoogle(res.accessToken)
       .then(res => {
         setGoogleRegistration(res);
         postInitProfile(res.token,res.email)
@@ -88,7 +100,7 @@ const Login = (props:any) => {
             history.push("./thankyoupage");
           });
       })
-    
+    }
   }
 
   return (
@@ -131,7 +143,8 @@ const Login = (props:any) => {
           :
             <LoginSocialMedia
               handleToggleLogin={handleToggleLogin}
-              responseGoogle={responseGoogle}/>
+              responseGoogle={responseGoogle}
+              responseFacebook={responseFacebook}/>
   
           }
         </Form>

@@ -1,17 +1,16 @@
 import React, { useState, useEffect} from 'react';
+import { useHistory, useLocation } from 'react-router-dom';
+import {emailVerify} from '../../../services/signUp';
+import { isMail, isLengthCorrect, isRequired } from '../../../utility/validator';
+
 import { Input, InputField, Label } from '../../../styleComponents/ui/input.style';
 import { Form, Div, Container } from './signUp.style';
 import { TitleSection } from '../../../styleComponents/ui/title.syle';
 import Button from '../../../styleComponents/ui/button.style';
-import loginImage from '../../../images/loginImage.png'
 import { LinkRouter } from '../../../styleComponents/ui/link.style';
-import {emailVerify} from '../../../services/signUp';
-import { isMail, isLengthCorrect, isRequired } from '../../../utility/validator';
 import { Box } from '../../../styleComponents/ui/box.style';
-import { useHistory, useLocation } from 'react-router-dom';
 
-
-import EmailVerificationModal from '../../globalModals/emailVerificationModal/emailVerificationModal.component';
+import loginImage from '../../../images/loginImage.png'
 
 
 const SignUp = (props:any) => {
@@ -19,7 +18,8 @@ const SignUp = (props:any) => {
   let {
     setAlert,
     alert,
-    removeAlert} = props;
+    removeAlert
+  } = props;
  
   const history = useHistory();
   const location = useLocation();
@@ -28,8 +28,6 @@ const SignUp = (props:any) => {
   let [email,setEmail] = useState<string>("");
   let [password,setPassword] = useState<string>("");
   const [showForm, setshowForm] = useState<boolean>(false);
-
-  console.log("EMAIL TEST",email);
 
 
   useEffect(() => {  
@@ -62,7 +60,7 @@ const SignUp = (props:any) => {
           } 
       })
       .catch(err => {
-        setAlert("Email already in use.", "danger");
+        if(err) setAlert("Email already in use.", "danger");
       })   
     }
   }

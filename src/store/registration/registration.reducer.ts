@@ -57,7 +57,12 @@ export const registrationReducer = (state = initialState, action:any) => {
         email: payload.email,
       }
     case  REGISTER_SUCCESS_FB:
-
+      console.log("FACEBOOK PAYLOAD",payload);
+      return {
+        token: payload.token,
+        isAuthenticated: true,
+        email: payload.email,
+      }
       break;
     default:
       return state;

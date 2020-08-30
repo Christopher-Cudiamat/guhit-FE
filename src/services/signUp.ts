@@ -56,16 +56,29 @@ export const signIn = async (data:IAuth) => {
 
 
 
-export const signUpFacebook = async (accessToken:any) => {
+export const signUpFacebook = async (accessToken:string) => {
 
-  let url = "/api/users/oauth/facebook";
-  let body = {
-    accessToken
+  try {
+    const config = {
+      headers:{
+        'Content-Type': 'application/json'
+      },
+      
+    }
+  
+    let url = "/api/users/oauth/facebook";
+
+    let body = {
+      access_token:accessToken,
+    }
+    
+    const res = await instancePost.post(url,body,config);
+
+    return res.data;
+  } catch (error) {
+
+    console.log(error);
   }
-
-  const res = await instancePost.post(url,body);
-  console.log("FB REG RESPONSE", res);
-  return res.data;
 };
 
 
@@ -86,12 +99,8 @@ export const signUpGoogle = async (accessToken:any) => {
       access_token:accessToken
     }
   
-    // let body = {
-    //   access_token:"ya29.a0Ae4lvC2fGOEDpyLzQntVJZFy6ivNVCDPwi5PpDPAKfJjeMxQouVx_9IHAT6sd7iuaVLR0X4nyAgC6Vm88OpFmwDZtn2HygDUunXdKEu5RIf8cAyiHEbpIJMiq0nOMLj5B7QhN19AsBqrcxskxdTYuVpcVDQwhDgbmJU"
-    // }
-  
     const res = await instancePost.post(url,body,config);
-    console.log("GOOGLE REG RESPONSE", res);
+ 
     return res.data;
   } catch (error) {
     console.log(error);

@@ -44,4 +44,11 @@ import {
     }
   }
 
+  export const setFaceBookRegistration= (data:any): IRegistrationAction => {
+    return {
+      type:  REGISTER_SUCCESS_FB,
+      payload: data,
+    }
+  }
+
 

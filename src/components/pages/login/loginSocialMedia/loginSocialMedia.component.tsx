@@ -1,27 +1,48 @@
 import React from 'react';
 import GoogleLogin from 'react-google-login';
-// import FacebookLogin from 'react-facebook-login';
+import FacebookLogin from 'react-facebook-login';
 import { icon } from '../../.././../images/imgConst';
 
 import { Div } from './loginSocialMedia.style';
 import Button from '../../../../styleComponents/ui/button.style';
 
 
-const LoginSocialMedia = (props:any) => {
+// import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
 
-  let {handleToggleLogin, responseGoogle} = props;
+
+const LoginSocialMedia = (props:any) => {
+  
+
+  let {
+    handleToggleLogin,
+     responseGoogle,
+     responseFacebook} = props;
   
   return (
     <>
-      <Div socialContainer>
-        <Button loginFaceBook>
-          Continue with Facebook
-        </Button>
-        <icon.facebookIcon
-          color={"white"}
-          size={"32px"} 
-          style={{position:"absolute", right:"5%", top:"12%"}}/>
-      </Div>
+
+      <FacebookLogin
+      appId="2504905576489719"
+      fields="name,email,picture"
+      callback={responseFacebook}
+
+      // To solve why render property is not working
+      
+      // render={(renderProps:any) => (
+      //   <Div socialContainer>
+      //     <Button 
+      //       loginFaceBook 
+      //       onClick={renderProps.onClick } 
+      //       disabled={renderProps.disabled}>
+      //       Continue with Facebook
+      //     </Button>
+      //     <icon.facebookIcon
+      //       color={"white"}
+      //       size={"32px"} 
+      //       style={{position:"absolute", right:"5%", top:"12%"}}/>
+      //   </Div>
+      // )}
+      /> 
 
 
       <GoogleLogin
@@ -33,8 +54,8 @@ const LoginSocialMedia = (props:any) => {
           <Div socialContainer>
             <Button 
               loginGoogle 
-              onClick={renderProps.onClick } 
-              disabled={renderProps.disabled}>
+              onClick={renderProps.onClick} 
+             >
               Continue with Google
             </Button>
             <icon.googleIcon 

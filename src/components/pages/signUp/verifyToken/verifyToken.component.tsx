@@ -1,26 +1,25 @@
 import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router';
+import { signUp } from '../../../../services/signUp';
+import { postInitProfile } from '../../../../services/profile';
+import { useHistory } from 'react-router-dom';
+
 import Button from '../../../../styleComponents/ui/button.style';
 import { Input, InputField, Label } from '../../../../styleComponents/ui/input.style';
 import { Box } from '../../../../styleComponents/ui/box.style';
 import { Form } from './verifyToken.style';
 import { TitleSection } from '../../../../styleComponents/ui/title.syle';
-import { useLocation } from 'react-router';
-import { signUp } from '../../../../services/signUp';
-import { postInitProfile } from '../../../../services/profile';
-import { useHistory } from 'react-router-dom';
 import { Div } from './verifyToken.style';
 
 const VerifyToken = (props:any) => {
 
   const {alert,setAlert,removeAlert,setRegistration,setUserProfile} = props;
   
-
   const [verificationCode, setVerificationCode] = useState<string>("");
   const history = useHistory();
   const location = useLocation<{token?:string}>();
   const token = location.state.token; 
-
-  console.log("Old Token", token);
+  const continueToPublish = location.state;
 
   useEffect(() => {  
     removeAlert();
@@ -41,15 +40,11 @@ const VerifyToken = (props:any) => {
         setUserProfile(res);
       });
 
-        //WILL USE THIS WHEN THE USER REGISTER COMING FROM CLICKING PUBLISH
-        // if(continueToPublish){
-        //   history.push('/publish-creator-info');
-        // }else{
-        //   history.push("./thankyoupage");
-        // }
-
-        history.push("./thankyoupage");
-
+        if(continueToPublish){
+          history.push('/publish-creator-info');
+        }else{
+          history.push("./thankyoupage");
+        }
     })
     .catch(err => {
       setAlert("Invalid verification code.");

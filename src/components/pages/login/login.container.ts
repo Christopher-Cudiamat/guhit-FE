@@ -34,6 +34,7 @@ const mapStateToDispatch = (dispatch: Dispatch) => {
     setUserProfile:(data:any) => dispatch(profileAction.setUserProfile(data)), 
     setCreatorProfile:(data:any) => dispatch(profileAction.setCreatorProfile(data)), 
     setGoogleRegistration:(data:any) => dispatch(registerAction.setGoogleRegistration(data)), 
+    setFaceBookRegistration:(data:any) => dispatch(registerAction.setFaceBookRegistration(data))
     
   }
 }
