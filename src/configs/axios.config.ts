@@ -1,11 +1,6 @@
 import axios from 'axios';
 import store from "./store.config";
 import {setIsLoading} from "../store/loader/loader.action";
-// export const instance = axios.create({
-//   baseURL: 'https://guhit-app.firebaseio.com/',
-// });
-// import {BASEURL} from "./url.const";
-
 
 
 export const instanceGet = axios.create({

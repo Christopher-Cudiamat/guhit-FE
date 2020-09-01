@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import FilterNav from '../filterNav/filterNav.component';
+import PaginationController from '../paginationController/paginationController.component';
+import { getCreatorsList, getCreator } from '../../../services/creators';
+import { useHistory } from 'react-router-dom';
+
 import Card from '../../../styleComponents/ui/card.style';
-import creatorThumb1 from "../../../images/user/avatar/avatar-1.png";
-// import creatorThumb2 from "../../images/user/avatar/avatar-2.png";
-// import creatorThumb3 from "../../images/user/avatar/avatar-3.png";
 import { TitleSection } from '../../../styleComponents/ui/title.syle';
-import { Div, Captions} from './creator.style';
+import { Div, Captions, Info} from './creator.style';
 import { Input, InputField, Label } from '../../../styleComponents/ui/input.style';
+
 
 
 
@@ -14,57 +16,31 @@ import { Input, InputField, Label } from '../../../styleComponents/ui/input.styl
 const Creator = (props:any) => {
 
   const [names, setNames] = useState(false);
+  const [rowPerPage, setRowPerPage] = useState(3);
+  const [page, setPage] = useState(0);
+  let [creatorsArr,setCreatorsArr] = useState([]);
+  const history = useHistory();
 
-  const creatorsArr = [
-    {
-      image: {creatorThumb1}, 
-      userName: "Kaloy_Pogi", 
-      series: ["Black Pink", "Twice","Bts", "Crash Landing to You"],
-    },
-    {
-      image: {creatorThumb1}, 
-      userName: "Rejik_Pacute", 
-      series: ["Black Pink", "Twice","Bts", "Crash Landing to You"],
-    },
-    {
-      image: {creatorThumb1}, 
-      userName: "Liq182", 
-      series: ["Crash Landing to You", "Twice","Bts", "Crash Landing to You"],
-    },
-    {
-      image: {creatorThumb1}, 
-      userName: "-MOnsi-", 
-      series: ["Bts", "Twice","Bts", "Crash Landing to You"],
-    },
-    {
-      image: {creatorThumb1}, 
-      userName: "Kaloy_Pogi", 
-      series: ["Black Pink", "Twice","Bts", "Crash Landing to You"],
-    },
-    {
-      image: {creatorThumb1}, 
-      userName: "Kaloy_Pogi", 
-      series: ["Black Pink", "Twice","Bts", "Crash Landing to You"],
-    },
-    {
-      image: {creatorThumb1}, 
-      userName: "Kaloy_Pogi", 
-      series: ["Black Pink", "Twice","Bts", "Crash Landing to You"],
-    },
-    {
-      image: {creatorThumb1}, 
-      userName: "Kaloy_Pogi", 
-      series: ["Black Pink", "Twice","Bts", "Crash Landing to You"],
-    },
-    {
-      image: {creatorThumb1}, 
-      userName: "Kaloy_Pogi", 
-      series: ["Black Pink", "Twice","Bts", "Crash Landing to You"],
-    },
-   
-  ];
+  console.log("PARAMS", creatorsArr);
 
-  
+  useEffect(() => {
+    getCreatorsList()
+      .then(res => setCreatorsArr(res));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const updateToggle = (val: boolean) => {
+    setNames(val);
+  }
+
+  const handleGoToCreatorPage = (creatorId:string) => {
+    history.push({
+      pathname:`/?creatorId=${creatorId}/creator`,
+      state:  {creatorId: creatorId}
+    });
+      
+  }
+
   const navList = [
     { title: 'Popular' },
     { title: 'Name' },
@@ -74,23 +50,12 @@ const Creator = (props:any) => {
     { title: 'All', last: true },
   ];
 
-  const updateToggle = (val: boolean) => {
-    setNames(val);
-  }
-
-
-  // let handleNameSelect = () => {  
-  //   setNames(true);
-  // };
-
-
   return (
-    <div>
+    <>
+    <FilterNav  arr={navList} onToggle={updateToggle} style={{marginBottom: "10rem"}}/>
+      <Div container>
 
-      <FilterNav  arr={navList} onToggle={updateToggle} style={{marginBottom: "10rem"}}/>
-
-     { names ?
-       
+        { names ?
           <Div inputBox>
             <p>Search by name:</p>
             <Input>
@@ -98,40 +63,47 @@ const Creator = (props:any) => {
               <Label>Creator's name...</Label>
             </Input>
           </Div>: null
-    
-      } 
+        } 
 
-      <Div info>
-        <TitleSection>Creators</TitleSection>
+        <Info hideShadow={creatorsArr.length < 1}>
+          <TitleSection>Creators</TitleSection>
+          <p>Results: {creatorsArr.length}</p>
+        </Info>
+        
+        <Div comicsList>
+          <Div cardContainer>
+            { 
+              creatorsArr.length > 0  ?
+                  creatorsArr.map((el:never|any,index:number) => 
+                    <Card 
+                    horizontal 
+                    key={index} 
+                    onClick={() => handleGoToCreatorPage(el._id)}>
+                      <img src={el.profilePic} alt="featured comics"/>
+                      <Captions>
+                        <p>{el.displayName}</p>
+                        <p>Joined: {el.joinedDate}</p>
+                        <p>Series: {el.seriesMade.length}</p>
+                      </Captions>
+                    </Card>
+                )
+              :
+                <Div noResult>
+                  <h3>No Results Found</h3>
+                </Div>
+            } 
+          </Div>
+          
+          { creatorsArr.length > 1  ?
+            <PaginationController
+              setPage={setPage}
+              setRowPerPage={setRowPerPage}
+              rowPerPage={rowPerPage}/>
+            : null
+          }
+        </Div> 
       </Div>
-      
-      <Div comicsList>
-          <Card containerCenter>
-            { creatorsArr.map((el,index) => {
-              
-               return   <Card container horizontal key={index}>
-                          <img src={el.image.creatorThumb1} alt="featured comics"/>
-                          <Captions>
-                          <p>{el.userName}</p>
-                          <p>Series:</p>
-                          <ul>
-                            {
-                              el.series.map((el,index) => {
-                                let text = `${el}...`;
-                                if(index < 1){
-                                  return<li key={index}>{text}</li>
-                                }
-                              })
-                            }
-                          </ul>
-                          </Captions>
-                        </Card>
-                        
-              })
-            }
-          </Card>
-      </Div>
-    </div>
+    </>
   );
 };
 

@@ -2,9 +2,11 @@ import React from 'react';
 import {
   Switch,
   Route,
+  Redirect
 } from "react-router-dom";
 
 import Creators from './creators/creators.component';
+import CreatorPage from './creators/creatorPage/creatorPage.component';
 import Novels from './novels/novels.component';
 import ErrorPage from './errorPage/errorPage.component';
 import ThankYouPage from './thankYouPage/thankYouPage.component';
@@ -37,6 +39,8 @@ const Pages = (props:any) => {
 
   let {modalData, setModalValue,loader} = props;
 
+ 
+
   const handleCloseOverlay =  () => {
     setModalValue();
   };
@@ -54,9 +58,11 @@ const Pages = (props:any) => {
       }
 
         <Switch>
-          <Route exact path="/">
+          
+          <Route exact path="/home">
             <Home />
           </Route>
+         
           <Route exact path="/comics">
             <Comics />
           </Route>
@@ -84,6 +90,9 @@ const Pages = (props:any) => {
           </Route>
           <Route exact path="/creators">
             <Creators />
+          </Route>
+          <Route exact path="/:id/creator" >
+            <CreatorPage />
           </Route>
           {/* <Route exact path="/creator-account">
             <CreatorAccount />
@@ -128,6 +137,10 @@ const Pages = (props:any) => {
             path="/creator-account"
             component={CreatorAccount}
           />;
+
+          <Route path="/">
+            <Redirect to="/home" />
+          </Route>
            
           <Route exact path="*">
             <ErrorPage />

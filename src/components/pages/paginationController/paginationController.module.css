@@ -1,0 +1,32 @@
+.container{
+  display: flex;
+  padding: 3rem 0rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.active {
+  color: #0ACCA9;
+  font-weight: 500;
+}
+
+.li {
+  padding: 0rem 1rem;
+}
+
+.prev,
+.next {
+  color: #fff;
+  background: #F0B110;
+  padding: .5rem;
+  border-radius: .2rem;
+}
+
+.next {
+  margin-left: 1rem;
+}
+
+
+.prev {
+  margin-right: 1rem;
+}

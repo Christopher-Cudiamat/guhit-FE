@@ -1,6 +1,8 @@
 import styled, {css} from "styled-components";
 
 interface ICreatorType {
+  container?:boolean,
+  cardContainer?:boolean,
   comicsList?:boolean,
   genre?:boolean,
   genres?:boolean,
@@ -9,7 +11,24 @@ interface ICreatorType {
   name?:boolean,
   searchNameBox?:boolean,
   inputBox?: boolean,
+  noResult?: boolean,
+  hideShadow?: boolean,
 }
+
+
+export const Info = styled.div<ICreatorType>`
+  padding: 4rem 2rem;
+  box-shadow: ${props => props.hideShadow ? "0 0px 0px rgba(0, 0, 0, 0)" : "0 2px 3px rgba(182, 182, 182, 0.35)"};
+  margin-bottom: 0rem;
+
+  @media ${props => props.theme.media.laptop} { 
+    box-shadow: 0 0px 0px rgba(0, 0, 0, 0);
+  }
+
+  & p:last-child {
+    color: ${props => props.theme.color.gray};
+  }
+`
 
 export const Captions = styled.div<ICreatorType>`
   justify-content: space-between;
@@ -18,27 +37,50 @@ export const Captions = styled.div<ICreatorType>`
   font-size: 1.4rem;
   color:  ${props => props.theme.color.gray};
 
+  & p:nth-child(2) {
+    margin-bottom: .5rem;
+  }
 `
 
 export const Div = styled.div<ICreatorType>`
-position: relative;
-  /* padding-left: 2rem;
-  padding-right: 2rem; */
+  position: relative;
+  margin-bottom: 5rem;
 
+  ${({container}) => container && 
+    css`
+     @media ${props => props.theme.media.laptop} { 
+      max-width: 80rem;
+      margin: auto;
+    }
+  `}; 
+
+  ${({cardContainer}) => cardContainer &&
+    css`  
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-evenly;
+    `
+  };
 
   ${({comicsList}) => comicsList && 
     css`
-      text-align: center;
-      display:flex;
-      margin: auto;
-      margin-top: 1rem;
-      margin-bottom: 4rem;
+      
+     
+  `}; 
+  
+
+  ${({noResult}) => noResult && 
+    css`
+    margin-top: 15rem;
+    margin-bottom: 20rem;
+    & h3 {
+      color:  ${props => props.theme.color.gray};
+    }
      
   `}; 
 
   ${({searchNameBox}) => searchNameBox && 
     css`
-      /* text-align: center; */
       position:absolute;
       right:0%;
       top:0%;
@@ -60,45 +102,15 @@ position: relative;
       padding: 2rem 2rem;
       background: ${props =>  props.theme.color.white}; 
       & p:first-child{
-
         color: ${props =>  props.theme.primary}; 
         font-size: 1.4rem;
         margin-bottom: .5rem;
       }   
   `}; 
 
-  ${({info}) => info && 
-    css`
-      margin-top: 4rem;
-      padding: 0rem 2rem;
-     
-  `}; 
 `
-
-
-export const Ul = styled.ul<ICreatorType>`
-  padding-top: 2rem;
-  padding-bottom: 2rem;
-  ${({name}) => name && 
-    css`
-      background:#eee;
-      width: 100%;
-     
-     
-  `}; 
-`
-
-export const List = styled.li<ICreatorType>`
-
-      padding: 1rem .5rem;
-      width: 30%;
-      font-size: ${props => props.active ? "1.6rem" : "1.4rem"};
-      font-weight: ${props => props.active ? "500" : "400"};
-      color: ${props => props.active ? props.theme.color.black : props.theme.color.grayLight};
-
-  `; 
 
 
       
-// color: ${props => props.acti ? props.theme.color.primaryLight : props.theme.color.primary};
+
 

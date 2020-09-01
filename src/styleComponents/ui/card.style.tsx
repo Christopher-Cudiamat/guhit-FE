@@ -31,7 +31,7 @@ const Card = styled.div<ICardTypes>`
     css`  
       display: flex;
       flex-wrap: wrap;
-      justify-content: space-between
+      justify-content: space-between;
     `
   };  
   
@@ -138,24 +138,45 @@ ${({grid}) => grid &&
 
   ${({horizontal}) => horizontal &&
     css`  
-
+      cursor:pointer;
       text-align: left;
       display: flex;
       width: 100%;
       padding: 2rem 2rem;
-      box-shadow: 0 2px 3px rgba(182, 182, 182, 0.75);
+      box-shadow: 0 2px 3px rgba(182, 182, 182, 0.35);
+
+      @media ${props => props.theme.media.laptop} { 
+        box-shadow: 0 0px 0px rgba(0, 0, 0, 0);
+        width: 25%;
+        border-radius: 2rem;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 3rem 1rem;
+        transition: all .3s;
+        &:hover {
+          border: solid 1px #ccc;
+          width: 30%;
+        }
+      }
+      
       & img:first-child{
-        width: 12rem;
-        height: auto;
+        width: 8rem;
+        height: 8rem;
         border-radius: 50%;
+
+        @media ${props => props.theme.media.laptop} { 
+          width: 15rem;
+          height: 15rem;
+        }
       }
       & div:last-child{
         display: flex;
         flex-direction: column;
         justify-content:center;
-        width: 30%;
+        /* width: 30%; */
         & p:first-child{
-          font-size: 2.4rem;
+          font-size: 1.8rem;
           margin-bottom: 1rem;
           font-weight: 700;
           color: ${props =>  props.theme.color.blackLight};
