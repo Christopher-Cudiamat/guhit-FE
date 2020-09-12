@@ -40,7 +40,7 @@ const AccountModal = (props:any) => {
       <Div accountList>
         <nav onClick={handleListsClick}>
           <ul>
-            <LinkRouter dark to="./creator-account">
+            <LinkRouter dark to="./account">
               <li>
                 <a>Account</a>
                 <icon.account fontSize={"2.2rem"}/>

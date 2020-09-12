@@ -10,6 +10,10 @@ interface IFormTypes {
 
 export const Div = styled.div<IFormTypes>` 
   text-align:center;
+
+  /* & div {
+    margin-bottom:
+  } */
  
   ${({loginOptions}) => loginOptions &&
       css`

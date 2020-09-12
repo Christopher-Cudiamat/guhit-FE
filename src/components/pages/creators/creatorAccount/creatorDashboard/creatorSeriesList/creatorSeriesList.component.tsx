@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { getAllSeries } from '../../../../../../services/publish';
-import { Div } from './creatorSeriesList.style';
-import Button from '../../../../../../styleComponents/ui/button.style'; 
-
-
+import moment from 'moment';
 import { useHistory } from 'react-router-dom';
 import { ScrollToTopOnMount } from '../../../../../../utility/scrollToTopOnMount';
-
-import { BsEye } from 'react-icons/bs';
 import DeleteSeriesModal from '../../../../../globalModals/deleteSeriesModal/deleteSeriesModal';
+
+import { Div } from './creatorSeriesList.style';
+import Button from '../../../../../../styleComponents/ui/button.style'; 
+import { BsEye } from 'react-icons/bs';
+
 
 
 const CreatorSeriesList = (props:any) => {
@@ -74,7 +74,7 @@ const CreatorSeriesList = (props:any) => {
                           <p>{el.genrePrimary}</p>
                           <p>{el.genreSecondary}</p>
                         </Div>
-                        <p>Date published:{el.seriesDateCreated}</p>
+                        <p>Date published: {moment(el.createdAt).format('L')}</p>
                         <p>chapters: 0</p>
                         <Div buttons>
                           <Button

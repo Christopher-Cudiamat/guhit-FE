@@ -63,7 +63,6 @@ export const signUpFacebook = async (accessToken:string) => {
       headers:{
         'Content-Type': 'application/json'
       },
-      
     }
   
     let url = "/api/users/oauth/facebook";

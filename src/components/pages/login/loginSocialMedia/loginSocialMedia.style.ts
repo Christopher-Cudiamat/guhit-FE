@@ -36,11 +36,13 @@ export const Div = styled.div<IFormTypes>`
     & span {
       line-height: 2.4rem;
       font-size: 1.6rem;
-
+      cursor: pointer;
+      font-weight: 600;
       color: 
       ${props => props.signUp ? props.theme.color.secondary : props.theme.color.primary };
       padding: 0rem .6rem;
     }
+
   `
   };
 

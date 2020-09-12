@@ -1,37 +1,72 @@
 import React, { useState, useEffect } from 'react';
 import FilterNav from '../filterNav/filterNav.component';
 import PaginationController from '../paginationController/paginationController.component';
-import { getCreatorsList, getCreator } from '../../../services/creators';
+import { getCreatorsList } from '../../../services/creators';
 import { useHistory } from 'react-router-dom';
+import moment from 'moment'; 
 
 import Card from '../../../styleComponents/ui/card.style';
 import { TitleSection } from '../../../styleComponents/ui/title.syle';
 import { Div, Captions, Info} from './creator.style';
 import { Input, InputField, Label } from '../../../styleComponents/ui/input.style';
 
-
+import{ BiLike } from 'react-icons/bi';
+import { ScrollToTopOnMount } from '../../../utility/scrollToTopOnMount';
+import useDebounce from '../../../styleComponents/ui/customHooks/useDebounce';
 
 
 
 const Creator = (props:any) => {
 
   const [names, setNames] = useState(false);
-  const [rowPerPage, setRowPerPage] = useState(3);
-  const [page, setPage] = useState(0);
+  const [limit,setLimit] = useState(6);
+  const [filterType,setFilterType] = useState('Popular');
+  const [search, setSearch] = useState('');
+  const [skip,setSkip] = useState(0);
+  const [flag,setFlag] = useState(false);
+  const [results,setResults] = useState(0);
+  const [pageCount, setPageCount] = useState(0);
   let [creatorsArr,setCreatorsArr] = useState([]);
+  const [genre, setGenre] = useState(false);
+
+  const debouncedSearchTerm = useDebounce(search, 200);
+
   const history = useHistory();
 
-  console.log("PARAMS", creatorsArr);
-
   useEffect(() => {
-    getCreatorsList()
-      .then(res => setCreatorsArr(res));
+    setFlag(true);
+    setFilterType('Popular')
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const updateToggle = (val: boolean) => {
-    setNames(val);
-  }
+  useEffect(() => {
+    if(filterType !== "Name"){
+      getCreatorsList(limit,skip,filterType,search)
+      .then(res => {
+        setCreatorsArr(res.allCreatorsList);
+        setResults(res.dataLength);
+        if(!flag){
+          setPageCount(Math.ceil(res.dataLength/limit));
+        }
+      });
+    } 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [skip,filterType]);
+
+  useEffect(() => {
+    if(search !== "" && debouncedSearchTerm){
+      getCreatorsList(limit,skip,filterType,debouncedSearchTerm)
+      .then(res => {
+        setCreatorsArr(res.allCreatorsList);
+        setResults(res.allCreatorsList.length);
+        if(!flag){
+          setPageCount(Math.ceil(res.allCreatorsList.length/limit));
+        }
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [search]);
+
 
   const handleGoToCreatorPage = (creatorId:string) => {
     history.push({
@@ -40,21 +75,26 @@ const Creator = (props:any) => {
     });
       
   }
-
+ 
   const navList = [
     { title: 'Popular' },
     { title: 'Name' },
-    { title: 'Joined' },
-    { title: 'Trending' },
-    { title: 'Originals'},
-    { title: 'All', last: true },
+    { title: 'Joined', last: true },
+    { title: 'All'},
   ];
 
   return (
     <>
-    <FilterNav  arr={navList} onToggle={updateToggle} style={{marginBottom: "10rem"}}/>
-      <Div container>
+    <ScrollToTopOnMount/>
+    
+    <FilterNav  
+      arr={navList} 
+      setGenre={setGenre}
+      style={{marginBottom: "10rem"}}
+      setFilterType={setFilterType}
+      setSearch={setSearch}/>
 
+      <Div container>
         { names ?
           <Div inputBox>
             <p>Search by name:</p>
@@ -67,13 +107,13 @@ const Creator = (props:any) => {
 
         <Info hideShadow={creatorsArr.length < 1}>
           <TitleSection>Creators</TitleSection>
-          <p>Results: {creatorsArr.length}</p>
+          <p>{results} {results <= 1 ? "Result" : "Results"}</p>
         </Info>
         
         <Div comicsList>
           <Div cardContainer>
             { 
-              creatorsArr.length > 0  ?
+              results > 0  ?
                   creatorsArr.map((el:never|any,index:number) => 
                     <Card 
                     horizontal 
@@ -81,24 +121,28 @@ const Creator = (props:any) => {
                     onClick={() => handleGoToCreatorPage(el._id)}>
                       <img src={el.profilePic} alt="featured comics"/>
                       <Captions>
-                        <p>{el.displayName}</p>
-                        <p>Joined: {el.joinedDate}</p>
+                        <h4>{el.displayName}</h4>
+                        <p>Joined: {moment(el.createdAt).format('L')}</p>
                         <p>Series: {el.seriesMade.length}</p>
+                        <div>
+                          <p>Likes: {el.likes}</p> 
+                          <BiLike color={"light blue"}/>
+                        </div>
                       </Captions>
                     </Card>
                 )
               :
                 <Div noResult>
-                  <h3>No Results Found</h3>
+                  <h3>No Creator Found</h3>
                 </Div>
             } 
           </Div>
           
-          { creatorsArr.length > 1  ?
+          { results > 6  ?
             <PaginationController
-              setPage={setPage}
-              setRowPerPage={setRowPerPage}
-              rowPerPage={rowPerPage}/>
+              pageCount={pageCount}
+              limit={limit}
+              setSkip={setSkip}/>
             : null
           }
         </Div> 

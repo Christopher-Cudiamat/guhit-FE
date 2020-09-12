@@ -13,9 +13,10 @@ const Events = () => {
 
   const [linkIndex, setLinkIndex] = useState<number | null>(null);
   const [filteredData, setFilteredData]= useState(eventsArr);
+
+  useEffect(() => {}, [filteredData]);
   
   useEffect(() => {
-    
     return () => {
       setFilteredData(eventsArr.sort((a, b) => (Date.parse(a.date) < Date.parse(b.date)) ? -1 : 1));
     };
@@ -29,9 +30,7 @@ const Events = () => {
     }
   };
 
-  const handleFilterEvents = (value:any) => {
-    setFilteredData(dateSortFilter(eventsArr,value));
-  };
+  const handleFilterEvents = (value:any) => setFilteredData(dateSortFilter(eventsArr,value));
 
   return (
     <>

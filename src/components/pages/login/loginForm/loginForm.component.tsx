@@ -12,14 +12,14 @@ const LoginForm = (props:any) => {
   
   return (
     <>
-      <Input>
+      <Input marginBottom={"1.5rem"}>
         <InputField 
           required 
           onBlur={e => setEmail(e.target.value)}/>
         <Label>Email</Label>
       </Input>
 
-      <Input>
+      <Input marginBottom={"1.5rem"}>
         <InputField 
           required 
           onBlur={e => setPassword(e.target.value)}/>

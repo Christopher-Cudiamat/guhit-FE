@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { getAllChapters } from '../../../../../../services/publish';
 import { useHistory } from 'react-router-dom';
+import moment from 'moment';
 
 import { Div } from './creatorChapterList.style';
 import Button from '../../../../../../styleComponents/ui/button.style';
@@ -45,8 +46,8 @@ const CreatorChapterList = (props:any) => {
           return <Div chapterCard key={index}> 
                   <img src={el.chapterCover} alt="Series cover"/>
                   <div>
-                    <h2>{el.chapterTitle}</h2>
-                    <p>Date created: {el.chapterDateCreated}</p>
+                    <h2>{el.chapterTitle}</h2> 
+                    <p>Date created: {moment(el.createdAt).format('L')}</p>
                     <p>chapter: {el.chapterNumber} </p>
                     <Div buttons>
                       <Button 

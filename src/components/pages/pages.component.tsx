@@ -134,7 +134,7 @@ const Pages = (props:any) => {
             component={PublishComicsChapter}
           />;
           <PrivateRoute
-            path="/creator-account"
+            path="/account"
             component={CreatorAccount}
           />;
 

@@ -25,11 +25,17 @@ export const DivContainer = styled.div<IUlTypes>`
   padding-right: 1rem;
   text-align: Left;
   margin-top: -1px;
+  right: 0rem;
 
   & a:first-child {
     @media ${props => props.theme.media.laptop} { 
       display: none;
     }
+  }
+
+  @media ${props => props.theme.media.tablet} { 
+    width: 40%;
+    text-align: right;
   }
 
   @media ${props => props.theme.media.laptop} { 

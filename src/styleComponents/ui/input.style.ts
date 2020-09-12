@@ -8,32 +8,34 @@ interface IInputTypes {
   searchGlobal?:boolean,
   fixed?:boolean,
   marginTop?: boolean,
+  marginBottom?: string,
   globalSearchInput?:boolean,
   disabledInput?:boolean,
+  noTransparent?:boolean,
 
 }
 
   
 export const Input = styled.div<IInputTypes>`
 
-      text-align: left;
-      position: relative;
-      width: 100%;
+  text-align: left;
+  position: relative;
+  width: 100%;
+  margin-bottom: ${props => props.marginBottom ? props.marginBottom : "0rem"};
 
-      & label:last-child {
-        color: ${props => props.theme.color.grayLight};
-        position: absolute;
-        font-size: 2rem;
-        top: 25%;
-        left: 3%;
-        
-      }
+  & label:last-child {
+    color: ${props => props.theme.color.grayLight};
+    position: absolute;
+    font-size: 2rem;
+    top: 25%;
+    left: 3%;
+  }
     
 `
 
 export const InputField = styled.input<IInputTypes>`
   
-  opacity: ${props => props.noBorder ? "1" : "0.5"};
+  opacity: ${props => props.noBorder ? "1" : props.noTransparent ? "1" : "0.5"};
   width: 100%;
   height: 50px;
   border-radius: 5px;
@@ -66,8 +68,8 @@ export const InputField = styled.input<IInputTypes>`
 
   &:focus + label, &:valid + label {
     position: absolute;
-    top: -23%;
-    left: 2%;
+    top: -33%;
+    left: 1%;
     font-size: 14px;
     transition: all .3s;
   }
@@ -86,7 +88,7 @@ export const Label = styled.label<IInputTypes>`
   position: absolute;
   font-size: 2rem;
   top: 19%;
-  left: 3%;
+  left: 2%;
   pointer-events: none;
 
   ${({fixed}) => fixed &&

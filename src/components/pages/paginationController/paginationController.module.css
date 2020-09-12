@@ -12,21 +12,42 @@
 
 .li {
   padding: 0rem 1rem;
+  font-size: 1.8rem;
+}
+.a {
+  padding: 0rem 1rem;
 }
 
 .prev,
-.next {
-  color: #fff;
+.next,
+.disable {
+  color: rgb(27, 27, 27);
   background: #F0B110;
-  padding: .5rem;
+  padding: .5rem .8rem;
   border-radius: .2rem;
+  cursor: pointer;
+}
+
+.next:hover,
+.prev:hover {
+  transform: scale(1.1);
 }
 
 .next {
   margin-left: 1rem;
 }
 
-
 .prev {
   margin-right: 1rem;
+}
+
+.disable {
+  opacity: 0.5;
+}
+
+.nextLink,
+.prevLink {
+  outline: none;
+  border: none;
+  text-decoration: none;
 }

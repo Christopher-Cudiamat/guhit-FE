@@ -5,39 +5,38 @@ import styles from './paginationController.module.css';
 
 const PaginationController = (props:any) => {
 
-  let {pageCount,setPage,setRowPerPage,rowPerPage} = props;
+  let {pageCount,setSkip,limit} = props;
+  let [activePageNum,setActivePageNum] = useState(0);
 
-  let [offset,setOffset] = useState(0);
+  console.log(pageCount);
 
   const handlePageClick = (data: any) => {
-    let selected = data.selected + 1;
-    setPage(selected * rowPerPage);
-    setRowPerPage(rowPerPage * 2);
-    console.log("SELECTED",selected);
-    // let offset = Math.ceil(selected * perPage);
-
-    // this.setState({ offset: offset }, () => {
-    //   this.loadCommentsFromServer();
-    // });
+    let selected = data.selected;
+    setActivePageNum(selected);
+    setSkip(selected * limit);  
   };
 
   return (
     <>
+    
       <ReactPaginate
           previousLabel={'PREV'}
           nextLabel={'NEXT'}
           breakLabel={'...'}
           breakClassName={'break-me'}
           pageCount={pageCount}
-          marginPagesDisplayed={2}
+          marginPagesDisplayed={1}
           pageRangeDisplayed={1}
           onPageChange={handlePageClick}
           containerClassName={styles.container}
           pageClassName={styles.li}
           // subContainerClassName={'pages pagination'}
           activeClassName={styles.active}
-          nextClassName={styles.next}
-          previousClassName={styles.prev}
+          nextClassName={activePageNum === pageCount - 1 ? styles.disable : styles.next}
+          previousClassName={activePageNum === 0 ? styles.disable : styles.prev}
+          nextLinkClassName={styles.nextLink}
+          previousLinkClassName={styles.prevLink}
+ 
         />
     </>
   );

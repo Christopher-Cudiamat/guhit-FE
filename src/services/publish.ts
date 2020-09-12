@@ -164,6 +164,7 @@ export const postCreateSeries = async (token:string,data:any) => {
   body.append('consent',data.containExplicit.toString());
 
   const res = await instancePost.post(url,body,config); 
+  console.log("SERIES___",res.data);
   return res.data;
 };
 
@@ -185,7 +186,6 @@ export const postCreateChapter = async (token:string,data:any) => {
     chapterPages,
     seriesId,
     chapterId,
-    
   } = data;
 
   const config = {
@@ -196,8 +196,6 @@ export const postCreateChapter = async (token:string,data:any) => {
   }
 
   let url = '/api/chapters/create-chapter';
-
-  
   const body = new FormData();
   
   body.append("seriesId",seriesId);
@@ -208,9 +206,7 @@ export const postCreateChapter = async (token:string,data:any) => {
   body.append("tags",tags.toString());
   body.append("openForComments",openForComments.toString());
   body.append("matureContents",matureContents.toString());
-  {chapterPages.map((el:any) => {
-    body.append("chapterPages",el);
-  })}
+  {chapterPages.map((el:any) => {body.append("chapterPages",el);})}
 
   const res = await instancePost.post(url,body,config); 
   return res.data;

@@ -6,6 +6,7 @@ interface IComicsTypes {
   genres?:boolean,
   active?:boolean,
   info?:boolean,
+  inputBox?:boolean,
 }
 
 export const Captions = styled.div<IComicsTypes>`
@@ -22,18 +23,12 @@ export const Div = styled.div<IComicsTypes>`
   padding-right: 2rem;
 
   @media ${props => props.theme.media.laptop} { 
-          width:70rem;
-          margin: auto;
-         
+    width:90rem;
+    margin: auto;  
   }
 
   ${({comicsList}) => comicsList && 
     css`
-      /* text-align: center;
-      display:flex;
-      margin: auto;
-      margin-top: 1rem;
-      margin-bottom: 4rem; */
       display: grid;
      
   `}; 
@@ -69,11 +64,20 @@ export const Div = styled.div<IComicsTypes>`
      
   `}; 
 
+  ${({inputBox}) => inputBox && 
+    css`
+      padding: 2rem 2rem;
+      background: ${props =>  props.theme.color.white}; 
+      & p:first-child{
+        color: ${props =>  props.theme.primary}; 
+        font-size: 1.4rem;
+        margin-bottom: .5rem;
+      }   
+  `}; 
+
 `
 
 export const Ul = styled.ul<IComicsTypes>`
-  /* padding-left: 1rem;
-  padding-right: 1rem; */
   padding-top: 2rem;
   padding-bottom: 2rem;
   ${({genre}) => genre && 
@@ -106,6 +110,12 @@ export const List = styled.li<IComicsTypes>`
       font-weight: ${props => props.active ? "500" : "400"};
       color: ${props => props.active ? props.theme.color.black : props.theme.color.gray};
 
+      @media ${props => props.theme.media.laptop} { 
+        cursor: pointer;
+        &:hover {
+          opacity: 0.7;
+        }
+      }
   `; 
 
 

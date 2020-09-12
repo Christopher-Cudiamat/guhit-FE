@@ -40,7 +40,6 @@ const SignUp = (props:any) => {
     e.persist();
     
     if(!isRequired(email)&&!isRequired(password)){
-      console.log("WORKING")
       setAlert("Please insert Email and Password", "danger");
     } else if (!isLengthCorrect(password)) {
       setAlert("Password must be at least 8 characters", "danger");
@@ -81,8 +80,8 @@ const SignUp = (props:any) => {
             <p>Already have a Guhit account?<span>
             <LinkRouter primary to="./login">Log in.</LinkRouter></span></p>
           </Div>
-          <>
-            <Input>
+          <Div>
+            <Input marginBottom={"2.5rem"}>
               <InputField 
                 type="text"
                 required 
@@ -90,7 +89,7 @@ const SignUp = (props:any) => {
                 />
               <Label>Email</Label>
             </Input>
-            <Input>
+            <Input marginBottom={"2.5rem"}>
               <InputField 
                 type="password"
                 required 
@@ -106,7 +105,7 @@ const SignUp = (props:any) => {
             <Div loginOptions>
               <p>By signing up you agree to our<span onClick={handleToggleLogin}>Terms of use.</span></p>
             </Div>
-          </>
+          </Div>
         </Form>
       </Div>
 

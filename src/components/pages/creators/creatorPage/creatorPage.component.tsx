@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { getCreator } from '../../../../services/creators';
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation} from 'react-router-dom';
+import moment from 'moment';
+
 import { MdLocationOn } from 'react-icons/md';
 import { FaPatreon } from 'react-icons/fa';
 
 import { Div } from './creatorPage.style';
-import { TitleSmall } from '../../../../styleComponents/ui/title.syle';
 import { Avatar } from '../../../../styleComponents/ui/avatar.style';
+import { ScrollToTopOnMount } from '../../../../utility/scrollToTopOnMount';
+import Button from '../../../../styleComponents/ui/button.style';
 
 const CreatorPage = () => {
 
@@ -14,7 +17,7 @@ const CreatorPage = () => {
     city: string,
     description: string,
     displayName: string,
-    joinedDate: string,
+    createdAt: string,
     patreon: string,
     profilePic: string,
     seriesMade: Array<string>,
@@ -25,12 +28,14 @@ const CreatorPage = () => {
     city: "",
     description: "",
     displayName: "",
-    joinedDate: "",
+    createdAt: "",
     patreon: "",
     profilePic: "",
     seriesMade: [],
     tools: [],
   });
+
+  console.log("DATA",data);
   const location = useLocation<{creatorId?:string}>();
   const creatorId = location.state.creatorId;
  
@@ -43,45 +48,39 @@ const CreatorPage = () => {
   return (
     
     <Div container>
-      <Avatar src={data.profilePic} alt="Creator profile picture"/>
 
-      <h2>{data.displayName}</h2>
-      
-      <p><span>Joined:</span>{data.joinedDate}</p>
+      <ScrollToTopOnMount/>
 
-      <p><MdLocationOn/> {data.city}</p>
+      <Div creatorDetails>
+        <Avatar src={data.profilePic} alt="Creator profile picture"/>
+        <h2>{data.displayName}</h2>
+        <p><span>Joined:</span>{moment(data.createdAt).format('L')}</p>
+        <p><MdLocationOn/> {data.city}</p>
+        <p>{data.description}</p>
+        <p>Tools:</p>
+        <ul>
+          {data.tools.map((el:string, index:number) => <li key={index}>{el}</li>)}
+        </ul>
+        <p><FaPatreon fontSize={"10px"}/>{data.patreon}</p>
+      </Div>
 
-      <p>{data.description}</p>
-
-      <p>Tools:</p>
-
-      <ul>
-        {data.tools.map((el:string, index:number) => <li key={index}>{el}</li>)}
-      </ul>
-
-      <p><FaPatreon fontSize={"10px"}/>{data.patreon}</p>
+      <Div creatorSeriesLists>
+        <h2>Series</h2>
+        {data.seriesMade.map((el:any,index:number) => 
+            <div key={index}>
+              <img src={el.seriesCover} alt="Series Cover"/>
+              <div>
+                <p>{el.seriesTitle}</p>
+                <p>{el.genrePrimary}</p>
+                <Button secondary>Read Now</Button>
+              </div>
+            </div>
+          ) 
+        }
+      </Div>
             
     </Div>
   );
 };
 
 export default CreatorPage;
-
-
-{/* <img src={data.profilePic} alt="Creator profile pic"/> 
-      
-      <h3>{data.displayName}</h3>
-
-      <p>{data.city}</p>
-
-      <p>{data.joinedDate}</p>
-
-      <p>{data.description}</p>
-
-      <TitleSmall marginBottom={"1rem"}>Tools</TitleSmall>
-      <ul>
-        {data.tools.map((el:string, index:number) => <li key={index}>{el}</li>)}
-      </ul>
-
-      <TitleSmall marginBottom={"1rem"}>Support Creator</TitleSmall>
-      <a href={data.patreon}>Donate</a> */}

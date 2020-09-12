@@ -15,7 +15,7 @@ overflow-x: scroll;
 }
 
 @media ${props => props.theme.media.laptop} { 
-  width:80rem;
+  width: 90rem;
   margin: auto;      
 }
 
@@ -38,10 +38,14 @@ export const Li = styled.li<ILiType>`
   text-align:center;
 
   @media ${props => props.theme.media.laptop} { 
-    font-size: 1.4rem;  
-    font-weight: 500;  
+    cursor:pointer;
+    font-size: 1.5rem;  
+    font-weight: 600;
     padding-right: .5rem;
     padding-left: .5rem;
+    &:hover {
+      opacity: 0.7;
+    }
   }
 
 

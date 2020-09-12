@@ -142,21 +142,22 @@ ${({grid}) => grid &&
       text-align: left;
       display: flex;
       width: 100%;
-      padding: 2rem 2rem;
+      padding: 1rem 1rem;
       box-shadow: 0 2px 3px rgba(182, 182, 182, 0.35);
 
-      @media ${props => props.theme.media.laptop} { 
+      @media ${props => props.theme.media.tablet} { 
         box-shadow: 0 0px 0px rgba(0, 0, 0, 0);
         width: 25%;
         border-radius: 2rem;
         flex-direction: column;
         align-items: center;
         text-align: center;
-        padding: 3rem 1rem;
-        transition: all .3s;
+        padding: 1.5rem 1rem;
+        margin: 0rem 0rem 3rem 0rem;
+       
         &:hover {
+          padding: 1.4rem .9rem; 
           border: solid 1px #ccc;
-          width: 30%;
         }
       }
       
@@ -165,7 +166,7 @@ ${({grid}) => grid &&
         height: 8rem;
         border-radius: 50%;
 
-        @media ${props => props.theme.media.laptop} { 
+        @media ${props => props.theme.media.tablet} { 
           width: 15rem;
           height: 15rem;
         }
@@ -174,6 +175,7 @@ ${({grid}) => grid &&
         display: flex;
         flex-direction: column;
         justify-content:center;
+        
         /* width: 30%; */
         & p:first-child{
           font-size: 1.8rem;
@@ -198,7 +200,7 @@ ${({horizontalSquare}) => horizontalSquare &&
     width: 100%;
     box-shadow: 0 2px 3px rgba(182, 182, 182, 0.30);
 
-    @media ${props => props.theme.media.laptop} { 
+    @media ${props => props.theme.media.tablet} { 
      display:flex
      width: 30%;
     }
@@ -230,7 +232,7 @@ ${({horizontalSquare}) => horizontalSquare &&
           margin-bottom: .5rem;
           font-weight: 500;
           color: ${props =>  props.theme.color.gray};
-            @media ${props => props.theme.media.laptop} { 
+            @media ${props => props.theme.media.tablet} { 
               color: ${props =>  props.theme.color.gray};
               font-size: ${props => props.chapters ? "2.2rem": "1.2rem"};
              
@@ -239,7 +241,7 @@ ${({horizontalSquare}) => horizontalSquare &&
         & p:nth-child(2){
           font-size: 1.2rem;
           color: ${props =>  props.theme.color.grayLight};
-          @media ${props => props.theme.media.laptop} { 
+          @media ${props => props.theme.media.tablet} { 
             font-size: ${props => props.chapters ? "1.4rem": "1.2rem"};    
           }
         }
@@ -248,7 +250,7 @@ ${({horizontalSquare}) => horizontalSquare &&
           font-size: 2.2rem;
           font-weight: 500;
           color: ${props =>  props.theme.color.grayLight};
-          @media ${props => props.theme.media.laptop} { 
+          @media ${props => props.theme.media.tablet} { 
               color: ${props =>  props.theme.color.gray};
               font-size: ${props => props.chapters ? "2rem": "1.2rem"};  
               margin-top: .5rem;

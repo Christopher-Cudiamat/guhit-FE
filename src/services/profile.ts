@@ -2,7 +2,6 @@ import {instanceGet, instancePost} from "../configs/axios.config";
 
 
 export const getProfile = async (token:string) => {
-  // console.log(token)
   const config = {
     headers:{
       'Content-Type': 'application/json',
@@ -14,16 +13,12 @@ export const getProfile = async (token:string) => {
  
 
   const res = await instanceGet.get(url, config);
-  // console.log("SECRET RESPONE",res.data);
   return res.data;
 };
 
 
-
 export const postInitProfile = async (token:string,email:any) => {
   
-  console.log("PST INIT TOKEN",token);
-
   const config = {
     headers:{
       'Content-Type': 'application/json',

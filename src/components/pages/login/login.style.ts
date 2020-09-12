@@ -53,18 +53,21 @@ export const Div = styled.div<IFormTypes>`
 
 
   ${({loginOptions}) => loginOptions &&
-      css`
-        margin-bottom: 3rem;
-        color: ${props => props.theme.color.gray};
-        & span {
-          line-height: 2.4rem;
-          font-size: 1.6rem;
+    css`
+      margin-bottom: 3rem;
+      color: ${props => props.theme.color.gray};
 
-          color: 
-          ${props => props.signUp ? props.theme.color.secondary : props.theme.color.primary };
-          padding: 0rem .6rem;
+      & span {
+        line-height: 2.4rem;
+        font-size: 1.6rem;
+        color: ${props => props.signUp ? props.theme.color.secondary : props.theme.color.primary };
+        padding: 0rem .6rem;
+
+        & a:hover {
+          font-weight: 600;
         }
-      `
+      }
+    `
   };
 
   ${({socialContainer}) => socialContainer &&

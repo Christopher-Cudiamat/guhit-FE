@@ -123,6 +123,7 @@ const Login = (props:any) => {
           <Div loginOptions signUp>
             <p>Dont have an account?<span>
             <LinkRouter 
+              style={{fontWeight: 600}}
               secondary 
               to={
                 continueToPublish 
