@@ -20,6 +20,7 @@ export interface IProfileParameter {
   novelsChaptersMade?: number,
   isCreator?: boolean, 
   seriesMade?: [],
+  user?: string,
 };
 
 export interface ISetUserProfile {

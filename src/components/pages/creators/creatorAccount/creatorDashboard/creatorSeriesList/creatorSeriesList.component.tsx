@@ -79,24 +79,25 @@ const CreatorSeriesList = (props:any) => {
                         <Div buttons>
                           <Button
                           blackOutline
-                            onClick={e => handleAddChapter(el._id)}>
+                            onClick={() => handleAddChapter(el._id)}>
                             Add new chapter
                           </Button> 
                           <Button 
                             blackOutline
-                            onClick={e => onOpenChapters(el._id)}>
+                            onClick={() => onOpenChapters(el._id)}>
                               Edit chapters
                           </Button >
                           <Button 
                             blackOutline 
-                            onClick={e => handleEditSeries(el._id)}>
+                            onClick={() => handleEditSeries(el._id)}>
                             Edit Series</Button>
                         </Div>
                         <Div deleteSeries 
-                          onClick={(e:any) => setIdSeries(el._id)}>
+                          onClick={() => setIdSeries(el._id)}>
                           <DeleteSeriesModal 
                             token={token}
                             id={idSeries}
+                            seriesTitle={el.seriesTitle}
                             />
                         </Div>
                       </div>

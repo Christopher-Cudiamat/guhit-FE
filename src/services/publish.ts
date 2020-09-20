@@ -217,7 +217,7 @@ export const postCreateChapter = async (token:string,data:any) => {
 ///////////////////////////////////////////////////////////
 //DELETE
 ///////////////////////////////////////////////////////////
-export const deleteSeries = async (token:string,seriesID:string|any) => {
+export const deleteSeries = async (token:string,seriesID:string|any,seriesTitle:string) => {
  
   const config = {
     headers:{
@@ -226,7 +226,7 @@ export const deleteSeries = async (token:string,seriesID:string|any) => {
     }
   }
 
-  let url = `/api/series/delete-series?id=${seriesID}`;
+  let url = `/api/series/delete-series?id=${seriesID}&seriesTitle=${seriesTitle}`;
 
   const res = await instanceDelete.delete(url, config); 
   return res.data;

@@ -4,6 +4,7 @@ interface ICreatorTypes {
   container?:boolean,
   creatorDetails?:boolean,
   creatorSeriesLists?:boolean,
+  marginRight?: boolean,
 }
 
 export const Div = styled.div<ICreatorTypes>`
@@ -24,7 +25,14 @@ export const Div = styled.div<ICreatorTypes>`
       @media ${props => props.theme.media.laptop} {
         display: flex;
       }
-  `};     
+  `};  
+
+  ${({marginRight}) => marginRight && 
+    css`
+      @media ${props => props.theme.media.laptop} {
+        margin-right: ${props => props.marginRight ? "10rem" : "0rem"}; 
+      }
+  `};    
 
 
   ${({creatorDetails}) => creatorDetails && 
@@ -34,7 +42,6 @@ export const Div = styled.div<ICreatorTypes>`
       padding: 0rem 2rem;
       @media ${props => props.theme.media.laptop} {
         width: 60%;
-        margin-right: 10rem; 
       }
 
       & img:first-child {

@@ -4,7 +4,6 @@ import { ScrollToTopOnMount } from '../../../../../utility/scrollToTopOnMount';
 
 import { Avatar } from '../../../../../styleComponents/ui/avatar.style';
 import { Div } from './creatorProfile.style';
-import Button from '../../../../../styleComponents/ui/button.style';
 import { MdLocationOn } from 'react-icons/md';
 import { FaPatreon } from 'react-icons/fa';
 import { LinkRouter } from '../../../../../styleComponents/ui/link.style';

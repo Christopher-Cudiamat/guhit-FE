@@ -13,16 +13,15 @@ import { deleteSeries } from '../../../services/publish';
 
 const DeleteSeriesModal = (props:any) => {
 
-  const {token, id} = props;
+  const {token,id,seriesTitle} = props;
 
   const history = useHistory();
 
   const handleDeleteSeries = (cb:any) => {
     cb();
-    deleteSeries(token,id)
+    deleteSeries(token,id,seriesTitle)
       .then(res => {
         if(res){
-          // history.push('/');
           history.go(0);
         }
       });

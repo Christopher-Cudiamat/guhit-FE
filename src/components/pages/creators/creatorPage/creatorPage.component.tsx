@@ -36,14 +36,15 @@ const CreatorPage = () => {
     tools: [],
   });
 
-  console.log("DATA",data);
   const history = useHistory();
   const location = useLocation<{creatorId?:string}>();
   const creatorId = location.state.creatorId;
  
   useEffect(() => {
     getCreator(creatorId)
-      .then(res => setData(res));
+      .then(res => {
+        setData(res)}
+        );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -57,7 +58,9 @@ const CreatorPage = () => {
 
       <ScrollToTopOnMount/>
 
-      <Div creatorDetails>
+      <Div 
+        creatorDetails
+        marginRight={data.seriesMade.length > 0 ? true : false}>
         <Avatar src={data.profilePic} alt="Creator profile picture"/>
         <h2>{data.displayName}</h2>
         <p><span>Joined:</span>{moment(data.createdAt).format('L')}</p>
@@ -70,24 +73,28 @@ const CreatorPage = () => {
         <p><FaPatreon fontSize={"10px"}/>{data.patreon}</p>
       </Div>
 
-      <Div creatorSeriesLists>
-        <h2>Series</h2>
-        {data.seriesMade.map((el:any,index:number) => 
-            <div key={index}>
-              <img src={el.seriesCover} alt="Series Cover"/>
-              <div>
-                <p>{el.seriesTitle}</p>
-                <p>{el.genrePrimary}</p>
-                <Button 
-                  onClick={() => handleGoToSeries("5f666dbcc135c42ba4f5ec15",el.user)}
-                  secondary>
-                  Read Now
-                </Button>
+      {
+        data.seriesMade.length > 0 ?
+        <Div creatorSeriesLists>
+          <h2>Series</h2>
+          {data.seriesMade.map((el:any,index:number) => 
+              <div key={index}>
+                <img src={el.seriesCover} alt="Series Cover"/>
+                <div>
+                  <p>{el.seriesTitle}</p>
+                  <p>{el.genrePrimary}</p>
+                  <Button 
+                    onClick={() => handleGoToSeries("5f666dbcc135c42ba4f5ec15",el.user)}
+                    secondary>
+                    Read Now
+                  </Button>
+                </div>
               </div>
-            </div>
-          ) 
-        }
-      </Div>
+            ) 
+          }
+        </Div>
+        : null
+      }
             
     </Div>
   );

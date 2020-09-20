@@ -26,6 +26,7 @@ const initialState:IProfileParameter = {
   novelsChaptersMade: 0,
   isCreator: false,
   seriesMade: [], 
+  user:""
 };
 
 export const profileReducer = (state = initialState, action: IProfileActions):IProfileParameter => {
@@ -54,6 +55,7 @@ export const profileReducer = (state = initialState, action: IProfileActions):IP
         tools: action.payload.tools,
         isCreator: action.payload.isCreator,
         seriesMade: action.payload.seriesMade,
+        user: action.payload.user
       }
     case SET_UPDATE_PROFILE:
       return {...state,[action.name]:action.value}
