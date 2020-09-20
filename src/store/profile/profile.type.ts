@@ -11,7 +11,7 @@ export interface IProfileParameter {
   profilePicPreview?: string,
   description?: string,
   city?: string,
-  joinedDate?: string,
+  createdAt?: string,
   patreon?: string,
   tools?: string,
   comicsSeriesMade?: number,

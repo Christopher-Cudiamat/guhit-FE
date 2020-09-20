@@ -107,9 +107,10 @@ const PublishCreatorInfo = (props:any) => {
     event.preventDefault(); 
     postProfile(registration.token,creatorsData)
       .then(res => {
+        console.log("RES",res);
         setCreatorProfile(res);
         if(profile.isCreator){
-          history.push("./creator-account");  
+          history.push("./account");  
         } else {
           history.push({
             pathname:"./publish-comic-series",
