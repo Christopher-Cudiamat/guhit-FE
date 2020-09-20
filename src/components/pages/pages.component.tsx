@@ -13,8 +13,8 @@ import ThankYouPage from './thankYouPage/thankYouPage.component';
 import About from './about/about.component';
 import Contacts from './contacts/contacts.component';
 import Events from './events/events.component';
-import Chapters from './comics/chapters/chapters.component';
-import Chapter from './comics/chapters/chapter/chapter.component';
+import Series from './comics/series/series.component';
+import Chapter from './comics/chapter/chapter.component';
 import { Div } from './pages.style';
 import PasswordRecovery from './login/passwordRecovery/passwordRecovery.component';
 
@@ -32,6 +32,7 @@ import PublishComicsSeries from './publish/publishComicsSeries/publishComicsSeri
 import PublishComicsChapter from './publish/publishComicsChapter/publishComicsChapter.container';
 import PrivateRoute from './privateRoute';
 import VerifyToken from './signUp/verifyToken/verifyToken.container';
+
 
 
 
@@ -66,8 +67,8 @@ const Pages = (props:any) => {
           <Route exact path="/comics">
             <Comics />
           </Route>
-          <Route exact path="/chapters">
-            <Chapters />
+          <Route exact path="/series">
+            <Series />
           </Route>
           <Route exact path="/chapter">
             <Chapter />
@@ -91,7 +92,10 @@ const Pages = (props:any) => {
           <Route exact path="/creators">
             <Creators />
           </Route>
-          <Route exact path="/:id/creator" >
+          {/* <Route exact path="/:id/creator" >
+            <CreatorPage />
+          </Route> */}
+          <Route exact path="/creator" >
             <CreatorPage />
           </Route>
           {/* <Route exact path="/creator-account">

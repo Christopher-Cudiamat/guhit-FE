@@ -125,7 +125,7 @@ ${({grid}) => grid &&
       box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
     }
     & div {
-      margin-top: .5rem;
+      margin-top:1.5rem;
       font-size: 1.4rem;
       color: ${props =>  props.theme.color.gray};
       display: flex;
@@ -203,29 +203,39 @@ ${({horizontalSquare}) => horizontalSquare &&
     @media ${props => props.theme.media.tablet} { 
      display:flex
      width: 30%;
+     cursor:pointer;
+     /* transition: all .3s;
+     &:hover{
+        transform: scale(1.1)
+      } */
     }
 
       &:nth-child(odd) {
-        background: #fff;
-        
+        background: #eee;
       }
 
       &:nth-child(even) {
-        background: #eee;
+        background: #fff;
       }
       
       & img:first-child{
         outline: none;
-        width: ${props => props.forSlider ? "90%" : "40%"};
+        width: ${props => props.forSlider ? "90%" : "35%"};
         height: auto;
         border-radius: 5px;
-        
+        margin-right:1rem;
+
+        @media ${props => props.theme.media.tablet} { 
+          width: ${props => props.forSlider ? "90%" : "25%"};
+        }
+
+        &:hover{
+          transform: scale(1)
+        }
       }
       & div:last-child{
         margin-right: .5rem; 
-        width: 55%;
-        display:flex;
-        flex-direction:column;
+
         & p:first-child{
           font-size: 1.8rem;
           margin-top: 1rem;
@@ -235,7 +245,6 @@ ${({horizontalSquare}) => horizontalSquare &&
             @media ${props => props.theme.media.tablet} { 
               color: ${props =>  props.theme.color.gray};
               font-size: ${props => props.chapters ? "2.2rem": "1.2rem"};
-             
             }
         }
         & p:nth-child(2){
@@ -247,12 +256,12 @@ ${({horizontalSquare}) => horizontalSquare &&
         }
         & p:last-child{
           margin-top: 1rem;
-          font-size: 2.2rem;
+          font-size: 3rem;
           font-weight: 500;
           color: ${props =>  props.theme.color.grayLight};
           @media ${props => props.theme.media.tablet} { 
               color: ${props =>  props.theme.color.gray};
-              font-size: ${props => props.chapters ? "2rem": "1.2rem"};  
+              font-size: ${props => props.chapters ? "3rem": "1.2rem"};  
               margin-top: .5rem;
           }
         

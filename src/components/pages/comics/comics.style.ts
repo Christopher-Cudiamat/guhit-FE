@@ -7,6 +7,7 @@ interface IComicsTypes {
   active?:boolean,
   info?:boolean,
   inputBox?:boolean,
+  noResult?:boolean
 }
 
 export const Captions = styled.div<IComicsTypes>`
@@ -24,13 +25,16 @@ export const Div = styled.div<IComicsTypes>`
 
   @media ${props => props.theme.media.laptop} { 
     width:90rem;
-    margin: auto;  
+    margin: auto; 
   }
 
   ${({comicsList}) => comicsList && 
     css`
-      display: grid;
-     
+      /* display: grid; */
+      padding-bottom: 5rem;
+      @media ${props => props.theme.media.laptop} { 
+        padding-bottom: 10rem;
+      }
   `}; 
 
   ${({info}) => info && 
@@ -56,23 +60,24 @@ export const Div = styled.div<IComicsTypes>`
       & div:last-child{
         display: flex;
         & > * {
-          margin-left: 2rem;
+
           font-size: 1.6rem;
+          margin-top: 1rem;
           color: ${props => props.theme.color.grayLight};
         }
       }
      
-  `}; 
+  `};  
 
-  ${({inputBox}) => inputBox && 
+  ${({noResult}) => noResult && 
     css`
-      padding: 2rem 2rem;
-      background: ${props =>  props.theme.color.white}; 
-      & p:first-child{
-        color: ${props =>  props.theme.primary}; 
-        font-size: 1.4rem;
-        margin-bottom: .5rem;
-      }   
+    margin-top: 15rem;
+    margin-bottom: 20rem;
+    text-align: center;
+    & h3 {
+      color:  ${props => props.theme.color.gray};
+    }
+     
   `}; 
 
 `
@@ -89,7 +94,8 @@ export const Ul = styled.ul<IComicsTypes>`
       width: 100%;
       margin-top: -2px;
       text-align: center;
-      
+      justify-content: center;
+
       @media ${props => props.theme.media.laptop} { 
         width: 50rem;
         margin: auto;
@@ -108,7 +114,9 @@ export const List = styled.li<IComicsTypes>`
       width: 30%;
       font-size: ${props => props.active ? "1.6rem" : "1.4rem"};
       font-weight: ${props => props.active ? "500" : "400"};
-      color: ${props => props.active ? props.theme.color.black : props.theme.color.gray};
+      color: ${props => props.active ? props.theme.color.white : props.theme.color.blackLight};
+      background: ${props => props.active ? props.theme.color.secondary : "none"};
+      border-radius: ${props => props.active ? "2rem" : "0rem"};
 
       @media ${props => props.theme.media.laptop} { 
         cursor: pointer;

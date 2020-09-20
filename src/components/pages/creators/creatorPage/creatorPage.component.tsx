@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { getCreator } from '../../../../services/creators';
 import { useLocation} from 'react-router-dom';
 import moment from 'moment';
+import { useHistory } from 'react-router-dom';
 
 import { MdLocationOn } from 'react-icons/md';
 import { FaPatreon } from 'react-icons/fa';
@@ -36,6 +37,7 @@ const CreatorPage = () => {
   });
 
   console.log("DATA",data);
+  const history = useHistory();
   const location = useLocation<{creatorId?:string}>();
   const creatorId = location.state.creatorId;
  
@@ -44,6 +46,10 @@ const CreatorPage = () => {
       .then(res => setData(res));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const handleGoToSeries = (seriesId:string,userId:string) => {
+    history.push({pathname:"./series",state:{seriesId,userId}});
+  } 
 
   return (
     
@@ -72,7 +78,11 @@ const CreatorPage = () => {
               <div>
                 <p>{el.seriesTitle}</p>
                 <p>{el.genrePrimary}</p>
-                <Button secondary>Read Now</Button>
+                <Button 
+                  onClick={() => handleGoToSeries("5f666dbcc135c42ba4f5ec15",el.user)}
+                  secondary>
+                  Read Now
+                </Button>
               </div>
             </div>
           ) 

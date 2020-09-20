@@ -47,9 +47,7 @@ const PublishComicsChapter = (props:any) => {
   const seriesId = location.state.seriesId;
   const isNewChapter = location.state.isNewChapter;
   const chapterId = location.state.chapterId;
-  console.log("seriesId",seriesId);
-  console.log("chapterId",chapterId);
-  console.log("isNewChapter",isNewChapter);
+
 
   const [isDisabled,  setIsDisabled] = useState<boolean>(false);
   const [chapterCover, setChapterCover] = useState<IImageUploadType[]>([]);
@@ -112,8 +110,6 @@ const PublishComicsChapter = (props:any) => {
   }, [chapterCover,chapterTitle,chapterPages,chapterDescription,tags,
     ,openForComments,matureContents,seriesId]);
   
-    console.log("TEST",chaptersData);
-
 
   useEffect(() => {
     setTagInputDef("");

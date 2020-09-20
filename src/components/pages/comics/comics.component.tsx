@@ -3,6 +3,8 @@ import FilterNav from '../filterNav/filterNav.component';
 import { ScrollToTopOnMount } from '../../../utility/scrollToTopOnMount';
 import { getSeriesList } from '../../../services/comics';
 import moment from 'moment';
+import PaginationController from '../paginationController/paginationController.component';
+import { useHistory } from 'react-router-dom';
 
 import Card from '../../../styleComponents/ui/card.style';
 import { Div, List, Ul } from './comics.style';
@@ -11,39 +13,52 @@ import { TitleSection } from '../../../styleComponents/ui/title.syle';
 import useDebounce from '../../../styleComponents/ui/customHooks/useDebounce';
 
 
+
 const Comics = (props:any) => {
 
-  const [limit,setLimit] = useState(8);
+  const [limit,setLimit] = useState(6);
   const [skip,setSkip] = useState(0);
+  const [pageCount, setPageCount] = useState(0);
   const [genre, setGenre] = useState(false);
   const [genreType, setGenreType] = useState("");
   const [search, setSearch] = useState('');
-  const [activeGenre, setActiveGenre] = useState(0);
+  const [activeGenre, setActiveGenre] = useState(-1);
   const [filterType,setFilterType] = useState('Popular');
   const [results,setResults] = useState(0);
   const [seriesArr,setSeriesArr] = useState([]);
-
+  const [flag,setFlag] = useState(false);
   const debouncedSearchTerm = useDebounce(search, 200);
+  const history = useHistory();
+
 
   useEffect(()=>{
+
     if(filterType !== "Genre" && filterType !== "Title"){
       getSeriesList(limit,skip,filterType)
         .then(res => {
           setSeriesArr(res.seriesList);
           setResults(res.dataLength);
+          setPageCount(Math.ceil(res.dataLength/limit));
         });
+    } else {
+      setActiveGenre(-1);
     }
+    
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[filterType]);
+  },[skip,filterType]);
 
   useEffect(()=>{
+    setFlag(true);
     getSeriesList(limit,skip,filterType,genreType)
       .then(res => {
         setSeriesArr(res.seriesList);
-        setResults(res.seriesList.length);
+        setResults(res.dataLength);
+        if(flag){
+          setPageCount(Math.ceil(res.dataLength/limit));
+        }
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[genreType]);
+  },[skip,genreType]);
 
   useEffect(() => {
     if(search !== "" && debouncedSearchTerm){
@@ -51,26 +66,22 @@ const Comics = (props:any) => {
       .then(res => {
         setSeriesArr(res.seriesList);
         setResults(res.seriesList.length);
-        // if(!flag){
-        //   setPageCount(Math.ceil(res.allCreatorsList.length/limit));
-        // }
+        setPageCount(Math.ceil(res.seriesList.length/limit));
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [search]);
 
-
   let genreArr = [
-   "All genre",
    "Action",
-   "Comedy", 
-   "Horror",
-   "Drama",
    "Adventure",
-   "Romance",
-   "Suspense",
-   "Sports",
+   "Comedy", 
+   "Drama",
    "Fantasy",
+   "Horror",
+   "Mystery",
+   "Romance",
+   "Spice Of Life",
   ]
 
   const navList = [
@@ -89,6 +100,10 @@ const Comics = (props:any) => {
     setActiveGenre(index);
     setGenreType(title);
   };
+
+  const handleGoToSeries = (seriesId:string,userId:string) => {
+    history.push({pathname:"./series",state:{seriesId,userId}});
+  } 
 
 
   return (
@@ -122,40 +137,49 @@ const Comics = (props:any) => {
 
 
       <Div info>
-        <div>
-          <TitleSection>Comics</TitleSection>
-        </div>
-        <div>
-          <p>{results} Results</p>
-        </div>
+        <div><TitleSection>Comics</TitleSection></div>
+        <div><p>{results} Results</p></div>
       </Div>
       
       <Div comicsList>
+        {
+          results > 0  ?
           <Card containerSpaceEvenly>
-            {
-              // results > 0  ?
-              seriesArr.map((el:never|any,index) => 
-                <Card grid key={index}>
-                  {/* <p>{el.seriesTitle}</p>
-                  <p>{moment(el.createdAt).format('L')}</p> */}
-                  <LinkRouter to="/chapters">
-                    <img src={el.seriesCover} alt="featured comics"/>
-                  </LinkRouter>
-                  <div>
-                    <p>{el.genrePrimary}</p>
-                    <p>{el.likes} Likes</p>
-                  </div>
-                </Card>  
-              )
-              // :
-              // <Div>
-              //   <h3>No Creator Found</h3>
-              // </Div>
-            }
+            {seriesArr.map((el:never|any,index) => 
+              <Card 
+                grid  
+                key={index}
+                onClick={() => handleGoToSeries(el._id,el.user)}>
+                <LinkRouter to="/chapters">
+                  <img src={el.seriesCover} alt="featured comics"/>
+                </LinkRouter>
+                <div>
+                  <p>{el.genrePrimary}</p>
+                  <p>{el.likes} Likes</p>
+                </div>
+              </Card>  
+              )}
           </Card>
+          :
+          <Div noResult>
+            <h3>No comics Found</h3>
+          </Div>
+        }
+
+        {results > limit  ?
+          <PaginationController
+            pageCount={pageCount}
+            limit={limit}
+            setSkip={setSkip}
+            filterType={filterType}/>
+          : null}
       </Div>
     </div>
   );
 };
 
 export default Comics;
+
+
+ {/* <p>{el.seriesTitle}</p>
+                <p>{moment(el.createdAt).format('L')}</p> */}

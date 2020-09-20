@@ -4,33 +4,29 @@ import PaginationController from '../paginationController/paginationController.c
 import { getCreatorsList } from '../../../services/creators';
 import { useHistory } from 'react-router-dom';
 import moment from 'moment'; 
-
-import Card from '../../../styleComponents/ui/card.style';
-import { TitleSection } from '../../../styleComponents/ui/title.syle';
-import { Div, Captions, Info} from './creator.style';
-import { Input, InputField, Label } from '../../../styleComponents/ui/input.style';
-
-import{ BiLike } from 'react-icons/bi';
 import { ScrollToTopOnMount } from '../../../utility/scrollToTopOnMount';
 import useDebounce from '../../../styleComponents/ui/customHooks/useDebounce';
 
 
+import Card from '../../../styleComponents/ui/card.style';
+import { TitleSection } from '../../../styleComponents/ui/title.syle';
+import { Div, Captions, Info} from './creator.style';
+
+import{ BiLike } from 'react-icons/bi';
+
 
 const Creator = (props:any) => {
 
-  const [names, setNames] = useState(false);
-  const [limit,setLimit] = useState(6);
+  const limit:number = 6;
+  const [skip,setSkip] = useState(0);
   const [filterType,setFilterType] = useState('Popular');
   const [search, setSearch] = useState('');
-  const [skip,setSkip] = useState(0);
   const [flag,setFlag] = useState(false);
   const [results,setResults] = useState(0);
   const [pageCount, setPageCount] = useState(0);
   let [creatorsArr,setCreatorsArr] = useState([]);
   const [genre, setGenre] = useState(false);
-
   const debouncedSearchTerm = useDebounce(search, 200);
-
   const history = useHistory();
 
   useEffect(() => {
@@ -70,11 +66,14 @@ const Creator = (props:any) => {
 
   const handleGoToCreatorPage = (creatorId:string) => {
     history.push({
-      pathname:`/?creatorId=${creatorId}/creator`,
+      pathname:"./creator",
       state:  {creatorId: creatorId}
     });
-      
   }
+
+  const handleGoBackToSeries = (seriesId:string,userId:string) => {
+    history.push({pathname:"./series",state:{seriesId,userId}});
+  } 
  
   const navList = [
     { title: 'Popular' },
@@ -95,15 +94,6 @@ const Creator = (props:any) => {
       setSearch={setSearch}/>
 
       <Div container>
-        { names ?
-          <Div inputBox>
-            <p>Search by name:</p>
-            <Input>
-              <InputField  required/>
-              <Label>Creator's name...</Label>
-            </Input>
-          </Div>: null
-        } 
 
         <Info hideShadow={creatorsArr.length < 1}>
           <TitleSection>Creators</TitleSection>
@@ -118,7 +108,7 @@ const Creator = (props:any) => {
                     <Card 
                     horizontal 
                     key={index} 
-                    onClick={() => handleGoToCreatorPage(el._id)}>
+                    onClick={() => handleGoToCreatorPage(el.user)}>
                       <img src={el.profilePic} alt="featured comics"/>
                       <Captions>
                         <h4>{el.displayName}</h4>
@@ -142,7 +132,8 @@ const Creator = (props:any) => {
             <PaginationController
               pageCount={pageCount}
               limit={limit}
-              setSkip={setSkip}/>
+              setSkip={setSkip}
+              filterType={filterType}/>
             : null
           }
         </Div> 

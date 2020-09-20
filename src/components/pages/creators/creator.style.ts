@@ -132,17 +132,6 @@ export const Div = styled.div<ICreatorType>`
       font-weight: 700;
   `}; 
 
-  ${({inputBox}) => inputBox && 
-    css`
-      padding: 2rem 2rem;
-      background: ${props =>  props.theme.color.white}; 
-      & p:first-child{
-        color: ${props =>  props.theme.primary}; 
-        font-size: 1.4rem;
-        margin-bottom: .5rem;
-      }   
-  `}; 
-
 `
 
 
