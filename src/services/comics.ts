@@ -11,7 +11,7 @@ export const getSeriesList = async (
 
   const config = {
     headers:{
-      'Content-Type': 'application/json',
+      'Content-Type': 'application/json'
     }
   }
 
@@ -57,6 +57,24 @@ export const getChapterComics = async (chapterId:string) => {
   let url = `api/chapters/chapter?chapterId=${chapterId}`;
 
   const res = await instanceGet.get(url,config);
+
+  return res.data;
+};
+
+export const postUpdateLikes = async (token:string,seriesId:string,seriesUserId:string) => { 
+
+  const config = {
+    headers:{
+      'Content-Type': 'application/json',
+      'Authorization': token
+    }
+  }
+
+  let url = "api/series/like";
+
+  let body = {seriesId,seriesUserId};
+
+  const res = await instanceGet.post(url,body,config);
 
   return res.data;
 };

@@ -18,6 +18,11 @@ interface IFormTypes {
 
 export const Container = styled.div<IFormTypes>`
     text-align:center; 
+
+    & > div:nth-child(2) {
+      margin-top: 2rem;
+      width: fit-content;
+    }
    
 ` 
 

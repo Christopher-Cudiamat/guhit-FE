@@ -115,7 +115,7 @@ const Creator = (props:any) => {
                         <p>Joined: {moment(el.createdAt).format('L')}</p>
                         <p>Series: {el.seriesMade.length}</p>
                         <div>
-                          <p>Likes: {el.likes}</p> 
+                          <p>Likes: {el.likes.length}</p> 
                           <BiLike color={"light blue"}/>
                         </div>
                       </Captions>

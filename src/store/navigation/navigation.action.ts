@@ -7,10 +7,9 @@ import {
 from "./navigation.type";
 
 
-export const setNavigation = (state:INavigationParameter) : INavigationActionTypes => {
+export const setNavigation = () : INavigationActionTypes => {
   return {
     type: SET_NAVIGATION,
-    navigation: state,
   }
 }
 

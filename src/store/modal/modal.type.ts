@@ -18,7 +18,6 @@ export interface IModalState {
 
 export interface IValueModal {
   type: typeof SET_MODAL,
-  modal: IModalParameter,
 }
 
 export interface IChangeValueModal {

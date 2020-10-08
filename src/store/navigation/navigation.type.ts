@@ -24,7 +24,6 @@ export interface INavigationState {
 
 export interface IValueNavigation {
   type: typeof SET_NAVIGATION,
-  navigation: INavigationParameter,
 }
 
 export interface IChangeValueNavigation {

@@ -155,7 +155,7 @@ const Comics = (props:any) => {
                 </LinkRouter>
                 <div>
                   <p>{el.genrePrimary}</p>
-                  <p>{el.likes} Likes</p>
+                  <p>{el.likes.length} Likes</p>
                 </div>
               </Card>  
               )}

@@ -1,11 +1,14 @@
 import React from 'react';
 
+import { newComicsTypes,newComArr } from './newReleasedComics.d.type';
+
 import { Div } from "./newReleasedComics.style"
 import Card from '../../../../styleComponents/ui/card.style';
 import Link from '../../../../styleComponents/ui/link.style';
 import { TitleSection } from '../../../../styleComponents/ui/title.syle';
 
-const NewReleasedComics = (props:any) => {
+
+const NewReleasedComics: React.FC<newComicsTypes> = (props:any) => {
 
   let {handleButtons,newComArr} = props;
 
@@ -16,7 +19,7 @@ const NewReleasedComics = (props:any) => {
           <Link  onClick={e => handleButtons("comicsLink")}>See all</Link>
         </Div>
         <Card containerSpaceAround>
-          {newComArr.map((el:any,index:number) => {
+          {newComArr.map((el: newComArr,index:number) => {
               return  <Card primary key={index}>
                         <img src={el.thumb} alt="new released comics comics"/>
                         <div>

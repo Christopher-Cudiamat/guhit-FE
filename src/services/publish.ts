@@ -73,7 +73,7 @@ export const getAllSeries = async (token:string) => {
 
 
 ///////////////////////////////////////////////////////////
-//GET
+//GET A SINGLE SERIES
 ///////////////////////////////////////////////////////////
 export const getSeries = async (token:string,seriesID:string|any) => {
  
@@ -93,7 +93,7 @@ export const getSeries = async (token:string,seriesID:string|any) => {
 
 
 ///////////////////////////////////////////////////////////
-//GET
+//GET A SINGLE CHAPTER
 ///////////////////////////////////////////////////////////
 export const getChapter = async (token:string,chapterID:string|any) => {
  
@@ -115,7 +115,7 @@ export const getChapter = async (token:string,chapterID:string|any) => {
 
 
 ///////////////////////////////////////////////////////////
-//GET
+//GET ALL CHAPTERS
 ///////////////////////////////////////////////////////////
 export const getAllChapters = async (token:string,seriesId:string) => {
  
@@ -136,7 +136,7 @@ export const getAllChapters = async (token:string,seriesId:string) => {
 
 
 ///////////////////////////////////////////////////////////
-//POST
+//POST A SERIES
 ///////////////////////////////////////////////////////////
 export const postCreateSeries = async (token:string,data:any) => {
 
@@ -172,7 +172,7 @@ export const postCreateSeries = async (token:string,data:any) => {
 
 
 ///////////////////////////////////////////////////////////
-//POST
+//POST CREATE CHAPTER
 ///////////////////////////////////////////////////////////
 export const postCreateChapter = async (token:string,data:any) => {
  
@@ -215,7 +215,7 @@ export const postCreateChapter = async (token:string,data:any) => {
 
 
 ///////////////////////////////////////////////////////////
-//DELETE
+//DELETE SERIES
 ///////////////////////////////////////////////////////////
 export const deleteSeries = async (token:string,seriesID:string|any,seriesTitle:string) => {
  
@@ -234,7 +234,7 @@ export const deleteSeries = async (token:string,seriesID:string|any,seriesTitle:
 
 
 ///////////////////////////////////////////////////////////
-//DELETE
+//DELETE CHAPTER
 ///////////////////////////////////////////////////////////
 export const deleteChapter = async (token:string,chaptersId:string|any) => {
   console.log("ID CHAPTER IN SERVICE", chaptersId);

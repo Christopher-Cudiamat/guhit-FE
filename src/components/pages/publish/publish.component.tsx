@@ -59,9 +59,9 @@ const Publish = (props:any) => {
   }
 
   const handlePublishSeries = () => {
-    history.push("./creator-account");
+    history.push("./account");
   }
-
+ 
 
   return (
     <Container id="containerElement">
@@ -223,7 +223,9 @@ const Publish = (props:any) => {
               <Button secondary> Create new comic</Button>
             </LinkRouter>
             <LinkRouter to="/publish-creator-info">
-              <Button disabled secondary>Create new novel</Button>
+              <Button disabled secondary>
+                Create new novel
+              </Button>
             </LinkRouter> 
           </div>
         </Banner>  

@@ -6,7 +6,7 @@ import {
 } from './modal.type';
 
 
-const initialState: IModalState = {
+export const initialState: IModalState = {
   data:{
     searchModal: false,
     drawerModal: false,

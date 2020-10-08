@@ -1,6 +1,7 @@
 import React from 'react';
 import Slider from "react-slick";
 
+import { HomeBannerTypes } from './homeBanner.d.type';
 import { TitleMain} from '../../../../styleComponents/ui/title.syle';
 import Button from '../../../../styleComponents/ui/button.style';
 import banner1 from "../../../../images/testing.png";
@@ -8,7 +9,8 @@ import { Div } from "./homeBanner.style";
 import './homeBanner.css';
 
 
-const HomeBanner = (props:any) => {
+
+const HomeBanner: React.FC<HomeBannerTypes> = props => {
 
   let {handleButtons} = props;
 

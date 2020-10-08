@@ -43,6 +43,7 @@ const CreatorPage = () => {
   useEffect(() => {
     getCreator(creatorId)
       .then(res => {
+        console.log(res);
         setData(res)}
         );
     // eslint-disable-next-line react-hooks/exhaustive-deps

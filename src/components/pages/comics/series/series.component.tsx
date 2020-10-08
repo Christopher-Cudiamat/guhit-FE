@@ -1,25 +1,22 @@
 import React, { useEffect, useState } from 'react';
-import { getSeriesComics } from '../../../../services/comics';
+import { getSeriesComics, postUpdateLikes } from '../../../../services/comics';
 import { useLocation} from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
+import Overview from './overview/overview.component';
 
-import Card from '../../../../styleComponents/ui/card.style';
-import { Div, Avatar, Support } from './series.style';
+
+import { Div} from './series.style';
 import { TitleSection } from '../../../../styleComponents/ui/title.syle';
-import {LinkRouter} from '../../../../styleComponents/ui/link.style';
-import { 
-  Accordion,
-  AccordionTitle,
-  AccordionDetails,
-  AccordionInput,
-  AccordionInputControl
-} from '../../../../styleComponents/ui/accordion.style';
-import { FaSearch } from 'react-icons/fa';
+
 import img from '../../../../images/banners/chapter-1-cover.jpg';
+import ChapterList from './chapterList/chapterList.component';
+
 
 
 
 const Series = (props:any) => {
+
+  const {registration} = props;
 
   const [overview, setOverview] = useState(false);
   const [search, setSearch] = useState(false);
@@ -27,11 +24,13 @@ const Series = (props:any) => {
   const [creator, setCreator] = useState<any>({});
   const [chapters, setChapters] = useState([{}]);
   const [bannerPic,setBannerPic] = useState("");
+  const [likes,setLikes] = useState(0);
+  const [update,setUpdate] = useState(true);
   const location = useLocation<any>();
   const state = location.state;
   const history = useHistory();
   const seriesTitle = series.seriesTitle;
-  console.log("BANNER",bannerPic);
+  console.log("BANNER",likes);
 
   
   const handleCorrectImagePath = (bannerImagePath:any) => {
@@ -50,9 +49,10 @@ const Series = (props:any) => {
       setCreator(res.creator);
       setChapters(res.chapters);
       handleCorrectImagePath(res.series.seriesBanner);
+      setLikes(res.series.likes.length);
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [update]);
 
   const handleOverview = () => {
     setOverview(!overview);
@@ -68,74 +68,43 @@ const Series = (props:any) => {
     history.push({pathname:"./chapter",state:{chapterId,seriesTitle}});
   };
 
+  const handleUpdateLikes = (token:string,seriesId:string,seriesUserId:string) => {
+    postUpdateLikes(token,seriesId,seriesUserId);
+    history.go(0);
+  }
+
 
   return (
     <div>
 
       <Div style={{position:"relative",background:"#222222"}}>
         <Div 
-        banner 
-        bannerPic={bannerPic}>
+          banner 
+          bannerPic={bannerPic}>
         </Div>
-        <TitleSection>{series.seriesTitle}</TitleSection> 
+        <TitleSection>{series.seriesTitle}</TitleSection>  
+        {/* <TitleSection>{likes}</TitleSection>  */}
       </Div>
       <Div container>
+        
         <Div overview>
-          <Accordion dark>
-            <AccordionTitle 
-              onClick={handleOverview}
-              show={overview}>
-              Overview
-            </AccordionTitle>
-            <AccordionDetails show={overview}>
-              {series.summary}
-              <LinkRouter to="./">
-                <Avatar src={creator.profilePic} alt="creator avatar" />
-                <Support>Support Creator</Support>
-              </LinkRouter>
-            </AccordionDetails>
-          </Accordion>  
-          <Accordion dark>
-            <AccordionTitle
-              onClick={handleSearchChapter}
-              show={search}>Search Chapter</AccordionTitle>
-            <AccordionInputControl show={search}>
-              <FaSearch 
-              color={"#fff"}
-              size={18} 
-              style={{position:"absolute",top: "27%",right: "4%"}}/>
-              <AccordionInput placeholder="Type chapter's number..."/>
-            </AccordionInputControl>
-          </Accordion>
+          <Overview 
+            series={series}
+            creator={creator}
+            handleOverview={handleOverview}
+            search={search}
+            handleSearchChapter={handleSearchChapter}
+            overview={overview}/>
         </Div>
       
         <Div chaptersList>
-            <Div titleContainer>
-              <TitleSection>Chapters</TitleSection>
-              <p>{chapters.length} results</p>
-            </Div>
-            <Card containerCenter>
-              { 
-                chapters.length > 0 ?
-                chapters.map((el:any,index:number) => 
-                  <Card
-                    onClick={() => handleGoToChapter(el._id,seriesTitle)}
-                    chapters 
-                    horizontalSquare 
-                    key={index}>
-                    <img src={el.chapterCover} alt="featured comics"/>
-                    <div>
-                      <p>{el.chapterTitle}</p>
-                      <p>{el.createdAt}</p>
-                      <p>#{index}</p>
-                    </div>
-                  </Card>)
-                :
-                <Div noResult>
-                  <h3>No chapters created</h3>
-                </Div>
-              }
-            </Card>
+          <ChapterList
+            series={series}
+            chapters={chapters}
+            handleGoToChapter={handleGoToChapter}
+            registration={registration}
+            handleUpdateLikes={handleUpdateLikes}
+            seriesTitle={seriesTitle}/>
         </Div>
       </Div>
     </div>

@@ -12,6 +12,10 @@ export const instancePost = axios.create({
     headers: {"Content-Type": "application/json"}
 });
 
+export const instancePatch = axios.create({
+    headers: {"Content-Type": "application/json"}
+});
+
 export const instanceDelete = axios.create({
     
 });
@@ -20,12 +24,6 @@ export const instancePostForRedirect = axios.create({
     baseURL: 'https://guhit-app.firebaseio.com/',
     headers: {"Content-Type": "application/x-www-form-urlencoded"}
 });
-
-
-
-
-
-
 
 
 instanceGet.interceptors.request.use(async (config) => {
@@ -44,14 +42,17 @@ instancePost.interceptors.request.use(async (config) => {
     return config;
 });
 
-
-
-
-
-
-
-
 instancePost.interceptors.response.use(async (config) => {
+    store.dispatch(setIsLoading({isLoading: false}));
+    return config;
+});
+
+instancePatch.interceptors.request.use(async (config) => {
+    store.dispatch(setIsLoading({isLoading: true}));
+    return config;
+});
+
+instancePatch.interceptors.response.use(async (config) => {
     store.dispatch(setIsLoading({isLoading: false}));
     return config;
 });

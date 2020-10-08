@@ -19,9 +19,9 @@ const mapStateToProps = (state:AppState) => {
 
 const mapStateToDispatch = (dispatch: Dispatch) => {
   return {
-    logout: (data:any) => dispatch(setIsRegistration.setLogout()),
-    setModalValue: (data:any) => dispatch(modalAction.setModal(data)),
-    setNavValue: (data:any) => dispatch(navAction.setNavigation(data)),
+    logout: () => dispatch(setIsRegistration.setLogout()),
+    setModalValue: () => dispatch(modalAction.setModal()),
+    setNavValue: () => dispatch(navAction.setNavigation()),
     changeNavValue: (name:string, value: boolean) => dispatch(navAction.setChangeValue(name, value)),
     removeUserProfile: () => dispatch(profileAction.removeUserProfile()),
   }

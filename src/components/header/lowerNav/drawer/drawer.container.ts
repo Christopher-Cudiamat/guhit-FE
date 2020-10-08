@@ -17,7 +17,7 @@ const mapStateToProps = (state:AppState) => {
 
 const mapStateToDispatch = (dispatch: Dispatch) => {
   return {  
-      setNavValue: (data:any) => dispatch(navAction.setNavigation(data)),
+      setNavValue: () => dispatch(navAction.setNavigation()),
       changeNavValue: (name:string, value: boolean) => dispatch(navAction.setChangeValue(name, value)),
       changeModalValue: (name:string, value: boolean) => dispatch(modalAction.setChangeValue(name, value))
   }

@@ -13,7 +13,7 @@ import ThankYouPage from './thankYouPage/thankYouPage.component';
 import About from './about/about.component';
 import Contacts from './contacts/contacts.component';
 import Events from './events/events.component';
-import Series from './comics/series/series.component';
+import Series from './comics/series/series.container';
 import Chapter from './comics/chapter/chapter.component';
 import { Div } from './pages.style';
 import PasswordRecovery from './login/passwordRecovery/passwordRecovery.component';
@@ -35,13 +35,10 @@ import VerifyToken from './signUp/verifyToken/verifyToken.container';
 
 
 
-
 const Pages = (props:any) => {
-
-  let {modalData, setModalValue,loader} = props;
-
  
-
+  let {modalData,setModalValue,loader} = props;
+  
   const handleCloseOverlay =  () => {
     setModalValue();
   };
@@ -61,7 +58,7 @@ const Pages = (props:any) => {
         <Switch>
           
           <Route exact path="/home">
-            <Home />
+            <Home/>
           </Route>
          
           <Route exact path="/comics">

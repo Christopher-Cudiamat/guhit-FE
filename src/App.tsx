@@ -25,7 +25,7 @@ const App = () => {
         <Loader/>
         <Router>
           <Header/> 
-          <Pages />
+          <Pages/>
           <Footer/>
         </Router>
       </>

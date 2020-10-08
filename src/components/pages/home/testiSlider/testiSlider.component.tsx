@@ -2,15 +2,17 @@ import React from 'react';
 import Slider from "react-slick";
 import {icon} from "../../../../images/imgConst";
 
+import { testiSliderTypes, reactionsArrTypes } from './testiSlider.d.type';
 import './testiSlider.css';
 import {TitleSection } from '../../../../styleComponents/ui/title.syle';
 import { Div } from "./testiSlider.style"
 import Button from '../../../../styleComponents/ui/button.style';
 
-import {FaQuoteLeft} from 'react-icons/fa';
 
 
-const TestiSlider = (props:any) => {
+
+
+const TestiSlider: React.FC<testiSliderTypes> = props => {
 
   let {reactionsArr} = props;
 
@@ -36,7 +38,7 @@ const TestiSlider = (props:any) => {
 
           <Slider {...settings}>
             {
-              reactionsArr.map((el:any,index:number)=>{
+              reactionsArr.map((el: reactionsArrTypes,index:number)=>{
               return <Div contents key={index}>
                         <div>
                           <img src={el.cover} alt="banner 1"/>

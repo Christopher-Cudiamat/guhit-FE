@@ -7,7 +7,7 @@ import { Div } from "./beACreator.style"
 import { TitleSection } from '../../../../styleComponents/ui/title.syle';
 
 
-const BeACreator = (props:any) => {
+const BeACreator = () => {
 
   return (
     <>
