@@ -27,9 +27,9 @@ import Comics from './comics/comics.container';
 import { Overlay } from '../../styleComponents/ui/overlay.style';
 import CreatorAccount from './creators/creatorAccount/creatorAccount.container';
 import Publish from './publish/publish.container';
-import PublishCreatorInfo from './publish/publishCreatorInfo/publishCreatorInfo.container';
-import PublishComicsSeries from './publish/publishComicsSeries/publishComicsSeries.container';
-import PublishComicsChapter from './publish/publishComicsChapter/publishComicsChapter.container';
+import PublishCreatorInfo from './publish/publishForms/publishCreatorInfo/publishCreatorInfo.container';
+import PublishComicsSeries from './publish/publishForms/publishComicsSeries/publishComicsSeries.container';
+import PublishComicsChapter from './publish/publishForms/publishComicsChapter/publishComicsChapter.container';
 import PrivateRoute from './privateRoute';
 import VerifyToken from './signUp/verifyToken/verifyToken.container';
 

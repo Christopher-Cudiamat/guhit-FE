@@ -4,6 +4,7 @@ import {AppState} from "../../../configs/redux.config";
 import { selectorsProfile } from '../../../store/profile/profile.selectors';
 import { Dispatch } from 'redux';
 import { selectorsRegistration } from '../../../store/registration/registration.selector';
+import * as navAction from '../../../store/navigation/navigation.action';
 
 
 const mapStateToProps = (state:AppState) => {
@@ -15,6 +16,8 @@ const mapStateToProps = (state:AppState) => {
 
 const mapStateToDispatch = (dispatch: Dispatch) => {
   return {
+    changeNavValue: (name:string, value: boolean) => dispatch(navAction.setChangeValue(name, value)),
+    setNavValue: () => dispatch(navAction.setNavigation()),
   }
 }
 

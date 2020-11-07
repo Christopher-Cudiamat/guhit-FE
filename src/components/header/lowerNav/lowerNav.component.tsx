@@ -95,8 +95,8 @@ const LowerNav: React.FC<LowerNavPropTypes> =  ({
           </Menu>
         }
       </Nav>
-
-      <Drawer toggle={modalData.drawerModal}/> 
+ 
+      <Drawer/> 
 
     </Container>  
 
