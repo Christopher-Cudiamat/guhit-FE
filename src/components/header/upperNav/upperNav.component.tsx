@@ -3,37 +3,38 @@ import GlobalSearchModal from './globalSearchModal/globalSearchModal.component';
 import NotificationModal from './notificationModal/notificationModal.component';
 import LibraryModal from './libraryModal/libraryModal.component';
 import AccountModal from './accountModal/accountModal.container';
-import  {icon} from '../../../images/imgConst';
+import { UpperNavPropTypes } from './upperNav.type';
 
+import  {icon} from '../../../images/imgConst';
 import { InputField, Input } from '../../../styleComponents/ui/input.style';
 import { LinkRouter } from '../../../styleComponents/ui/link.style';
 import {Icon} from '../../../styleComponents/ui/icon.style';
 import Nav from '../../../styleComponents/Nav.style';
-import { Div, Brand, Container, Avatar, Close } from './upperNav.style';
+import { Div, Brand, Container, Avatar, Close, DivLink } from './upperNav.style';
 
 
-const UpperNav = (props:any) => {
-
-  let {
+const UpperNav: React.FC<UpperNavPropTypes> = ({
     profile,
     registration,
+    navData, 
+    modalData,
     setNavValue, 
     changeNavValue,
-    navData,
-    modalData,
     setModalValue,
-    changeModalValue
-  } = props;
+    changeModalValue,
+  }) => {
+
+ 
 
   const [modalToggle, setModalToggle] = useState(false);
 
   const handleModal = (name:string) => {
-    changeNavValue(["drawerToggle"], false);
+    changeNavValue("drawerToggle", false);
     setModalValue();
     if(name === "searchDesktop"){
-      changeModalValue([name], false);
+      changeModalValue(name, false);
     } else {  
-      changeModalValue([name], true);
+      changeModalValue(name, true);
     }
     setModalToggle(!modalToggle);
   };
@@ -41,13 +42,13 @@ const UpperNav = (props:any) => {
   const handleCloseModal = () => {
     setModalValue();
     setModalToggle(!modalToggle);
-    changeNavValue(["drawerToggle"], false);
+    changeNavValue("drawerToggle", false);
   }
  
   const handlelinks = (name:string) => {
     setModalValue();
     setNavValue();
-    changeNavValue([name], true);
+    changeNavValue(name, true);
   }
  
   return (
@@ -57,7 +58,7 @@ const UpperNav = (props:any) => {
           <Brand>Guhit</Brand>
         </LinkRouter>
         
-        <Div left alignBaseLine={registration.isRegistered}>
+        <Div left alignBaseLine={registration.isAuthenticated}>
           <Div relative>
             <Input onClick={() => handleModal("searchDesktop")}>
               <InputField 
@@ -74,6 +75,7 @@ const UpperNav = (props:any) => {
             </Icon>    
           </Div>      
 
+          {/* PHASE 2
           {registration.isAuthenticated ?
             <>
               <Icon white>
@@ -87,7 +89,8 @@ const UpperNav = (props:any) => {
                   style={{marginTop:"-2px"}} size={25}/>
               </Icon>
             </> : null
-          } 
+          }  
+          */}
        
           {registration.isAuthenticated ?
             <>
@@ -96,32 +99,35 @@ const UpperNav = (props:any) => {
                 src={profile.profilePic} alt="thumbnail pic"/> 
             </>
             :
-            <LinkRouter 
-              to="./login" 
-              togglenav={navData.data.loginLink}
-              style={{marginRight: "0rem",fontSize: "1.6rem"}}>
-              <p onClick={() => handlelinks("loginLink")}>Log in</p>
-            </LinkRouter>  
+            <DivLink linkColor={navData.loginLink} >
+              <LinkRouter 
+                to="./login" 
+                
+                style={{marginRight: "0rem",fontSize: "1.6rem"}}>
+                <p onClick={() => handlelinks("loginLink")}>Log in</p>
+              </LinkRouter>  
+            </DivLink>
           } 
         </Div>
       </Nav>
        
       <Div modalsContainer account>
-        {modalData.data.searchModal ?
+        
+        {modalData.searchModal ?
           <GlobalSearchModal toggle={modalToggle}/>
-          : modalData.data.notifModal
+          : modalData.notifModal
           ? <NotificationModal toggle={modalToggle}/>
-          : modalData.data.libraryModal
+          : modalData.libraryModal
           ? <LibraryModal toggle={modalToggle}/>
-          : modalData.data.accountModal
+          : modalData.accountModal
           ? <AccountModal toggle={modalToggle}/>
           : null
         }
       
-        {modalData.data.notifModal || modalData.data.libraryModal  || modalData.data.accountModal ?
+        {modalData.notifModal || modalData.libraryModal  || modalData.accountModal ?
             <Close onClick={handleCloseModal} modalCloseIcon>x</Close> 
           : 
-          modalData.data.searchModal ?
+          modalData.searchModal ?
             <Close onClick={handleCloseModal} searchCloseIcon>x</Close> 
           : null
         } 

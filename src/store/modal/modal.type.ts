@@ -2,7 +2,6 @@ export const SET_MODAL = "SET_MODAL";
 export const CHANGE_MODAL = "CHANGE_MODAL";
 
 export interface IModalParameter {
-  //Modals
   searchModal?: boolean,
   drawerModal?: boolean,
   notifModal?: boolean,
@@ -10,10 +9,6 @@ export interface IModalParameter {
   accountModal?: boolean,
   openModal: boolean,
   switchToDesktopModal?: boolean,
-}
-
-export interface IModalState {
-  data: IModalParameter
 }
 
 export interface IValueModal {

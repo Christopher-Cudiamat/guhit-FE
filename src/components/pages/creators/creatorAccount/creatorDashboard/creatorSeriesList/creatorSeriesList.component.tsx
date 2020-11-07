@@ -13,17 +13,22 @@ import { BsEye } from 'react-icons/bs';
 
 const CreatorSeriesList = (props:any) => {
 
-  const {listFilter,token,onOpenChapters,sereiesArrLength} = props;
+  const {
+    listFilter,
+    token,
+    onOpenChapters,
+    sereiesArrLength,
+    changeNavValue,
+    setNavValue
+  } = props;
  
   const [seriesArray, setSeriesArray] = useState<Array<any>>([]);
   const [idSeries, setIdSeries] = useState('');
-
   const history = useHistory();
 
   useEffect(() => { 
     getAllSeries(token)
       .then(res => {
-        console.log("SERIRSSSSSSS",res.length);
         sereiesArrLength(res.length);
         setSeriesArray(res);
       })
@@ -44,8 +49,10 @@ const CreatorSeriesList = (props:any) => {
     }); 
   }
   
-  const handleViewSeries = () => {
-    history.push("/comics-series"); 
+  const handleViewSeries = (seriesId:string,userId:string) => {
+    setNavValue();
+    changeNavValue("comicsLink", true);
+    history.push({pathname:"./series",state:{seriesId,userId}});
   }
 
   return (
@@ -53,58 +60,56 @@ const CreatorSeriesList = (props:any) => {
     <>
       <ScrollToTopOnMount/>
       {
-        seriesArray.map((el,index) => {
-          
-          return  <>
+        seriesArray.map((el,index) => 
 
-                    <Div seriesCard key={index}> 
-                      <div>
-                        <img 
-                          onClick={handleViewSeries}
-                          src={el.seriesCover} 
-                          alt="Series cover"/>
-                        <div>
-                          <BsEye color="white" fontSize="3.4rem"/>
-                          <p>View series</p>
-                        </div>
-                      </div>  
-                      <div>
-                        <h2>{el.seriesTitle}</h2>
-                        <Div genre>
-                          <p>{el.genrePrimary}</p>
-                          <p>{el.genreSecondary}</p>
-                        </Div>
-                        <p>Date published: {moment(el.createdAt).format('L')}</p>
-                        <p>chapters: 0</p>
-                        <Div buttons>
-                          <Button
-                          blackOutline
-                            onClick={() => handleAddChapter(el._id)}>
-                            Add new chapter
-                          </Button> 
-                          <Button 
-                            blackOutline
-                            onClick={() => onOpenChapters(el._id)}>
-                              Edit chapters
-                          </Button >
-                          <Button 
-                            blackOutline 
-                            onClick={() => handleEditSeries(el._id)}>
-                            Edit Series</Button>
-                        </Div>
-                        <Div deleteSeries 
-                          onClick={() => setIdSeries(el._id)}>
-                          <DeleteSeriesModal 
-                            token={token}
-                            id={idSeries}
-                            seriesTitle={el.seriesTitle}
-                            />
-                        </Div>
-                      </div>
-                    </Div>
+          <Div seriesCard key={index}> 
+            <div>
+              <img 
+                onClick={() => handleViewSeries(el._id,el.user._id)}
+                src={el.seriesCover} 
+                alt="Series cover"/>
+              <div >
+                <BsEye color="white" fontSize="3.4rem"/>
+                <p>View series</p>
+              </div>
+            </div>  
+            <div>
+              <h2>{el.seriesTitle}</h2>
+              <Div genre>
+                <p>{el.genrePrimary}</p>
+                <p>{el.genreSecondary}</p>
+              </Div>
+              <p>Date published: {moment(el.createdAt).format('L')}</p>
+              <p>chapters: 0</p>
+              <Div buttons>
+                <Button
+                blackOutline
+                  onClick={() => handleAddChapter(el._id)}>
+                  Add new chapter
+                </Button> 
+                <Button 
+                  blackOutline
+                  onClick={() => onOpenChapters(el._id)}>
+                    Edit chapters
+                </Button >
+                <Button 
+                  blackOutline 
+                  onClick={() => handleEditSeries(el._id)}>
+                  Edit Series</Button>
+              </Div>
+              <Div deleteSeries 
+                onClick={() => setIdSeries(el._id)}>
+                <DeleteSeriesModal 
+                  token={token}
+                  id={idSeries}
+                  seriesTitle={el.seriesTitle}
+                  />
+              </Div>
+            </div>
+          </Div>
                   
-                  </>
-        })
+               
+        )
       }
     </>
    

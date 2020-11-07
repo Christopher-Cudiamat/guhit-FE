@@ -211,11 +211,11 @@ ${({horizontalSquare}) => horizontalSquare &&
     }
 
       &:nth-child(odd) {
-        background: #eee;
+        background: #ddd;
       }
 
       &:nth-child(even) {
-        background: #fff;
+        background: #eee;
       }
       
       & img:first-child{
@@ -238,20 +238,21 @@ ${({horizontalSquare}) => horizontalSquare &&
 
         & p:first-child{
           font-size: 1.8rem;
-          margin-top: 1rem;
+          margin-top: 2rem;
           margin-bottom: .5rem;
           font-weight: 500;
-          color: ${props =>  props.theme.color.gray};
+          color: ${props =>  props.theme.color.blackLight};
             @media ${props => props.theme.media.tablet} { 
-              color: ${props =>  props.theme.color.gray};
+              /* color: ${props =>  props.theme.color.gray}; */
               font-size: ${props => props.chapters ? "2.2rem": "1.2rem"};
             }
         }
         & p:nth-child(2){
           font-size: 1.2rem;
-          color: ${props =>  props.theme.color.grayLight};
+          color: ${props =>  props.theme.color.gray};
           @media ${props => props.theme.media.tablet} { 
-            font-size: ${props => props.chapters ? "1.4rem": "1.2rem"};    
+            font-size: ${props => props.chapters ? "1.4rem": "1.2rem"};   
+            margin-bottom: 1rem; 
           }
         }
         & p:last-child{

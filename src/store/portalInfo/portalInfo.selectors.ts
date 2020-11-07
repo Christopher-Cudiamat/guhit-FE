@@ -6,4 +6,4 @@ const getPortalInfo= (state: AppState) => {
 
 export const selectorsPortalInfo = {
   getPortalInfo
-};
+}; 

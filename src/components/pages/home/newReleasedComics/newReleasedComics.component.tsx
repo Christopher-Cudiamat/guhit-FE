@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { newComicsTypes,newComArr } from './newReleasedComics.d.type';
+import { newComicsTypes,newComArr } from './newReleasedComics.type';
 
 import { Div } from "./newReleasedComics.style"
 import Card from '../../../../styleComponents/ui/card.style';
@@ -8,9 +8,7 @@ import Link from '../../../../styleComponents/ui/link.style';
 import { TitleSection } from '../../../../styleComponents/ui/title.syle';
 
 
-const NewReleasedComics: React.FC<newComicsTypes> = (props:any) => {
-
-  let {handleButtons,newComArr} = props;
+const NewReleasedComics: React.FC<newComicsTypes> = ({handleButtons,newComArr}) => {
 
   return (
     <Div featuredSection>

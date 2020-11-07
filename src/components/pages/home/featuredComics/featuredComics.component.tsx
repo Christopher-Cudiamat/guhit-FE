@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { featuredComicsTypes, featComArrTypes } from './featuredComics.d.type';
+import { featuredComicsTypes, featComArrTypes } from './featuredComics.type';
 
 import { Div } from "./featuredComics.style"
 import Card from '../../../../styleComponents/ui/card.style';
@@ -8,9 +8,7 @@ import Link from '../../../../styleComponents/ui/link.style';
 import { TitleSection } from '../../../../styleComponents/ui/title.syle';
 
 
-const FeaturedComics: React.FC<featuredComicsTypes> = props => {
-
-  let {handleButtons,featComArr} = props;
+const FeaturedComics: React.FC<featuredComicsTypes> = ({handleButtons,featComArr}) => {
 
   return (
     <Div featuredSection>

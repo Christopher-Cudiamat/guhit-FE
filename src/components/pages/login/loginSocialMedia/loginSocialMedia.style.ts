@@ -22,8 +22,24 @@ export const Div = styled.div<IFormTypes>`
       } */
 
       & > button {
-        width: 100%;
+        /* width: 100%; */
+        width: 20.5rem;
+        height: 4.6rem;
         margin-bottom: 2rem;
+        margin-top: 2rem;
+        border-radius: 0px;
+        font-size: 1.4rem;
+        font-weight: bold;
+        text-align: center;
+        @media ${props => props.theme.media.tablet} { 
+          width: 22.473rem;
+          height: 5.2rem;
+        }
+        @media ${props => props.theme.media.tablet} { 
+          width: 25.569rem;
+          height: 6.132rem;
+          font-size: 1.7rem;
+        }
       }
       `
   };

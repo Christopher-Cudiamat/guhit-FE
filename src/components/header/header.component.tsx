@@ -1,21 +1,21 @@
 import React, { useState } from 'react';
 import LowerNav from './lowerNav/lowerNav.container';
 import UpperNav from './upperNav/upperNav.container';
+import { HeaderPropTypes } from './header.type';
 
 import { Div } from './header.style';
+
  
-const Header = (props:any) => {
-
-  const {navData} = props;
-
-  const [togglenav, setToggleNav] = useState(true);
-
-  const  handleToggleNav = () => setToggleNav(!togglenav);
+const Header: React.FC<HeaderPropTypes> = ({navData}) => {
 
   return (
     <Div>
-      <UpperNav togglenav={handleToggleNav}/>
-      {!navData.data.loginLink ? <LowerNav/> : null}
+      <UpperNav />
+      {
+        !navData.loginLink 
+        ? <LowerNav/> 
+        : null
+      }
     </Div>
   );
 };

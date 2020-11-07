@@ -32,7 +32,6 @@ const Comics = (props:any) => {
 
 
   useEffect(()=>{
-
     if(filterType !== "Genre" && filterType !== "Title"){
       getSeriesList(limit,skip,filterType)
         .then(res => {
@@ -43,7 +42,6 @@ const Comics = (props:any) => {
     } else {
       setActiveGenre(-1);
     }
-    
     // eslint-disable-next-line react-hooks/exhaustive-deps
   },[skip,filterType]);
 
@@ -166,13 +164,15 @@ const Comics = (props:any) => {
           </Div>
         }
 
-        {results > limit  ?
+        {
+          results > limit  ?
           <PaginationController
             pageCount={pageCount}
             limit={limit}
             setSkip={setSkip}
             filterType={filterType}/>
-          : null}
+          : null
+        }
       </Div>
     </div>
   );

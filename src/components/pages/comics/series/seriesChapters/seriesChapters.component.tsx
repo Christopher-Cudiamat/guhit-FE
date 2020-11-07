@@ -1,11 +1,13 @@
 import React from 'react';
+import moment from 'moment';
+
 import Card from '../../../../../styleComponents/ui/card.style';
-import { Div} from '../series.style';
+import { Div} from './seriesChapters.style';
 import { TitleSection } from '../../../../../styleComponents/ui/title.syle';
 
 
 
-const ChapterList = (props:any) => {
+const SeriesChapters = (props:any) => {
 
   let {
     series,
@@ -17,11 +19,11 @@ const ChapterList = (props:any) => {
   } = props;
 
   return (
-    <>
+    <div>
       <Div titleContainer>
         <TitleSection>Chapters</TitleSection>
         <p>{chapters.length} results</p>
-        <p onClick={() => handleUpdateLikes(registration.token,series._id,series.user)}>LIKE</p>
+        {/* <p onClick={() => handleUpdateLikes(registration.token,series._id,series.user)}>LIKE</p> */}
       </Div>
       <Card containerCenter>
         { 
@@ -29,14 +31,14 @@ const ChapterList = (props:any) => {
           chapters.map((el:any,index:number) => 
             <Card
               onClick={() => handleGoToChapter(el._id,seriesTitle)}
-              chapters 
+              chapters  
               horizontalSquare 
               key={index}>
               <img src={el.chapterCover} alt="featured comics"/>
               <div>
                 <p>{el.chapterTitle}</p>
-                <p>{el.createdAt}</p>
-                <p>#{index}</p>
+                <p>{moment(el.createdAt).format('L')}</p>
+                <p>#{index + 1}</p>
               </div>
             </Card>)
           :
@@ -45,8 +47,8 @@ const ChapterList = (props:any) => {
           </Div>
         }
       </Card>
-    </>
+    </div>
     )
 }
 
-export default ChapterList;
+export default SeriesChapters;

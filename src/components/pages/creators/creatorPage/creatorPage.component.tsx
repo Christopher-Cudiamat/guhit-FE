@@ -12,7 +12,9 @@ import { Avatar } from '../../../../styleComponents/ui/avatar.style';
 import { ScrollToTopOnMount } from '../../../../utility/scrollToTopOnMount';
 import Button from '../../../../styleComponents/ui/button.style';
 
-const CreatorPage = () => {
+const CreatorPage = (props:any) => {
+
+  let {changeNavValue,setNavValue} = props;
 
   interface IDataTypes {
     city: string,
@@ -44,12 +46,14 @@ const CreatorPage = () => {
     getCreator(creatorId)
       .then(res => {
         console.log(res);
-        setData(res)}
+        setData(res)} 
         );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleGoToSeries = (seriesId:string,userId:string) => {
+    setNavValue();
+    changeNavValue("comicsLink", true);
     history.push({pathname:"./series",state:{seriesId,userId}});
   } 
 
@@ -80,12 +84,12 @@ const CreatorPage = () => {
           <h2>Series</h2>
           {data.seriesMade.map((el:any,index:number) => 
               <div key={index}>
-                <img src={el.seriesCover} alt="Series Cover"/>
+                <img src={el.seriesCover} alt="Series Cover"/> 
                 <div>
                   <p>{el.seriesTitle}</p>
                   <p>{el.genrePrimary}</p>
                   <Button 
-                    onClick={() => handleGoToSeries("5f666dbcc135c42ba4f5ec15",el.user)}
+                    onClick={() => handleGoToSeries(el.seriesId,el.user)}
                     secondary>
                     Read Now
                   </Button>

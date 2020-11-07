@@ -3,23 +3,18 @@ export const CHANGE_VALUE = "CHANGE_VALUE";
 
 export interface INavigationParameter {
   [x: string]: any;
-  //Links
-  brandLogo?: boolean | string,
-  homeLink?: boolean | string,
-  comicsLink?: boolean | string,
-  novelsLink?: boolean | string,
-  loginLink?: boolean | string,
-  menuLink?: boolean | string,
-  libraryLink?:  boolean | string,
-  publishLink?:  boolean | string,
-  creatorLink?:  boolean | string,
-  aboutLink?:  boolean | string,
-  eventsLink?:  boolean | string,
-  contactLink?:  boolean | string,
-}
-
-export interface INavigationState {
-  data: INavigationParameter
+  brandLogo?: boolean,
+  homeLink?: boolean,
+  comicsLink?: boolean,
+  novelsLink?: boolean,
+  loginLink?: boolean,
+  menuLink?: boolean,
+  libraryLink?:  boolean,
+  publishLink?:  boolean,
+  creatorLink?:  boolean,
+  aboutLink?:  boolean,
+  eventsLink?:  boolean,
+  contactLink?:  boolean,
 }
 
 export interface IValueNavigation {

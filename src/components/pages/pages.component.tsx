@@ -6,7 +6,7 @@ import {
 } from "react-router-dom";
 
 import Creators from './creators/creators.component';
-import CreatorPage from './creators/creatorPage/creatorPage.component';
+import CreatorPage from './creators/creatorPage/creatorPage.container';
 import Novels from './novels/novels.component';
 import ErrorPage from './errorPage/errorPage.component';
 import ThankYouPage from './thankYouPage/thankYouPage.component';
@@ -48,7 +48,7 @@ const Pages = (props:any) => {
     <Div onClick={handleCloseOverlay}>
       
       {
-        modalData.data.drawerModal || modalData.data.searchModal || modalData.data.notifModal  || modalData.data.libraryModal || modalData.data.accountModal 
+        modalData.drawerModal || modalData.searchModal || modalData.notifModal  || modalData.libraryModal || modalData.accountModal 
         ? <Overlay onClick={handleCloseOverlay} zIndex={"99"}/> 
         : loader.isLoading
         ?  <Overlay light/> 

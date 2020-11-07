@@ -54,14 +54,16 @@ const LoginSocialMedia = (props:any) => {
           <Div socialContainer>
             <Button 
               loginGoogle 
-              onClick={renderProps.onClick} 
-             >
-              Continue with Google
+              onClick={renderProps.onClick}>
+              LOGIN WITH GOOGLE
             </Button>
+          
+            {/* 
+            To be used later
             <icon.googleIcon 
               color={"white"}
               size={"32px"} 
-              style={{position:"absolute", right:"5%", top:"12%"}}/>
+              style={{position:"absolute", right:"5%", top:"12%"}}/> */}
           </Div>
         )}
       />

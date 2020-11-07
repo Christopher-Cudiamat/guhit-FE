@@ -3,53 +3,53 @@ import { getSeriesComics, postUpdateLikes } from '../../../../services/comics';
 import { useLocation} from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 import Overview from './overview/overview.component';
+import SeriesChapters from './seriesChapters/seriesChapters.component';
 
-
-import { Div} from './series.style';
+import { Div } from './series.style';
 import { TitleSection } from '../../../../styleComponents/ui/title.syle';
-
-import img from '../../../../images/banners/chapter-1-cover.jpg';
-import ChapterList from './chapterList/chapterList.component';
-
-
-
+import { AiFillLike } from 'react-icons/ai';
+import { ScrollToTopOnMount } from '../../../../utility/scrollToTopOnMount';
 
 const Series = (props:any) => {
 
-  const {registration} = props;
+  const {registration,portalInfo,profile} = props;
 
-  const [overview, setOverview] = useState(false);
+  let device: string = portalInfo.deviceType;
+
+  const [overview, setOverview] = useState(device === "desktop" ? true : false);
   const [search, setSearch] = useState(false);
   const [series, setSeries] = useState<any>({});
   const [creator, setCreator] = useState<any>({});
   const [chapters, setChapters] = useState([{}]);
   const [bannerPic,setBannerPic] = useState("");
   const [likes,setLikes] = useState(0);
+  const [isLiked,setIsLiked] = useState(false);
   const [update,setUpdate] = useState(true);
   const location = useLocation<any>();
   const state = location.state;
   const history = useHistory();
   const seriesTitle = series.seriesTitle;
-  console.log("BANNER",likes);
-
   
   const handleCorrectImagePath = (bannerImagePath:any) => {
     const path = bannerImagePath.split("\\");
     const newPath = path[path.length - 1];
-    const url = `http://localhost:3000/uploads/series/${newPath}`
-    setBannerPic(url);
-
+    const url = `http://localhost:3000/uploads/series/${newPath}`;
+    const urlMobile = `http://192.168.1.11:3000/uploads/series/${newPath}`;
+    setBannerPic(device === "desktop" ? url : urlMobile);
   } 
 
   useEffect(() => {
     getSeriesComics(state.seriesId,state.userId)
     .then(res => {
-      console.log("RESPONSE",res);
-      setSeries(res.series);
       setCreator(res.creator);
+      setSeries(res.series); 
       setChapters(res.chapters);
       handleCorrectImagePath(res.series.seriesBanner);
       setLikes(res.series.likes.length);
+      let likeState = res.series.likes.some(
+        (el:{likersUserId:string}) => el.likersUserId === profile.user
+      );
+      setIsLiked(likeState)
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [update]);
@@ -65,7 +65,7 @@ const Series = (props:any) => {
   };
 
   const handleGoToChapter = (chapterId:string,seriesTitle:string) => {
-    history.push({pathname:"./chapter",state:{chapterId,seriesTitle}});
+    history.push({pathname:"./chapter",state:{chapterId,seriesTitle,chapters}});
   };
 
   const handleUpdateLikes = (token:string,seriesId:string,seriesUserId:string) => {
@@ -76,21 +76,32 @@ const Series = (props:any) => {
 
   return (
     <div>
-
-      <Div style={{position:"relative",background:"#222222"}}>
+      <ScrollToTopOnMount/>
+      <Div bannerContainer>
         <Div 
           banner 
           bannerPic={bannerPic}>
+            <div></div>
+            <TitleSection>{series.seriesTitle}</TitleSection>  
+            <div>
+              <p>{likes}</p>
+              <AiFillLike 
+                style={{pointerEvents: isLiked ? "none" : "auto"}}
+                color={isLiked ? "#0ACCA9" : "#FFF"}
+                onClick={() => 
+                  handleUpdateLikes(registration.token,series._id,series.user)
+                }/>
+            </div>
         </Div>
-        <TitleSection>{series.seriesTitle}</TitleSection>  
-        {/* <TitleSection>{likes}</TitleSection>  */}
       </Div>
+
       <Div container>
         
         <Div overview>
           <Overview 
             series={series}
-            creator={creator}
+            creatorPic={creator.profilePic}
+            creatorName={creator.displayName}
             handleOverview={handleOverview}
             search={search}
             handleSearchChapter={handleSearchChapter}
@@ -98,7 +109,7 @@ const Series = (props:any) => {
         </Div>
       
         <Div chaptersList>
-          <ChapterList
+          <SeriesChapters
             series={series}
             chapters={chapters}
             handleGoToChapter={handleGoToChapter}

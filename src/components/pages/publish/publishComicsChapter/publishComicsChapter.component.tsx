@@ -62,6 +62,8 @@ const PublishComicsChapter = (props:any) => {
   const [prevThumbnail, setprevThumbnail] = useState<string>("");
   const [toggleThumbSize, setToggleThumbSize] = useState<boolean>(false);
 
+  const maxPageUpload: boolean = chapterPages.length > 10;
+
   useEffect(() => {
 
     if(!isNewChapter) {
@@ -179,8 +181,8 @@ const PublishComicsChapter = (props:any) => {
 
   const handleUpload = (e:any, name: string) => {
     let files:any = e;
-      if(files.length === 1 && handleValidateUpload(e)) {
-        if (e[0].size <= 2000000){
+      if(files.length >= 1 && handleValidateUpload(e)) {
+        if (e[0].size){
           let file = e[0];
           let reader = new FileReader();
           reader.onload = function(e: any) {
@@ -193,7 +195,7 @@ const PublishComicsChapter = (props:any) => {
           reader.readAsDataURL(file);
         }else {
           e.target.value = "";
-          alert("Exceed maximum")
+          console.log("Exceed maximum---------------")
         };
       } else {
         e.target.value = "";
@@ -268,10 +270,10 @@ const PublishComicsChapter = (props:any) => {
               </>: null
             }
             <UploaderChapter
-              disabled={chapterPages.length > 2}>
+              disabled={maxPageUpload}>
               <UploaderField
                 chapters
-                disabled={chapterPages.length > 2}
+                disabled={maxPageUpload}
                 multiple
                 type="file"
                 onChange={handleChapterUpload}/>

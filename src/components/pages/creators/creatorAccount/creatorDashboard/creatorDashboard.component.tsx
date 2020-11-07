@@ -1,5 +1,5 @@
 import React, { useState} from 'react';
-import CreatorSeriesList from './creatorSeriesList/creatorSeriesList.component';
+import CreatorSeriesList from './creatorSeriesList/creatorSeriesList.container';
 import CreatorNoSeries from './creatorNoSeries/creatorNoSeries.component';
 import CreatorChapterList from './creatorChapterList/creatorChapterList.component';
 import { useHistory} from 'react-router-dom';
@@ -19,9 +19,6 @@ const CreatorDashboard = (props:any) => {
   const [seriesId, setSeriesId] =  useState<string>("");
   const [chapterId, setChapterId] =  useState<string>("");
   let [seriesLength,setSeriesLength] =  useState<number>();
-  console.log("seriesLength",seriesLength);
-  
-
   const history = useHistory();
 
   const handleChapterLists = (id:string) => { 

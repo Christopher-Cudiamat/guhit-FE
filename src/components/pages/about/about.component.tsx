@@ -1,11 +1,11 @@
 import React from 'react';
 import Slider from "react-slick";
 
-import {teamMembersArr} from './about.json';
-import {recognitionsArr} from './about.json';
-import {settings} from './about.json';
+import { teamMembersArr } from './about.json';
+import { recognitionsArr } from './about.json';
+import { settings } from './about.json';
 
-import {Div} from "./about.style";
+import { Div } from "./about.style";
 import { TitleSection } from '../../../styleComponents/ui/title.syle';
 import { Banner } from '../../../styleComponents/ui/banner.style';
 import bannera from '../../../images/loginImageblack.png';
@@ -15,7 +15,7 @@ import bannera from '../../../images/loginImageblack.png';
 const About = () => {
 
   return (
-    <div style={{position:'relative', 	overflowX: "hidden"}}>
+    <Div container>
       
       <Div banner>
         <Banner height={"55vh"} bgImg={bannera}>
@@ -77,27 +77,8 @@ const About = () => {
           }
         </Slider>
       </Div>
-      
-
-      {/* 
-
-      Note - this feature will be used in the future. Dont delete.
-
-      <Div dropdown>
-        <label>Jump to:</label>
-
-        {/* 
-        <select id="cars">
-          <option value="history">History</option>
-          <option value="mission">Mision & Vision</option>
-          <option value="team">Guhit Team</option>
-          <option value="media">Media</option>
-        </select> 
-      </Div>
-       */}
-      
-
-    </div>
+  
+    </Div>
   );
 };
 

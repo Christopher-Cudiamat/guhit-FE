@@ -8,14 +8,20 @@ interface IAboutTypes {
   dropdown?:boolean,
   missionVision?: boolean,
   media?: boolean,
+  container?: boolean,
 }
 
 
 export const Div = styled.div<IAboutTypes>`
-  padding: 5rem 2rem 5rem 2rem; 
 
   & h2 {margin-bottom: 4rem;}
- 
+  
+  ${({container}) => container && 
+    css`
+      position: relative;
+      overflowX: hidden;
+  `}; 
+
   ${({banner}) => banner && 
     css`
       padding: 0rem !important;
@@ -37,6 +43,7 @@ export const Div = styled.div<IAboutTypes>`
 
   ${({history}) => history && 
     css`
+      padding: 5rem 2rem;
       text-align: center;
       margin: auto;
       background: #ddd;
@@ -88,6 +95,7 @@ export const Div = styled.div<IAboutTypes>`
 
   ${({team}) => team && 
     css`
+      padding: 5rem 2rem;
       text-align: center;
       margin: auto;
       background:  ${props => props.theme.color.white};

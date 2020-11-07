@@ -15,6 +15,8 @@ interface IUpperNavTypes {
   searchCloseIcon?:boolean,
   toggleHeight?:boolean,
   searchActive?:boolean,
+  DivLink?:boolean,
+  linkColor?: boolean | undefined | string
 }
 
 export const Container = styled.div<IUpperNavTypes>`
@@ -22,6 +24,12 @@ export const Container = styled.div<IUpperNavTypes>`
   @media ${props => props.theme.media.laptop} { 
     max-width: 110rem;
     margin:auto; 
+  }
+`
+
+export const DivLink = styled.div<IUpperNavTypes>`
+  & > a {
+    color: ${props => props.linkColor ? props.theme.color.primary : props.theme.color.white};
   }
 `
 
@@ -76,6 +84,7 @@ export const Div = styled.div<IUpperNavTypes>`
     }
     `
   };
+  
 
 
   ${({svg}) => svg &&
@@ -165,7 +174,7 @@ export const Close = styled.h1<IUpperNavTypes>`
   ${({searchCloseIcon}) => searchCloseIcon && 
       css`
         position: absolute;
-        top: 11%;
+        top: 1%;
         right: 2%;
         opacity: 0.6;
 

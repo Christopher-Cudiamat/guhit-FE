@@ -11,6 +11,7 @@ interface IButtonTypes {
   loginGoogle?: boolean,
   width?: string,
   height?: string,
+  fontSize?: string,
   primaryOutline?: boolean,
   disabled?:boolean,
   noFill?:boolean,
@@ -18,24 +19,26 @@ interface IButtonTypes {
 }
 
 const Button = styled.button<IButtonTypes>`
-opacity:  ${props => props.disabled ? ".5":"1"};
-background: none;
-padding: 1.5rem 2rem 1.5rem 2rem;
-font-size: 1.8rem; 
-border-radius: 8px;
-outline: none;
-border:none;
-width: ${props => props.width ? props.width  : props.width };
-height: ${props => props.height ? props.height  : props.height};
+  opacity:  ${props => props.disabled ? ".3":"1"};
+  pointer-events:  ${props => props.disabled ? "none":"auto"};
+  background: none;
+  padding: 1.5rem 2rem 1.5rem 2rem;
+  font-size: ${props => props.fontSize ? props.fontSize : "1.8rem"}; 
+  border-radius: 8px;
+  outline: none;
+  border:none;
+  width: ${props => props.width ? props.width  : props.width };
+  height: ${props => props.height ? props.height  : props.height};
 
   @media ${props => props.theme.media.laptop} { 
       &:hover {
-        opacity: 0.8;
+        opacity: ${props => props.disabled ? ".5":"1"};
+        pointer-events:  ${props => props.disabled ? "none":"auto"};
         cursor: pointer;
         transition: all .5s;
     }
   }
-}
+
 
   ${({primary}) => primary &&
     css`  
@@ -90,7 +93,7 @@ ${({blackOutline}) => blackOutline &&
     css`
       width: 50%; 
       color: ${props => props.theme.color.gray};
-      border: solid .15rem ${props => props.theme.color.gray};
+      border: solid .20rem ${props => props.theme.color.gray};
       height: 5rem;
       transition: all .5s;
 
@@ -102,17 +105,9 @@ ${({blackOutline}) => blackOutline &&
     `
   };
 ${({primaryOutline}) => primaryOutline &&
-    css`
-      width: 35%; 
-      color: ${props => props.theme.color.secondary};
-      /* border: solid .15rem #0ACCA9; */
-      border: solid .15rem #F0B110;
-      border-top-left-radius: 0px;
-      border-bottom-left-radius: 0px;
-      background: white;
-      position: relative;
-      z-index:20;
-      
+    css` 
+      color: ${props => props.theme.color.primary};
+      border: solid .15rem #0ACCA9;
     `
   };
 

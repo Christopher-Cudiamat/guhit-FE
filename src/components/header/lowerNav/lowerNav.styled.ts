@@ -4,7 +4,7 @@ import styled from "styled-components";
 interface ILowerNavTypes {
   ShowDesktop?: boolean,
   colorText?: boolean,
-  togglenav?: boolean,
+  togglenav?: boolean | undefined,
 }
 
 export const Container = styled.div<ILowerNavTypes>`

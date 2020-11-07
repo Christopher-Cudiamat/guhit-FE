@@ -10,9 +10,7 @@ import './homeBanner.css';
 
 
 
-const HomeBanner: React.FC<HomeBannerTypes> = props => {
-
-  let {handleButtons} = props;
+const HomeBanner: React.FC<HomeBannerTypes> = ({handleButtons}) => {
 
   const settings = {
     dots: true,

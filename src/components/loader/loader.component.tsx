@@ -1,9 +1,9 @@
 import React from 'react';
 import store from '../../configs/store.config';
 import loaderGif from '../../images/loader/loader.gif';
+import { LoaderGif } from './loader.style';
 
-
-const Loader = (props:any) => {
+const Loader = () => {
 
   let loader = store.getState().loader.isLoading;
 
@@ -12,20 +12,10 @@ const Loader = (props:any) => {
     <>
       { loader ?
           <>
-          <img 
-            src={loaderGif}
-            alt="loader"
-            style={{
-            width: "8rem",
-            height: "8rem",
-            position: "absolute",
-            zIndex: 9999,  
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)"}}/> 
+            <LoaderGif 
+              src={loaderGif}
+              alt="loader gif"/> 
           </>
-          
-       
         : null
       }
 

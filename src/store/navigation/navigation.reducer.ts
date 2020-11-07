@@ -1,35 +1,34 @@
 import { 
-  INavigationState,
   CHANGE_VALUE,
   SET_NAVIGATION,
-  INavigationActionTypes
+  INavigationActionTypes,
+  INavigationParameter
 } from './navigation.type';
 
-const initialState: INavigationState = {
-  data:{
-    homeLink: true,
-    comicsLink: false,
-    novelsLink: false, 
-    menuLink: false,
-    loginLink: false, 
-    libraryLink: false,
-    publishLink: false,
-    creatorLink: false,
-    aboutLink: false,
-    eventLink: false,
-    contactLink: false,
-  }
+const initialState: INavigationParameter = {
+  homeLink: true,
+  comicsLink: false,
+  novelsLink: false, 
+  menuLink: false,
+  loginLink: false, 
+  libraryLink: false,
+  publishLink: false,
+  creatorLink: false,
+  aboutLink: false,
+  eventLink: false,
+  contactLink: false,
+  
 };
 
-export const navigationReducer = (state = initialState, action: INavigationActionTypes): INavigationState => {
+export const navigationReducer = (state = initialState, action: INavigationActionTypes): INavigationParameter => {
 
   switch(action.type) {
     case SET_NAVIGATION:
-      Object.keys(state.data).map((el) => state.data[el] = false);
+      Object.keys(state).map((el) => state[el] = false);
       return {...state};
     case CHANGE_VALUE:
-      const newObject = Object.assign({}, state.data, {[action.name]:action.data});
-      return {...state, data: {...newObject}};
+      const newObject = Object.assign({}, state, {[action.name]:action.data});
+      return {...newObject};
     default:
       return state;
   } 
