@@ -1,5 +1,6 @@
 import React from 'react';
 import { PublishBottomBannerPropTypes } from './publishBottomBanner.type';
+import SwitchToDesktop from '../../../globalModals/switchToDesktop/switchToDesktop';
 
 import { Banner, BannerTitle } from '../../../../styleComponents/ui/banner.style';
 import Button from '../../../../styleComponents/ui/button.style';
@@ -12,7 +13,8 @@ const PublishBottomBanner: React.FC<PublishBottomBannerPropTypes> = ({
   isRegistered,
   isACreator,
   changeNavValue,
-  setNavValue
+  setNavValue,
+  portalInfo
   }) => {
 
   const handleGotoLogin = () => {
@@ -27,19 +29,27 @@ const PublishBottomBanner: React.FC<PublishBottomBannerPropTypes> = ({
         bgImg={bannera}>
         <BannerTitle>Have fun creating!</BannerTitle>
         <div>
-          <LinkRouter 
-          onClick={handleGotoLogin}
-            to={
-                !isRegistered 
-                ? {pathname:"/login" , state:true}
-                : isACreator && isRegistered 
-                ? {pathname:"./publish-comic-series",state:  "isNewSeries"}
-                : "/publish-creator-info"
-              }>
-            <Button secondary> 
-                Create new serie
-            </Button>
-          </LinkRouter>
+          {
+          
+            portalInfo.deviceType === "mobile" || portalInfo.deviceType === "tablet" 
+            ?
+            <SwitchToDesktop/>
+            :
+            <LinkRouter 
+            onClick={handleGotoLogin}
+              to={
+                  !isRegistered 
+                  ? {pathname:"/login" , state:true}
+                  : isACreator && isRegistered 
+                  ? {pathname:"./publish-comic-series",state:  "isNewSeries"}
+                  : "/publish-creator-info"
+                }>
+              <Button secondary>Create new serie</Button>     
+            </LinkRouter>
+         
+          } 
+    
+    
           {/* 
 
           Note: This is for phase 3

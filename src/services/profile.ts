@@ -50,12 +50,13 @@ export const postProfile = async (token:string,data:any) => {
 
   const body = new FormData();
   
-  body.append("profilePic", data.profilePic);
+ 
   body.append('displayName',data.displayName);
   body.append('city',data.city);
   body.append('description',data.description);
   body.append('patreon',data.patreon);
   body.append('tools',data.tools.toString());
+  body.append("profilePic", data.profilePic);
 
   const res = await instancePost.post(url,body,config);
   return res.data;

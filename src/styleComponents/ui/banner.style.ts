@@ -11,10 +11,8 @@ interface IBannerTypes {
 };
 
 export const Banner = styled.div<IBannerTypes>`
-  height: ${props => props.height ? props.height : "100vh"};
   background: url(${props => props.bgImg});
-  padding: 3rem 2rem;
-  /* width: 100%; */
+  padding: 5rem 2rem;
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -24,18 +22,21 @@ export const Banner = styled.div<IBannerTypes>`
   justify-content: center;
   margin-top: -1px;
   position: relative;
+  
+  @media ${props => props.theme.media.laptop} { 
+    height: ${props => props.height ? props.height : "100vh"};
+    padding: 3rem 2rem;
+  }
 `
 
 export const BannerTitle = styled.p<IBannerTypes>`
-  
-      font-size: ${props => props.fontSize ? props.fontSize : "6.4rem"};
-      color: ${props => props.color ? props.color : "white"};
+  font-size: ${props => props.fontSize ? props.fontSize : "6.4rem"};
+  color: ${props => props.color ? props.color : "white"};
 `
 
 export const BannerText = styled.p<IBannerTypes>`
-  
-      font-size: ${props => props.fontSize ? props.fontSize : "1.8rem"};
-      color: ${props => props.color ? props.color : "white"};
+  font-size: ${props => props.fontSize ? props.fontSize : "1.8rem"};
+  color: ${props => props.color ? props.color : "white"};
 `
 
 

@@ -15,7 +15,6 @@ import store from './configs/store.config';
 const App = () => {
   
   let loader = store.getState().loader.isLoading;
-  console.log("LOADER",loader);
 
   return (
 

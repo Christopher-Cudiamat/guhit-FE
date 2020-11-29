@@ -15,8 +15,8 @@ const PublishCommunity: React.FC = () => {
         <p>
           Our incredibly supportive community is home to over 52,000 creators and millions of readers. Our love of storytelling makes us a perfect home for your stories to find fans.
         </p>
-        </div>
-        <img src={communityImage} alt="Guhit community image"/>
+      </div>
+      <img src={communityImage} alt="Guhit community image"/>
     </Div>
   );
 };

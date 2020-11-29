@@ -12,17 +12,15 @@ interface inputPatreonTypes {
 
 
 
-const inputPatreon: React.FC<inputPatreonTypes> = props => {
-
-  const {patreon,setPatreon} = props;
+const inputPatreon: React.FC<inputPatreonTypes> = ({patreon,setPatreon}) => {
 
   return (
     <Input>
-      <Label fixed>Patreon</Label>
+      <Label fixed>Patreon Account</Label>
       <InputField 
         marginTop
-        defaultValue={patreon}
-        onBlur={(e) => setPatreon(e.target.value)}/>
+        defaultValue={`https://www.patreon.com/${patreon}`}
+        onChange={(e) => setPatreon(e.target.value)}/>
     </Input>
   );
 }

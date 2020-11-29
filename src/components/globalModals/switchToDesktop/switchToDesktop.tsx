@@ -5,6 +5,7 @@ import { MdClose } from 'react-icons/md';
 import { Overlay } from '../../../styleComponents/ui/overlay.style';
 import laptop from '../../../images/laptop-chibi.png';
 import { Box } from '../../../styleComponents/ui/box.style';
+import Button from '../../../styleComponents/ui/button.style';
 
 const SwitchToDesktop = (props:any) => {
   
@@ -16,16 +17,16 @@ const SwitchToDesktop = (props:any) => {
       {({ openPortal, closePortal, portal }) => (
         
         <React.Fragment>
-           <button onClick={openPortal} style={{
-                position:"absolute",
-                top: "0px",
-                left: "0px",
-                width: "100%",
+           <Button secondary onClick={openPortal} style={{
+                width: "80%",
                 height: "100%",
-                opacity: "0",
+                padding: "2rem",
+                marginTop: "2rem",
+                fontSize: "2.4rem",
+                borderRadius: "4rem",
                 }}>
-            Open Portal
-          </button>
+            Create a series
+          </Button>
           {portal(
             <>    
               <Overlay zIndex={"999"} onClick={closePortal}>

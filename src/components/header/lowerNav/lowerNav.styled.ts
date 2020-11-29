@@ -14,8 +14,6 @@ export const Container = styled.div<ILowerNavTypes>`
   @media ${props => props.theme.media.laptop} { 
     max-width: 110rem;
     margin:auto;
-    /* padding-top:1rem; */
-    
   }
 `
 
@@ -34,14 +32,9 @@ export const Menu = styled.div<ILowerNavTypes>`
           ? props.theme.color.primary 
           : props.theme.color.white };
           transition: .5s all;
-
         border: 2px solid ${props => props.colorText
           ? props.theme.color.primary 
           : props.theme.color.white };
-          transition: .5s all;
-        &:hover {
-          font-size: 1.48rem;
-        }
       }
     }
 

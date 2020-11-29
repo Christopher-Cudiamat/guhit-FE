@@ -56,9 +56,11 @@ const PublishMonetization: React.FC = () => {
         
       </div>
       <div>
+        
         <TitleSection marginBottom={"5rem"} fontWeight={"bold"}>
           Monetization
         </TitleSection>
+
         <p>Earn money doing what you love with Guhit</p>
         
         <div 

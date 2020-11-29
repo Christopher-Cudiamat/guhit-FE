@@ -13,24 +13,41 @@ interface inputToolsTypes {
   inputToolsEl: React.RefObject<HTMLInputElement>,
   setToolsInputDef:  React.Dispatch<React.SetStateAction<string>>,
   toolsInputDef: string,
-  handleTools: (e:any) => void,
-  handleDeleteArr: (indexClicked: number) => void,
   tools: string[],
+  setTools: React.Dispatch<React.SetStateAction<string[]>>,
+  setToolDisabled: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 
 
-const inputPatreon: React.FC<inputToolsTypes> = props => {
+const inputPatreon: React.FC<inputToolsTypes> = ({
+  toolDisabled,
+  inputToolsEl,
+  setToolsInputDef,
+  toolsInputDef,
+  tools,
+  setTools,
+  setToolDisabled
+  }) => {
 
-  const {
-    toolDisabled,
-    inputToolsEl,
-    setToolsInputDef,
-    toolsInputDef,
-    tools,
-    handleTools,
-    handleDeleteArr
-  } = props;
+
+  const handleTools = (event:any) => {
+    event.preventDefault();
+    if(tools.length >= 2) setToolDisabled(true);
+    
+    if(inputToolsEl && inputToolsEl.current) {
+      inputToolsEl.current.focus();
+      if(inputToolsEl.current.value.length > 1){
+        setTools([...tools,inputToolsEl.current.value]);
+      } 
+    }
+  };
+
+  const handleDeleteArr = (indexClicked:number) => {
+    const newTools = tools.filter((el,index) => index !== indexClicked);
+    setTools(newTools);
+    if(tools.length < 4) setToolDisabled(false);
+  }; 
 
   
 
@@ -45,19 +62,20 @@ const inputPatreon: React.FC<inputToolsTypes> = props => {
             disabled={toolDisabled}
             type="text" 
             ref={inputToolsEl} 
+            maxLength={20}
             onChange={e => setToolsInputDef(e.target.value)}
             value={toolsInputDef}
             />
           <Button 
             width={"20rem"}
             height={"5rem"}
-            style={{marginTop:"10px",marginLeft:"-3px"}}
-            primaryOutline
+            style={{marginTop:"10px",marginLeft:"3px"}}
+            secondary
             onClick={handleTools} 
             disabled={toolDisabled}>
-            Add media
+            Add Tools
           </Button>
-        </Div>
+        </Div> 
       </Input>
       <div style={{display: "flex",flexDirection:"column",textAlign: "left", color: "#ccc",fontSize: "1.4rem"}}>
         <p style={{marginBottom: "1rem", color: "#aaa"}}>Tools:</p>

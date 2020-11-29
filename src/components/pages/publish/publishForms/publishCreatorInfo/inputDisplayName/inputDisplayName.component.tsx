@@ -25,6 +25,7 @@ const InputDisplayName: React.FC<InputDisplayNameTypes> = props => {
       <InputField 
         marginTop
         defaultValue={displayName}
+        maxLength={20}
         onChange={(e) => setDisplayName(e.target.value)}/>
     </Input>
   );

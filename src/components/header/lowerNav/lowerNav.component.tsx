@@ -75,7 +75,8 @@ const LowerNav: React.FC<LowerNavPropTypes> =  ({
           </List>
         </Ul>
 
-        {modalData.drawerModal ?
+        {
+          modalData.drawerModal ?
           <Menu colorText={navData.menuLink}>
             <p onClick={handleToggleMenu}>Close</p>
             <Icon 

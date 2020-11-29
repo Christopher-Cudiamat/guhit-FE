@@ -5,12 +5,14 @@ import { selectorsProfile } from '../../../store/profile/profile.selectors';
 import { Dispatch } from 'redux';
 import { selectorsRegistration } from '../../../store/registration/registration.selector';
 import * as navAction from '../../../store/navigation/navigation.action';
+import { selectorsPortalInfo } from '../../../store/portalInfo/portalInfo.selectors';
 
 
 const mapStateToProps = (state:AppState) => {
   return{
     profile: selectorsProfile.getProfile(state),
-    registration: selectorsRegistration.getRegistration(state)
+    registration: selectorsRegistration.getRegistration(state),
+    portalInfo: selectorsPortalInfo.getPortalInfo(state),
   }
 }
 

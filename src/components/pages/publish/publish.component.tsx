@@ -6,7 +6,7 @@ import {
   animateScroll
   as scroll, scrollSpy 
 } from 'react-scroll';
-import PublishBanner from './publishBanner/publishBanner.container';
+import PublishBanner from './publishBanner/publishBanner.component';
 import PublishCommunity from './publishCommunity/publishCommunity.component';
 import PublishStudio from './publishStudio/publishStudio.component';
 import PublishSubmit from './publishSubmitWork/publishSubmit.component';
@@ -22,7 +22,8 @@ const Publish: React.FC<PublishPropTypes> = ({
   registration,
   profile,
   changeNavValue,
-  setNavValue
+  setNavValue,
+  portalInfo
   }) => {
 
   useEffect(() => {
@@ -64,12 +65,14 @@ const Publish: React.FC<PublishPropTypes> = ({
         <PublishSubmit />
       </Element>
 
+
       <Element name="publishOption">
         <PublishBottomBanner 
           isRegistered={registration.isAuthenticated}
           isACreator={profile.isCreator} 
           changeNavValue={changeNavValue}
-          setNavValue={setNavValue}/>
+          setNavValue={setNavValue}
+          portalInfo={portalInfo}/>
       </Element>
 
     </div>

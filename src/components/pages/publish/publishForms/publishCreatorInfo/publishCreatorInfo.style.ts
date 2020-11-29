@@ -12,7 +12,6 @@ interface IFormTypes {
   hash?: boolean,
   bannerUploader?: boolean,
   inputTagContainer?: boolean,
-  buttonContainer?: boolean,
 }
 
 
@@ -67,15 +66,6 @@ export const Div = styled.div<IFormTypes>`
         line-height: 2rem;
         color: ${props => props.theme.color.blackLight};
       }
-    `
-  };
-
-  
-  ${({buttonContainer}) => buttonContainer&&
-    css`
-      margin-top: 6rem;
-      display:  flex;
-      justify-content:  flex-start; 
     `
   };
 

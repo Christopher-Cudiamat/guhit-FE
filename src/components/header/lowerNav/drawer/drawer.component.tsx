@@ -1,6 +1,5 @@
 import React from 'react';
 import  {icon} from '../../../../images/imgConst';
-import SwitchToDesktop from '../../../globalModals/switchToDesktop/switchToDesktop';
 
 import { DivLink, DivContainer, Container } from './drawer.style';
 import { LinkRouter } from '../../../../styleComponents/ui/link.style';
@@ -35,11 +34,10 @@ const Drawer: React.FC<DrawerPropTypes> = ({
   return (
     <Container>
         <DivContainer toggle={modalData.drawerModal}>
-          <LinkRouter to="./">
-            <DivLink onClick={() => handleClickLink("homeLink")}>
+          <LinkRouter to="./publish">
+            <DivLink onClick={() => handleClickLink("publishLink")}>
               <p>Publish</p>
               <icon.rightArrow size={22} color={"white"}/>
-              <SwitchToDesktop/>
             </DivLink>
           </LinkRouter>
 

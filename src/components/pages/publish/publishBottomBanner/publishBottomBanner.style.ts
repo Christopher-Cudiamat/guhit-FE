@@ -10,8 +10,8 @@ export const Div = styled.div<IPublishTypes>`
     css`
       overflow-x: hidden;
 
-      & div {
-        width: 100%;
+      & p:first-child {
+        font-size: 4.4rem;
       }
    
       & div > div {
@@ -21,16 +21,23 @@ export const Div = styled.div<IPublishTypes>`
       }
 
       & div a  button {
-        margin: 8rem;
-       height: 7rem;
-       font-size: 2.6rem;
-       border-radius: 4rem;
-       cursor: pointer;
-       &:hover {
-        background: ${props => props.theme.color.secondaryDark}; 
-         transform: translateY(-10%) scale(1.1);
-         transition: all .3s;
-       }
+        padding: 2rem;
+        margin-top: 2rem;
+        font-size: 2.4rem;
+        border-radius: 4rem;
+
+        @media ${props => props.theme.media.laptop} { 
+          padding: 2rem;
+          margin-top: 4rem;
+          font-size: 2.6rem;
+
+          &:hover {
+            cursor: pointer;
+            background: ${props => props.theme.color.secondaryDark}; 
+            transform: translateY(-10%) scale(1.1);
+            transition: all .3s;
+          }
+        }
       }
   `}; 
 

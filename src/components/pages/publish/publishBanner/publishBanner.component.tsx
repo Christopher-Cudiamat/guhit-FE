@@ -1,6 +1,4 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
-import { PublishBannerPropTypes } from './publishBanner.type';
 import { Link } from 'react-scroll';
 
 import { 
@@ -13,13 +11,7 @@ import Button from '../../../../styleComponents/ui/button.style';
 import { Div } from './publishBanner.style';
 
 
-const PublishBanner: React.FC<PublishBannerPropTypes> = ({profile}) => {
-
-  const history = useHistory();
-
-  const handlePublishSeries = () => {
-    history.push("./account");
-  }
+const PublishBanner: React.FC = () => {
 
   return (
     <Div bannerContainer>
@@ -31,25 +23,17 @@ const PublishBanner: React.FC<PublishBannerPropTypes> = ({profile}) => {
           At Guhit, creators are limited only by what they dare to dream.
           Guhit can help creators bring their stories to print, television, feature film, merchandising, and more.
         </BannerText>
-        {
-          profile.isCreator ?
-          <Button
-            onClick={handlePublishSeries} 
-            secondary>
-            Get Started
+
+        <Link 
+          to="monetization" 
+          spy={true} 
+          smooth={true} 
+          offset={-55} 
+          duration={800}>
+          <Button secondary> 
+            Learn More
           </Button>
-          :
-          <Link 
-            to="monetization" 
-            spy={true} 
-            smooth={true} 
-            offset={-55} 
-            duration={800}>
-            <Button secondary> 
-              Learn More
-            </Button>
-          </Link>
-        }
+        </Link>
       </Banner>
     </Div>
   );

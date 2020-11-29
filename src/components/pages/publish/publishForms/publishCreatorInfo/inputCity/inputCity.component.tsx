@@ -22,6 +22,7 @@ const InputCity: React.FC<InputCityTypes> = props => {
       <InputField 
         marginTop
         defaultValue={city}
+        maxLength={20}
         onBlur={(e) => setCity(e.target.value)}/>
     </Input>
   );

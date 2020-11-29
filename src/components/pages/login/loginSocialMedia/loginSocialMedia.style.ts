@@ -15,14 +15,7 @@ export const Div = styled.div<IFormTypes>`
     css`
       position: relative;
 
-      /* & svg {
-        position:absolute,
-        right:5%,
-        top:0%
-      } */
-
       & > button {
-        /* width: 100%; */
         width: 20.5rem;
         height: 4.6rem;
         margin-bottom: 2rem;

@@ -8,13 +8,18 @@ export const Div = styled.div<IPublishTypes>`
   
   ${({nav}) => nav && 
     css`
-      position: sticky;
-      top: 0;
-      border-bottom: 1px solid ${props => props.theme.color.gray};
-      padding: 0rem;
-      margin-top: -1px;
-      background:white !important;
-      z-index: 888;
+      display: none;
+
+      @media ${props => props.theme.media.laptop} { 
+        display: block;
+        position: sticky;
+        top: 0;
+        border-bottom: 1px solid ${props => props.theme.color.gray};
+        padding: 0rem;
+        margin-top: -1px;
+        background:white !important;
+        z-index: 888;
+      }
     
       & ul  {
         font-size: 1.8rem;

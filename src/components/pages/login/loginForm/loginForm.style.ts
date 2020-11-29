@@ -4,16 +4,11 @@ import styled, {css} from "styled-components";
 interface IFormTypes { 
   loginOptions?: boolean,
   signUp?: boolean,
-
 }
 
 
 export const Div = styled.div<IFormTypes>` 
   text-align:center;
-
-  /* & div {
-    margin-bottom:
-  } */
  
   ${({loginOptions}) => loginOptions &&
       css`
@@ -28,8 +23,6 @@ export const Div = styled.div<IFormTypes>`
         }
       `
   };
-
-
 
 `
 
